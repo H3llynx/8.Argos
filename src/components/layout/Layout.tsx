@@ -9,8 +9,8 @@ export function Layout() {
     }, [pathname]);
 
     return (
-        <>
+        <div className="absolute w-screen h-dvh inset-0 bg-dark-rgba-2 md:bg-grey-rgba-2">
             <Outlet />
-        </>
+        </div>
     );
 };

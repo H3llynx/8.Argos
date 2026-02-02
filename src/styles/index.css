@@ -16,8 +16,13 @@
   --color-red: #ff1048;
   --color-orange: #FF7F11;
   --color-dark-rgba: rgba(0, 0, 0, 0.13);
+  --color-dark-rgba-2: rgba(0, 0, 0, 0.4);
   --color-grey-rgba: rgba(235, 234, 239, 0.8);
   --color-grey-rgba-2: rgba(235, 234, 239, 0.4);
+}
+
+html {
+  background-color: var(--color-grey);
 }
 
 body {
@@ -26,18 +31,8 @@ body {
   background-image: url(../assets/images/cat.jpg);
   color: var(--color-dark);
   display: flex;
-  height: 100dvh;
+  min-height: 100dvh;
   font-family: var(--font-open-sans);
-
-  &::after {
-    content: " ";
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--color-grey-rgba-2);
-    z-index: -1;
-  }
 }
 
 h1,
