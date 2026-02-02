@@ -1,0 +1,47 @@
+@reference "../../styles/index.css";
+
+.navbar {
+    @apply flex;
+
+    .active {
+        @apply text-grey-3
+    }
+
+    a:not(.active):hover {
+        @apply text-turquoise;
+    }
+
+    .close-svg {
+        @apply hidden;
+    }
+}
+
+.navbar ul {
+    @apply hidden md:flex gap-1 uppercase text-base;
+
+    li {
+        @apply p-0.5
+    }
+}
+
+.navbar:has(input:checked) {
+    ul {
+        @apply fixed w-screen h-dvh inset-0 flex flex-col bg-grey px-2 py-6 text-lg;
+    }
+
+    li {
+        @apply border-b border-dark-rgba
+    }
+
+    .menu-svg {
+        @apply hidden;
+    }
+
+    .close-svg {
+        @apply block;
+    }
+}
+
+.menu-toggle {
+    @apply relative z-1 h-full md:hidden;
+}
