@@ -1,0 +1,9 @@
+@reference "../../styles/index.css";
+
+.auth-cta {
+    @apply flex gap-0.5 relative z-1 items-center hover:text-turquoise;
+}
+
+.paw {
+    @apply w-1.5 -rotate-10
+}
