@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router';
+import { Footer } from '../footer/Footer';
+import { Header } from '../header/Header';
 
 export function Layout() {
     const { pathname } = useLocation();
@@ -9,8 +11,13 @@ export function Layout() {
     }, [pathname]);
 
     return (
-        <div className="absolute w-screen h-dvh inset-0 bg-dark-rgba-2 md:bg-grey-rgba-2">
-            <Outlet />
-        </div>
+        <>
+            <div className="absolute w-screen h-dvh inset-0 bg-dark-rgba-2 md:bg-grey-rgba-2 z-0" />
+            <div className="w-screen min-h-dvh flex flex-col justify-between relative z-1">
+                <Header />
+                <Outlet />
+                <Footer />
+            </div>
+        </>
     );
 };

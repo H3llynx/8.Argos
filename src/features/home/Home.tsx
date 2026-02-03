@@ -1,11 +1,15 @@
-import { Footer } from "../../components/footer/Footer"
-import { Header } from "../../components/header/Header"
+import { Animals } from "../animals/Animals";
+import { Login } from "../auth/components/login/Login";
+import { useAuth } from "../auth/hooks/useAuth";
+
 export function Home() {
+    const { user, loading } = useAuth();
+
     return (
-        <div className="flex flex-col justify-between min-h-dvh">
-            <Header />
-            <main><p>Contenu</p></main>
-            <Footer />
-        </div>
+        <main>
+            {loading && <p>Loading</p>}
+            {!user && !loading && <Login />}
+            {user && <Animals />}
+        </main>
     )
 }

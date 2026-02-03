@@ -31,7 +31,7 @@ body {
   background-image: url(../assets/images/cat.jpg);
   color: var(--color-dark);
   display: flex;
-  min-height: 100dvh;
+  height: 100dvh;
   font-family: var(--font-open-sans);
 }
 
