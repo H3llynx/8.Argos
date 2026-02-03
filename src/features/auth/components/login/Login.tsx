@@ -1,6 +1,10 @@
 import { useEffect } from 'react';
 import { useForm, } from 'react-hook-form';
 import { useNavigate } from 'react-router';
+import Paw from "../../../../assets/svg/paw.svg?react";
+import { Button } from '../../../../components/atoms/Button/Button.tsx';
+import { Input } from '../../../../components/atoms/Input/Input.tsx';
+import "../../Auth.css";
 import { useAuth } from '../../hooks/useAuth.tsx';
 import { signIn } from '../../services/auth.ts';
 import type { Credentials } from "../../types.ts";
@@ -8,7 +12,7 @@ import type { Credentials } from "../../types.ts";
 export function Login() {
     const { register, handleSubmit, formState: { isSubmitting } } = useForm<Credentials>();
     const navigate = useNavigate();
-    const { user, loading } = useAuth();
+    const { user } = useAuth();
 
     useEffect(() => {
         if (user) {
@@ -26,31 +30,47 @@ export function Login() {
     }
 
     return (
-        <>
-            {loading && <p>Loading...</p>}
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <input
-                    type="email"
-                    placeholder="Email"
-                    {...register('email')}
-                    required
-                />
+        <form onSubmit={handleSubmit(onSubmit)}
+            className="auth-form"
+        >
+            <Input
+                label="email"
+                id="email"
+                type="email"
+                placeholder="Email"
+                {...register("email")}
+                required
+            />
 
-                <input
-                    type="password"
-                    placeholder="Mot de passe"
-                    {...register('password', {
-                        minLength: {
-                            value: 6,
-                            message: "Minimum 5 characters"
-                        }
-                    })}
-                    required />
+            <Input
+                label="password"
+                id="password"
+                type="password"
+                {...register("password")}
+                required
+            />
 
-                <button type="submit" disabled={isSubmitting}>
-                    {isSubmitting ? "checking..." : "Login"}
-                </button>
-            </form>
-        </>
+            <Button disabled={isSubmitting}>
+                {isSubmitting
+                    ? (
+                        <>
+                            <span className="loading-paws">
+                                <span className="mr-0.5">Connexion</span>
+                                <Paw className="paw w-1" aria-hidden="true" />
+                                <Paw className="paw w-1" aria-hidden="true" />
+                                <Paw className="paw w-1" aria-hidden="true" />
+                            </span>
+                        </>
+                    )
+                    :
+                    (
+                        <>
+                            <Paw aria-hidden="true" className="paw w-1" />
+                            Sign in
+                        </>
+                    )
+                }
+            </Button>
+        </form>
     );
 }

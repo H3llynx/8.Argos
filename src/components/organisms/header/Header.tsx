@@ -1,6 +1,6 @@
-import Logo from "../../assets/svg/logo.svg?react";
-import { AuthArea } from "../auth_area/AuthArea";
-import { Navbar } from "../navbar/Navbar";
+import Logo from "../../../assets/svg/logo.svg?react";
+import { AuthArea } from "../../molecules/auth_area/AuthArea";
+import { Navbar } from "../../molecules/navbar/Navbar";
 import "./Header.css";
 
 export function Header() {

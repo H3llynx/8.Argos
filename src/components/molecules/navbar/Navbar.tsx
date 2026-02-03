@@ -1,7 +1,7 @@
 import { NavLink } from "react-router";
-import Close from "../../assets/svg/close.svg?react";
-import Logo from "../../assets/svg/logo.svg?react";
-import Menu from "../../assets/svg/menu.svg?react";
+import Close from "../../../assets/svg/close.svg?react";
+import Logo from "../../../assets/svg/logo.svg?react";
+import Menu from "../../../assets/svg/menu.svg?react";
 import "./Navbar.css";
 
 export function Navbar() {

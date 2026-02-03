@@ -1,8 +1,8 @@
 import { NavLink } from "react-router";
-import Logout from "../../assets/svg/logout.svg?react";
-import Paw from "../../assets/svg/paw.svg?react";
-import { useAuth } from "../../features/auth/hooks/useAuth";
-import { signOut } from "../../features/auth/services/auth";
+import Logout from "../../../assets/svg/logout.svg?react";
+import Paw from "../../../assets/svg/paw.svg?react";
+import { useAuth } from "../../../features/auth/hooks/useAuth";
+import { signOut } from "../../../features/auth/services/auth";
 import "./AuthArea.css";
 
 export function AuthArea() {

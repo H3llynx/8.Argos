@@ -1,0 +1,5 @@
+@reference "../../../styles/index.css";
+
+.header {
+    @apply w-screen py-1 md:py-0.5 px-2 md:px-4 bg-grey md:bg-grey-rgba flex justify-between items-center relative z-2;
+}

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router';
-import { Footer } from '../footer/Footer';
-import { Header } from '../header/Header';
+import { Footer } from '../../organisms/footer/Footer';
+import { Header } from '../../organisms/header/Header';
 
 export function Layout() {
     const { pathname } = useLocation();
