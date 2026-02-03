@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 import Paw from "../../../../assets/svg/paw.svg?react";
 import { Button } from '../../../../components/atoms/Button/Button.tsx';
 import { Input } from '../../../../components/atoms/Input/Input.tsx';
+import { Loading } from '../../../../components/atoms/Loading/Loading.tsx';
 import "../../Auth.css";
 import { useAuth } from '../../hooks/useAuth.tsx';
 import { signIn } from '../../services/auth.ts';
@@ -52,18 +53,8 @@ export function Login() {
 
             <Button disabled={isSubmitting}>
                 {isSubmitting
-                    ? (
-                        <>
-                            <span className="loading-paws">
-                                <span className="mr-0.5">Connexion</span>
-                                <Paw className="paw w-1" aria-hidden="true" />
-                                <Paw className="paw w-1" aria-hidden="true" />
-                                <Paw className="paw w-1" aria-hidden="true" />
-                            </span>
-                        </>
-                    )
-                    :
-                    (
+                    ? (<Loading />)
+                    : (
                         <>
                             <Paw aria-hidden="true" className="paw w-1" />
                             Sign in

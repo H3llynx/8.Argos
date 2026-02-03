@@ -10,13 +10,13 @@ export function AuthArea() {
     return (
         <div>
             {!user &&
-                <NavLink to="/auth" className="auth-cta text-dark">
+                <NavLink to="/auth" tabIndex={0} className="auth-cta text-dark">
                     <Paw className="w-1.5 -rotate-10" aria-hidden="true" />
                     <span className="font-caveat text-3xl">Sign in</span>
                 </NavLink>
             }
             {user &&
-                <button onClick={signOut} className="auth-cta text-grey-2">
+                <button onClick={signOut} tabIndex={0} className="auth-cta text-grey-2">
                     <Logout aria-hidden="true" />
                     Sign out
                 </button>

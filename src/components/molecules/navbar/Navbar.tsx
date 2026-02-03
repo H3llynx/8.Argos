@@ -1,10 +1,16 @@
-import { NavLink } from "react-router";
+import { NavLink, useLocation } from "react-router";
 import Close from "../../../assets/svg/close.svg?react";
 import Logo from "../../../assets/svg/logo.svg?react";
 import Menu from "../../../assets/svg/menu.svg?react";
+import { useAuth } from "../../../features/auth/hooks/useAuth";
 import "./Navbar.css";
 
 export function Navbar() {
+    const { user } = useAuth();
+    const location = useLocation();
+
+    const getTabIndex = (path: string) => location.pathname === path ? -1 : 0;
+
     return (
         <nav className="navbar">
             <label htmlFor="menu-toggle" aria-label="open/close menu" className="menu-toggle">
@@ -14,10 +20,13 @@ export function Navbar() {
             </label>
             <Logo className="w-6 text-grey-2 hidden" aria-label="Argos logo" />
             <ul>
-                <li><NavLink to="/">Home</NavLink></li>
-                <li><NavLink to="/map">Map</NavLink></li>
-                <li><NavLink to="/calendar">Calendar</NavLink></li>
-                <li><NavLink to="/stats">Stats</NavLink></li>
+                <li><NavLink to="/" tabIndex={getTabIndex("/")}>Home</NavLink></li>
+                {user && <>
+                    <li><NavLink to="/map" tabIndex={getTabIndex("/map")}>Map</NavLink></li>
+                    <li><NavLink to="/calendar" tabIndex={getTabIndex("/calendar")}>Calendar</NavLink></li>
+                    <li><NavLink to="/stats" tabIndex={getTabIndex("/stats")}>Stats</NavLink></li>
+                </>
+                }
             </ul>
         </nav>
     )
