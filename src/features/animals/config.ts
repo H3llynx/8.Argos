@@ -1,10 +1,13 @@
 export const formFields = {
     name: {
+        field: "name",
         label: "name",
         id: "name",
         input_type: "text",
     },
     type: {
+        field: "type",
+        id: "type",
         label: "type",
         options: [
             {
@@ -18,6 +21,8 @@ export const formFields = {
         ]
     },
     sex: {
+        field: "sex",
+        id: "sex",
         label: "sex",
         options: [
             {
@@ -31,6 +36,8 @@ export const formFields = {
         ]
     },
     age: {
+        field: "age",
+        id: "age",
         label: "age",
         options: [
             {
@@ -54,6 +61,8 @@ export const formFields = {
         ]
     },
     size: {
+        field: "size",
+        id: "size",
         label: "size",
         options: [
             {
@@ -71,13 +80,26 @@ export const formFields = {
         ]
     },
     breed: {
+        field: "breed",
         label: "breed",
         id: "breed",
         input_type: "text",
     },
     location: {
+        field: "location",
         label: "location",
         id: "location",
         input_type: "text",
+    },
+    photo: {
+        field: "photo_url",
+        id: "photo",
+        input_type: "file",
+    },
+    adoption_date: {
+        field: "adopted_at",
+        id: "adopted_at",
+        input_type: "date",
+        label: "adoption date"
     },
 }

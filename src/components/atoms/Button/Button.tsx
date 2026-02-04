@@ -5,7 +5,7 @@ import "./Button.css";
 
 type Button = {
     children: ReactNode;
-    variant: "default" | "edit" | "delete" | "update" | "add" | "authentication";
+    variant: "default" | "edit" | "delete" | "update" | "add" | "authentication" | "cancelFile";
 } & React.ButtonHTMLAttributes<HTMLButtonElement>
 
 
@@ -18,7 +18,8 @@ const buttonVariants = tv({
             delete: "action-btn delete",
             update: "update-btn",
             add: "action-btn add",
-            authentication: "font-caveat text-2xl shadow-1 mt-2"
+            authentication: "font-caveat text-2xl shadow-1 mt-2",
+            cancelFile: "action-btn cancel-file"
         }
     },
     defaultVariants: {

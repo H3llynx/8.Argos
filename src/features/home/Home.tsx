@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
+import { Loading } from "../../components/atoms/Loading/Loading";
 import { Animals } from "../animals/Animals";
 import { useAuth } from "../auth/hooks/useAuth";
 
@@ -15,7 +16,7 @@ export function Home() {
 
     return (
         <main className="flex w-full max-w-[1400px] mx-auto mb-auto px-2 py-4">
-            {loading && <p>Loading</p>}
+            {loading && <Loading />}
             {user && <Animals />}
         </main>
     )

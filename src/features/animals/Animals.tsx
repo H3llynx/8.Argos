@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Add from "../../assets/svg/add.svg?react";
 import { Button } from '../../components/atoms/Button/Button';
+import { Loading } from '../../components/atoms/Loading/Loading';
 import { AddAnimal } from './components/AddAnimal/AddAnimal';
 import { AnimalTable } from './components/AnimalTable/AnimalTable';
 import { EditAnimal } from './components/EditAnimal/EditAnimal';
@@ -92,7 +93,7 @@ export function Animals() {
     return (
         <section className="flex justify-center xl:justify-between w-full flex-wrap gap-4">
             <div className="flex flex-col gap-1 pb-2 overflow-hidden max-w-full xl:w-1/2">
-                {loading && <p>Loading...</p>}
+                {loading && <Loading />}
                 {error && <p>{error}</p>}
                 {animals &&
                     <EditingContext value={{ animalToEdit }}>

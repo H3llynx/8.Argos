@@ -1,12 +1,31 @@
+import { tv } from "tailwind-variants";
 import Error from "../../../assets/svg/error.svg?react";
 import Paw from "../../../assets/svg/paw.svg?react";
 import "./Input.css";
-import type { InputProps } from "./types";
 
-export function Input({ label, id, type, placeholder, ...props }: InputProps) {
+export type InputProps = {
+    variant?: "default" | "checkbox"
+    label?: string;
+    required?: boolean;
+} & React.InputHTMLAttributes<HTMLInputElement>
+
+const labelVariants = tv({
+    base: "label",
+    variants: {
+        variant: {
+            default: "flex flex-col",
+            checkbox: "flex flex-row font-bold cursor-pointer",
+        }
+    },
+    defaultVariants: {
+        variant: "default"
+    }
+});
+
+export function Input({ variant = "default", label, id, type, placeholder, ...props }: InputProps) {
     return (
-        <label className="label" htmlFor={id}>
-            <span>{label}:</span>
+        <label className={labelVariants({ variant })} htmlFor={id}>
+            <span>{label}</span>
             <div className="input-container">
                 <input
                     className="shadow-1"

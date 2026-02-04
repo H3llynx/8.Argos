@@ -4,12 +4,12 @@ export type Animal = {
     created_at: string;
     name: string;
     type: string;
-    breed?: string;
+    breed?: string | null;
     sex: string;
     age: string;
     size: string;
-    photo_url?: string;
-    adopted_at?: string;
+    photo_url?: string | null;
+    adopted_at?: string | null;
     location: string
 }
 

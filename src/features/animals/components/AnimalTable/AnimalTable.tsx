@@ -13,7 +13,7 @@ export function AnimalTable({ animals, onEditAnimal, onDeleteAnimal }: AnimalTab
                 <table aria-labelledby="animals-table">
                     <thead>
                         <tr>
-                            <th scope="col"><Camera aria-label="Photo" /></th>
+                            <th scope="col"><Camera aria-label="Photo" className="w-[16px]" /></th>
                             <th scope="col">Name</th>
                             <th scope="col">Type</th>
                             <th scope="col">Breed</th>

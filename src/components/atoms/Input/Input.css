@@ -4,7 +4,15 @@
     @apply flex gap-0.5 items-center relative text-dark font-normal;
 
     input {
-        @apply bg-white py-0.5 px-1 rounded-full border border-dark-rgba w-full;
+        @apply bg-white py-0.5 px-1 rounded-full border border-dark-rgba;
+
+        &[type="checkbox"] {
+            @apply cursor-pointer;
+        }
+
+        &[type="date"] {
+            @apply border border-dark-rgba font-medium bg-white-rgba-2 rounded-lg px-0.5;
+        }
     }
 }
 

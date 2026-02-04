@@ -20,6 +20,14 @@
     }
 }
 
+.cancel-file {
+    @apply bg-transparent text-inherit border-0 font-bold;
+
+    &:hover {
+        @apply bg-transparent text-turquoise;
+    }
+}
+
 .update-btn {
     @apply font-open-sans text-sm font-medium py-0.5 px-1.5 gap-[5px];
 }
