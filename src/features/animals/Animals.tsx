@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react';
+import Add from "../../assets/svg/add.svg?react";
+import { Button } from '../../components/atoms/Button/Button';
+import { AddForm } from './components/AddForm/AddForm';
 import { AnimalTable } from './components/AnimalTable/AnimalTable';
 import { EditForm } from './components/EditForm/EditForm';
 import { deleteAnimal, fetchAnimals, updateAnimal } from './services/animals';
@@ -15,6 +18,7 @@ export function Animals() {
     const [animalToDelete, setAnimalToDelete] = useState<Animal | null>(null);
     const [newPhoto, setNewPhoto] = useState<File | null>(null);
     const [reload, setReload] = useState(false);
+    const [isAdding, setIsAdding] = useState(false);
 
     useEffect(() => {
         const init = async () => {
@@ -34,7 +38,15 @@ export function Animals() {
 
     useEffect(() => {
         if (!isEditing) setAnimalToEdit(null);
-    }, [isEditing])
+    }, [isEditing]);
+
+    useEffect(() => {
+        if (isAdding) setIsEditing(false);
+    }, [isAdding]);
+
+    useEffect(() => {
+        if (isEditing) setIsAdding(false);
+    }, [isEditing]);
 
     const handleEdit = (animal: Animal) => {
         if (!animalToEdit || animalToEdit === animal) {
@@ -51,9 +63,14 @@ export function Animals() {
         setReload(true);
     };
 
+    const handleAdd = () => {
+        setIsAdding(!isAdding);
+    }
+
     const handleChange = (field: keyof Animal, value: string) => {
         if (editedAnimal) {
-            const updatedValue = (field === "name") && !value
+            const required = ["name", "location"]
+            const updatedValue = required.includes(field) && !value
                 ? animalToEdit![field]
                 : value;
             setEditedAnimal({ ...editedAnimal, [field]: updatedValue })
@@ -77,12 +94,14 @@ export function Animals() {
         else {
             updateAnimal(editedAnimal!);
             setReload(true);
+            setAnimalToEdit(null);
+            setIsEditing(false);
         }
     };
 
     return (
         <section className="flex justify-center xl:justify-between w-full flex-wrap gap-4">
-            <div className="flex flex-col gap-1 overflow-hidden max-w-full xl:max-w-1/2">
+            <div className="flex flex-col gap-1 pb-2 overflow-hidden max-w-full xl:max-w-1/2">
                 {loading && <p>Loading...</p>}
                 {error && <p>{error}</p>}
                 {animals &&
@@ -92,6 +111,7 @@ export function Animals() {
                         onDeleteAnimal={handleDelete}
                     />
                 }
+                <Button variant="add" className="w-min" onClick={handleAdd}><Add aria-hidden="true" className="w-1" />Add</Button>
             </div>
             <div className="flex flex-col gap-1 w-full max-w-xl">
                 {isEditing && animalToEdit &&
@@ -104,9 +124,13 @@ export function Animals() {
                         onAgeChange={(e) => handleChange("age", e.target.value)}
                         onSizeChange={(e) => handleChange("size", e.target.value)}
                         onBreedChange={(e) => handleChange("breed", e.target.value)}
+                        onLocationChange={(e) => handleChange("location", e.target.value)}
                         onPhotoSelected={handlePhotoUpdate}
                         handleUpdate={handleUpdate}
                     />
+                }
+                {isAdding &&
+                    <AddForm />
                 }
             </div>
         </section>

@@ -74,5 +74,10 @@ export const formFields = {
         label: "breed",
         id: "breed",
         input_type: "text",
-    }
+    },
+    location: {
+        label: "location",
+        id: "location",
+        input_type: "text",
+    },
 }

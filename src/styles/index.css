@@ -93,15 +93,7 @@ a {
     }
   }
 
-  .cta {
-    @apply bg-turquoise-2 md:bg-dark py-[0.3rem] px-1 border border-dark-rgba text-white rounded-full font-caveat text-2xl flex justify-center items-center gap-0.5;
-
-    &:hover {
-      @apply bg-turquoise-2;
-    }
-
-    &:active {
-      @apply bg-turquoise;
-    }
+  select {
+    @apply border border-dark-rgba h-2 font-medium bg-white-rgba rounded-lg px-0.5;
   }
 }

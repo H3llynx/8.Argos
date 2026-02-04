@@ -9,7 +9,7 @@
 }
 
 table {
-    @apply text-sm text-left w-full;
+    @apply text-xs text-left w-full;
 }
 
 td,
@@ -42,29 +42,5 @@ td {
 
     img {
         @apply w-full h-full object-cover;
-    }
-}
-
-.action-btn {
-    @apply py-[5px] px-0.5 text-xs rounded-md font-medium border border-grey-rgba-2;
-
-    &:active {
-        @apply brightness-80;
-    }
-}
-
-.edit {
-    @apply bg-turquoise text-white;
-
-    &:hover {
-        @apply bg-turquoise-2;
-    }
-}
-
-.delete {
-    @apply bg-red text-white;
-
-    &:hover {
-        @apply bg-red-2;
     }
 }

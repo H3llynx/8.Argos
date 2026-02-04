@@ -1,0 +1,49 @@
+@reference "../../../styles/index.css";
+
+.cta {
+    @apply bg-turquoise-2 md:bg-dark py-[0.3rem] px-1 border border-dark-rgba text-white rounded-full flex justify-center items-center gap-0.5;
+
+    &:hover {
+        @apply bg-turquoise-2;
+    }
+
+    &:active {
+        @apply bg-turquoise;
+    }
+}
+
+.action-btn {
+    @apply py-[5px] px-0.5 gap-[5px] text-xs rounded-md font-medium border border-grey-rgba-2;
+
+    &:active {
+        @apply brightness-80;
+    }
+}
+
+.update-btn {
+    @apply font-open-sans text-sm font-medium py-0.5 px-1.5 gap-[5px];
+}
+
+.edit {
+    @apply bg-turquoise text-white;
+
+    &:hover {
+        @apply bg-turquoise-2;
+    }
+}
+
+.delete {
+    @apply bg-red text-white;
+
+    &:hover {
+        @apply bg-red-2;
+    }
+}
+
+.add {
+    @apply bg-turquoise-2 text-white;
+
+    &:hover {
+        @apply bg-turquoise;
+    }
+}

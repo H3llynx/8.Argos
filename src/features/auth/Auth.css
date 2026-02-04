@@ -1,5 +1,5 @@
 @reference "../../styles/index.css";
 
 .auth-form {
-    @apply flex gap-1 flex-col justify-center m-auto w-min relative z-1;
+    @apply flex max-w-xs gap-1 flex-col justify-center m-auto relative z-1;
 }

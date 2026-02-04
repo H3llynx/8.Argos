@@ -14,7 +14,7 @@ export function Home() {
     })
 
     return (
-        <main className="flex w-full max-w-[1400px] m-auto p-2">
+        <main className="flex w-full max-w-[1400px] mx-auto mb-auto px-2 py-4">
             {loading && <p>Loading</p>}
             {user && <Animals />}
         </main>
