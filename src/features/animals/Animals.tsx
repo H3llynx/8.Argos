@@ -1,24 +1,25 @@
 import { useEffect, useState } from 'react';
 import Add from "../../assets/svg/add.svg?react";
 import { Button } from '../../components/atoms/Button/Button';
-import { AddForm } from './components/AddForm/AddForm';
+import { AddAnimal } from './components/AddAnimal/AddAnimal';
 import { AnimalTable } from './components/AnimalTable/AnimalTable';
-import { EditForm } from './components/EditForm/EditForm';
+import { EditAnimal } from './components/EditAnimal/EditAnimal';
+import type { AnimalContextType } from './context/AnimalContext';
+import { AnimalContext } from './context/AnimalContext';
+import { EditingContext } from './context/EditingContext';
 import { deleteAnimal, fetchAnimals, updateAnimal } from './services/animals';
-import { hostImg } from './services/picture-hosting';
 import type { Animal } from './types';
 
 export function Animals() {
     const [animals, setAnimals] = useState<Animal[] | null>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const [isEditing, setIsEditing] = useState(false);
+    const [isEditing, setIsEditing] = useState<boolean>(false);
     const [animalToEdit, setAnimalToEdit] = useState<Animal | null>(null)
     const [editedAnimal, setEditedAnimal] = useState<Animal | null>(null);
     const [animalToDelete, setAnimalToDelete] = useState<Animal | null>(null);
-    const [newPhoto, setNewPhoto] = useState<File | null>(null);
-    const [reload, setReload] = useState(false);
-    const [isAdding, setIsAdding] = useState(false);
+    const [reload, setReload] = useState<boolean>(false);
+    const [isAdding, setIsAdding] = useState<boolean>(false);
 
     useEffect(() => {
         const init = async () => {
@@ -37,24 +38,26 @@ export function Animals() {
     }, [reload]);
 
     useEffect(() => {
-        if (!isEditing) setAnimalToEdit(null);
+        if (!isEditing) {
+            setAnimalToEdit(null);
+            setEditedAnimal(null);
+        }
+    }, [isEditing]);
+
+    useEffect(() => {
+        if (isEditing) setIsAdding(false);
     }, [isEditing]);
 
     useEffect(() => {
         if (isAdding) setIsEditing(false);
     }, [isAdding]);
 
-    useEffect(() => {
-        if (isEditing) setIsAdding(false);
-    }, [isEditing]);
-
     const handleEdit = (animal: Animal) => {
         if (!animalToEdit || animalToEdit === animal) {
             setIsEditing(!isEditing);
         }
-        setNewPhoto(null);
         setAnimalToEdit(animal);
-        setEditedAnimal(animal)
+        setEditedAnimal(animal);
     };
 
     const handleDelete = async (animal: Animal) => {
@@ -67,29 +70,8 @@ export function Animals() {
         setIsAdding(!isAdding);
     }
 
-    const handleChange = (field: keyof Animal, value: string) => {
-        if (editedAnimal) {
-            const required = ["name", "location"]
-            const updatedValue = required.includes(field) && !value
-                ? animalToEdit![field]
-                : value;
-            setEditedAnimal({ ...editedAnimal, [field]: updatedValue })
-        }
-    };
-
-    const handlePhotoUpdate = async (file: File | null) => {
-        if (editedAnimal && file) {
-            setNewPhoto(file);
-            const newUrl = await hostImg(file);
-            setEditedAnimal({ ...editedAnimal, photo_url: newUrl })
-        }
-    };
-
     const handleUpdate = async (e: React.SubmitEvent) => {
         e.preventDefault();
-        if (newPhoto) {
-            await handlePhotoUpdate(newPhoto);
-        }
         if (editedAnimal === animalToEdit) { return }
         else {
             updateAnimal(editedAnimal!);
@@ -99,38 +81,38 @@ export function Animals() {
         }
     };
 
+    const AnimalContextValue: AnimalContextType = {
+        animalToEdit,
+        editedAnimal,
+        setEditedAnimal,
+        handleUpdate,
+        setAnimalToEdit
+    };
+
     return (
         <section className="flex justify-center xl:justify-between w-full flex-wrap gap-4">
-            <div className="flex flex-col gap-1 pb-2 overflow-hidden max-w-full xl:max-w-1/2">
+            <div className="flex flex-col gap-1 pb-2 overflow-hidden max-w-full xl:w-1/2">
                 {loading && <p>Loading...</p>}
                 {error && <p>{error}</p>}
                 {animals &&
-                    <AnimalTable
-                        animals={animals}
-                        onEditAnimal={handleEdit}
-                        onDeleteAnimal={handleDelete}
-                    />
+                    <EditingContext value={{ animalToEdit }}>
+                        <AnimalTable
+                            animals={animals}
+                            onEditAnimal={handleEdit}
+                            onDeleteAnimal={handleDelete}
+                        />
+                    </EditingContext>
                 }
                 <Button variant="add" className="w-min" onClick={handleAdd}><Add aria-hidden="true" className="w-1" />Add</Button>
             </div>
             <div className="flex flex-col gap-1 w-full max-w-xl">
                 {isEditing && animalToEdit &&
-                    <EditForm
-                        animalToEdit={animalToEdit}
-                        editedAnimal={editedAnimal!}
-                        onNameChange={(e) => handleChange("name", e.target.value)}
-                        onTypeChange={(e) => handleChange("type", e.target.value)}
-                        onSexChange={(e) => handleChange("sex", e.target.value)}
-                        onAgeChange={(e) => handleChange("age", e.target.value)}
-                        onSizeChange={(e) => handleChange("size", e.target.value)}
-                        onBreedChange={(e) => handleChange("breed", e.target.value)}
-                        onLocationChange={(e) => handleChange("location", e.target.value)}
-                        onPhotoSelected={handlePhotoUpdate}
-                        handleUpdate={handleUpdate}
-                    />
+                    <AnimalContext value={AnimalContextValue}>
+                        <EditAnimal />
+                    </AnimalContext>
                 }
                 {isAdding &&
-                    <AddForm />
+                    <AddAnimal />
                 }
             </div>
         </section>
