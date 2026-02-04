@@ -1,23 +1,11 @@
 @reference "../../../styles/index.css";
 
-.label {
-    @apply flex flex-col gap-0.5 capitalize justify-center text-sm text-white md:text-dark;
-
-    &:has(input:user-valid) .valid-svg {
-        @apply block -right-2;
-    }
-
-    &:has(input:user-invalid) .error-svg {
-        @apply block -right-2.5;
-    }
-}
-
 .input-container {
-    @apply flex gap-0.5 items-center relative text-dark;
-}
+    @apply flex gap-0.5 items-center relative text-dark font-normal;
 
-input {
-    @apply bg-white py-0.5 px-1 rounded-full border border-dark-rgba w-xs;
+    input {
+        @apply bg-white py-0.5 px-1 rounded-full border border-dark-rgba w-full;
+    }
 }
 
 .error-svg,

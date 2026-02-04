@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useForm, } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import Paw from "../../../../assets/svg/paw.svg?react";
-import { Button } from '../../../../components/atoms/Button/Button.tsx';
 import { Input } from '../../../../components/atoms/Input/Input.tsx';
 import { Loading } from '../../../../components/atoms/Loading/Loading.tsx';
 import "../../Auth.css";
@@ -51,7 +50,7 @@ export function Login() {
                 required
             />
 
-            <Button disabled={isSubmitting}>
+            <button className="cta shadow-1 mt-2" disabled={isSubmitting}>
                 {isSubmitting
                     ? (<Loading />)
                     : (
@@ -61,7 +60,7 @@ export function Login() {
                         </>
                     )
                 }
-            </Button>
+            </button>
         </form>
     );
 }

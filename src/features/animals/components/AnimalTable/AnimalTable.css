@@ -1,0 +1,70 @@
+@reference "../../../../styles/index.css";
+
+.animal-h2 {
+    @apply text-3xl text-white md:text-dark font-caveat;
+}
+
+.table-container {
+    @apply bg-white capitalize border border-grey-1 rounded-lg pt-1 pb-[5px] w-full overflow-scroll;
+}
+
+table {
+    @apply text-sm text-left w-full;
+}
+
+td,
+th {
+    @apply px-0.5;
+}
+
+thead th {
+    @apply pb-0.5 text-dark border-b-2 border-turquoise;
+
+    &:first-of-type svg {
+        @apply m-auto
+    }
+}
+
+tbody th {
+    @apply py-[0.25rem];
+}
+
+tbody tr:not(:last-of-type) {
+    @apply border-b border-grey-rgba;
+}
+
+td {
+    @apply text-grey-1 relative;
+}
+
+.animal-photo {
+    @apply w-2.5 h-2.5 border border-dark-rgba rounded-full overflow-hidden m-auto;
+
+    img {
+        @apply w-full h-full object-cover;
+    }
+}
+
+.action-btn {
+    @apply py-[5px] px-0.5 text-xs rounded-md font-medium border border-grey-rgba-2;
+
+    &:active {
+        @apply brightness-80;
+    }
+}
+
+.edit {
+    @apply bg-turquoise text-white;
+
+    &:hover {
+        @apply bg-turquoise-2;
+    }
+}
+
+.delete {
+    @apply bg-red text-white;
+
+    &:hover {
+        @apply bg-red-2;
+    }
+}

@@ -3,8 +3,7 @@ import type { Credentials } from "../types";
 
 export const loadUser = async () => {
     try {
-        const { data, error } = await supabase.auth.getUser();
-        if (error) throw error;
+        const { data } = await supabase.auth.getUser();
         return data.user;
     } catch (error) {
         console.error("Authentication error:", error);

@@ -13,10 +13,14 @@
   --color-grey-3: #c1bfbf;
   --color-turquoise: #0097a7;
   --color-turquoise-2: #14B8A6;
-  --color-red: #ff1048;
+  --color-red: #e73737;
+  --color-red-2: #e81f1f;
+  --color-pink: #ff1048;
   --color-orange: #FF7F11;
+  --color-white-rgba: rgba(255, 255, 255, 0.3);
   --color-dark-rgba: rgba(0, 0, 0, 0.13);
   --color-dark-rgba-2: rgba(0, 0, 0, 0.4);
+  --color-dark-rgba-3: rgba(0, 0, 0, 0.25);
   --color-grey-rgba: rgba(235, 234, 239, 0.8);
   --color-grey-rgba-2: rgba(235, 234, 239, 0.4);
 }
@@ -29,15 +33,10 @@ body {
   background-size: cover;
   background-position: center;
   background-image: url(../assets/images/cat.jpg);
+  background-attachment: fixed;
   color: var(--color-dark);
   display: flex;
-  height: 100dvh;
-  font-family: var(--font-open-sans);
-}
-
-h1,
-h2,
-h3 {
+  min-height: 100dvh;
   font-family: var(--font-open-sans);
 }
 
@@ -69,6 +68,10 @@ a {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
   }
 
+  .shadow-3 {
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  }
+
   .bg-blur {
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
@@ -76,5 +79,29 @@ a {
 
   .paw {
     @apply w-1.5 -rotate-10
+  }
+
+  .label {
+    @apply flex flex-col gap-0.5 capitalize justify-center text-sm font-medium text-white md:text-dark;
+
+    &:has(input:user-valid) .valid-svg {
+      @apply block -right-2;
+    }
+
+    &:has(input:user-invalid) .error-svg {
+      @apply block -right-2.5;
+    }
+  }
+
+  .cta {
+    @apply bg-turquoise-2 md:bg-dark py-[0.3rem] px-1 border border-dark-rgba text-white rounded-full font-caveat text-2xl flex justify-center items-center gap-0.5;
+
+    &:hover {
+      @apply bg-turquoise-2;
+    }
+
+    &:active {
+      @apply bg-turquoise;
+    }
   }
 }

@@ -1,0 +1,5 @@
+@reference "../../../../styles/index.css";
+
+select {
+    @apply border border-dark-rgba h-2 font-medium bg-white-rgba rounded-md px-0.5;
+}

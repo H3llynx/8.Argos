@@ -12,7 +12,7 @@ export function Layout() {
 
     return (
         <>
-            <div className="absolute w-screen h-dvh inset-0 bg-dark-rgba-2 md:bg-grey-rgba-2 z-0" />
+            <div className="fixed w-screen h-dvh inset-0 bg-dark-rgba-2  md:bg-grey-rgba-2 z-0" />
             <div className="w-screen min-h-dvh flex flex-col justify-between relative z-1">
                 <Header />
                 <Outlet />
