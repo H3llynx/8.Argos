@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router';
 import { Footer } from '../../organisms/footer/Footer';
 import { Header } from '../../organisms/header/Header';
+import "./Layout.css";
 
 export function Layout() {
     const { pathname } = useLocation();
@@ -12,8 +13,7 @@ export function Layout() {
 
     return (
         <>
-            <div className="fixed w-screen h-dvh inset-0 bg-dark-rgba-2  md:bg-grey-rgba-2 z-0" />
-            <div className="w-screen min-h-dvh flex flex-col justify-between relative z-1">
+            <div className="layout">
                 <Header />
                 <Outlet />
                 <Footer />

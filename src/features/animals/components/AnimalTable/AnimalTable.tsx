@@ -4,8 +4,10 @@ import { useEditing } from "../../hooks/useContexts";
 import type { AnimalTableProps } from "../../types";
 import "./AnimalTable.css";
 
+
 export function AnimalTable({ animals, onEditAnimal, onDeleteAnimal }: AnimalTableProps) {
     const { animalToEdit } = useEditing();
+
     return (
         <>
             <h2 id="animals-table" className="animal-h2">Animal listings</h2>
@@ -41,11 +43,11 @@ export function AnimalTable({ animals, onEditAnimal, onDeleteAnimal }: AnimalTab
                                 <td><span>{animal.type}</span></td>
                                 <td><span>{animal.breed}</span></td>
                                 <td><span>{animal.sex}</span></td>
-                                <td><span>{animal.age}</span></td>
+                                <td><span>{animal.age.toLowerCase() === "puppy_kitten" ? "Baby" : animal.age}</span></td>
                                 <td><span>{animal.size}</span></td>
                                 <td><span>{animal.location}</span></td>
                                 <td>{animal.adopted_at ? "adopted" : "available"}</td>
-                                <td className="min-w-8 flex h-3 gap-[5px] items-center">
+                                <td className="min-w-9 flex h-3 gap-[5px] items-center">
                                     <Button variant="edit" onClick={() => { onEditAnimal(animal) }}>{animalToEdit === animal ? "Cancel" : "Edit"}</Button>
                                     <Button variant="delete" onClick={() => onDeleteAnimal(animal)}>Delete</Button>
                                 </td>

@@ -14,7 +14,7 @@ const labelVariants = tv({
     variants: {
         variant: {
             default: "flex flex-col",
-            checkbox: "flex flex-row font-bold cursor-pointer",
+            checkbox: "flex flex-row font-bold cursor-pointer"
         }
     },
     defaultVariants: {
@@ -34,8 +34,12 @@ export function Input({ variant = "default", label, id, type, placeholder, ...pr
                     placeholder={placeholder}
                     {...props}
                 />
-                <Error aria-hidden="true" className="w-2 error-svg" />
-                <Paw aria-hidden="true" className="paw w-1 valid-svg" />
+                {variant === "default" &&
+                    <>
+                        <Error aria-hidden="true" className="w-2 error-svg" />
+                        <Paw aria-hidden="true" className="paw w-1 valid-svg" />
+                    </>
+                }
             </div>
         </label>
     )

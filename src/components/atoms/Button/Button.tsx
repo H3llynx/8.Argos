@@ -5,7 +5,7 @@ import "./Button.css";
 
 type Button = {
     children: ReactNode;
-    variant: "default" | "edit" | "delete" | "update" | "add" | "authentication" | "cancelFile";
+    variant?: "default" | "edit" | "delete" | "update" | "add" | "authentication" | "cancelFile";
 } & React.ButtonHTMLAttributes<HTMLButtonElement>
 
 
@@ -13,7 +13,7 @@ const buttonVariants = tv({
     base: "cta",
     variants: {
         variant: {
-            default: "font-caveat text-2xl",
+            default: "text-sm font-medium",
             edit: "action-btn edit",
             delete: "action-btn delete",
             update: "update-btn",
@@ -27,12 +27,13 @@ const buttonVariants = tv({
     }
 });
 
-export function Button({ children, variant, className, ...props }: Button) {
+export function Button({ children, variant = "default", className, ...props }: Button) {
     return (
         <button className={twMerge(
             buttonVariants({ variant }),
             className
         )}
+            tabIndex={0}
             {...props}
         >
             {children}

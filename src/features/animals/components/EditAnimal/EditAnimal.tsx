@@ -41,7 +41,7 @@ export function EditAnimal() {
     };
 
     return (
-        <>
+        <div className="form flex flex-col gap-1">
             <h2 className="animal-h2">Edit <span className="capitalize">{animalToEdit.name}</span>:</h2>
             <form className="flex gap-y-1 gap-x-2 flex-wrap" onSubmit={handleUpdate}>
                 <Input
@@ -54,7 +54,7 @@ export function EditAnimal() {
                     className="capitalize"
                 />
 
-                <label className="label" htmlFor={type.id}>
+                <label className="label flex flex-col" htmlFor={type.id}>
                     <span>{type.label}</span>
                     <select
                         key={animalToEdit.id}
@@ -70,7 +70,7 @@ export function EditAnimal() {
                     </select>
                 </label>
 
-                <label className="label" htmlFor={sex.id}>
+                <label className="label flex flex-col" htmlFor={sex.id}>
                     <span>{sex.label}</span>
                     <select
                         key={animalToEdit.id}
@@ -87,7 +87,7 @@ export function EditAnimal() {
                     </select>
                 </label>
 
-                <label className="label" htmlFor={size.id}>
+                <label className="label flex flex-col" htmlFor={size.id}>
                     <span>{size.label}</span>
                     <select
                         key={animalToEdit.id}
@@ -113,7 +113,7 @@ export function EditAnimal() {
                     onChange={(e) => handleChange(breed.field as keyof Animal, e.target.value)}
                 />
 
-                <label className="label" htmlFor={age.id}>
+                <label className="label flex flex-col" htmlFor={age.id}>
                     <span>{age.label}</span>
                     <select
                         key={animalToEdit.id}
@@ -138,11 +138,12 @@ export function EditAnimal() {
                     value={editedAnimal.location}
                     onChange={(e) => handleChange(location.field as keyof Animal, e.target.value)}
                 />
-                <div className="flex gap-2 items-center mt-1.5">
+
+                <div className="flex gap-2 items-center">
                     <Input
                         variant="checkbox"
-                        label="Adopted?"
-                        type="checkbox"
+                        label={adoption_date.checkbox_label}
+                        type={adoption_date.input_type_1}
                         checked={isAdopted}
                         onChange={() => {
                             setIsAdopted(!isAdopted);
@@ -151,16 +152,17 @@ export function EditAnimal() {
                     />
                     {isAdopted &&
                         <Input
-                            aria-label="Set adoption date"
+                            aria-label={adoption_date.date_aria_label}
                             id={adoption_date.id}
-                            type={adoption_date.input_type}
+                            type={adoption_date.input_type_2}
                             onChange={(e) => handleChange(adoption_date.field as keyof Animal, e.target.value)}
                             required
                         />
                     }
                 </div>
-                <div className="flex mt-1.5">
-                    <label className="flex gap-0.5 flex-wrap items-center cursor-pointer text-white md:text-dark">
+
+                <div className="flex">
+                    <label className="flex gap-0.5 flex-wrap items-center cursor-pointer">
                         {animalToEdit.photo_url && <img src={animalToEdit.photo_url} className="w-1.5 h-1.5 object-cover rounded-md border border-dark-rgba" alt="" />}
                         {!animalToEdit.photo_url && <Camera className="w-1.5" aria-hidden="true" />}
                         <input
@@ -169,14 +171,16 @@ export function EditAnimal() {
                             className="text-xs font-medium self-center cursor-pointer"
                             type={photo.input_type}
                             ref={fileInputRef}
-                            onChange={handlePhotoChange} />
+                            onChange={handlePhotoChange}
+                        />
                     </label>
                     {fileInputRef.current?.value && fileInputRef.current.value.length > 0 &&
                         <Button type="button" variant="cancelFile" onClick={handlePhotoClear}>Cancel</Button>
                     }
                 </div>
+
                 <Button variant="update" className="w-full md:w-auto m-auto">Update<span className="capitalize">{animalToEdit.name}</span></Button>
             </form >
-        </>
+        </div>
     )
 }

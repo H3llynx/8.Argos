@@ -19,6 +19,7 @@
   --color-orange: #FF7F11;
   --color-white-rgba: rgba(255, 255, 255, 0.3);
   --color-white-rgba-2: rgba(255, 255, 255, 0.6);
+  --color-white-rgba-3: rgba(255, 255, 255, 0.8);
   --color-dark-rgba: rgba(0, 0, 0, 0.13);
   --color-dark-rgba-2: rgba(0, 0, 0, 0.4);
   --color-dark-rgba-3: rgba(0, 0, 0, 0.25);
@@ -33,12 +34,15 @@ html {
 body {
   background-size: cover;
   background-position: center;
-  background-image: url(../assets/images/cat.jpg);
+  background-image: url(../assets/images/bg-dog-2.jpg);
   background-attachment: fixed;
-  color: var(--color-dark);
   display: flex;
   min-height: 100dvh;
   font-family: var(--font-open-sans);
+}
+
+main {
+  @apply text-white xl:text-dark;
 }
 
 button {
@@ -78,23 +82,25 @@ a {
     -webkit-backdrop-filter: blur(5px);
   }
 
+  .animal-h2 {
+    @apply text-3xl font-caveat;
+  }
+
   .paw {
     @apply w-1.5 -rotate-10
   }
 
-  .label {
-    @apply flex flex-col gap-0.5 capitalize justify-center text-sm font-medium text-white md:text-dark;
-
-    &:has(input:user-valid) .valid-svg {
-      @apply block -right-2;
-    }
-
-    &:has(input:user-invalid) .error-svg {
-      @apply block -right-2.5;
-    }
-  }
-
   select {
     @apply border border-dark-rgba h-2 font-medium bg-white-rgba rounded-lg px-0.5;
+  }
+
+  @media (min-width: 1280px) {
+    .form {
+      background: linear-gradient(to right, var(--color-white-rgba-3), transparent);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 1rem;
+      border-radius: 1rem;
+    }
   }
 }

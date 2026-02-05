@@ -22,7 +22,6 @@ export const updateAnimal = async (updatedAnimal: Animal) => {
             .eq("id", updatedAnimal.id)
             .select()
             .single();
-
         return { data, error };
     } catch (err: unknown) {
         const error = err as Error;
@@ -41,6 +40,21 @@ export const deleteAnimal = async (id: string) => {
     } catch (err: unknown) {
         const error = err as Error;
         console.error("Animal delete error:", error);
+        return { data: null, error };
+    }
+}
+
+export const addAnimal = async (newAnimal: Animal) => {
+    try {
+        const { data, error } = await supabase
+            .from("animals")
+            .insert(newAnimal)
+            .select()
+            .single();
+        return { data, error };
+    } catch (err: unknown) {
+        const error = err as Error;
+        console.error("Animal creation error:", error);
         return { data: null, error };
     }
 }

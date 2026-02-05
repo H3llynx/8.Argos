@@ -99,7 +99,9 @@ export const formFields = {
     adoption_date: {
         field: "adopted_at",
         id: "adopted_at",
-        input_type: "date",
-        label: "adoption date"
+        input_type_1: "checkbox",
+        input_type_2: "date",
+        checkbox_label: "adopted?",
+        date_aria_label: "set adoption date"
     },
 }

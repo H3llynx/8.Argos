@@ -1,7 +1,19 @@
 @reference "../../../styles/index.css";
 
+.label {
+    @apply gap-0.5 capitalize justify-center text-sm font-medium;
+}
+
 .input-container {
     @apply flex gap-0.5 items-center relative text-dark font-normal;
+
+    &:has(input:user-valid) .valid-svg {
+        @apply block -right-1.5 text-turquoise-2;
+    }
+
+    &:has(input:user-invalid) .error-svg {
+        @apply block -right-2 text-orange;
+    }
 
     input {
         @apply bg-white py-0.5 px-1 rounded-full border border-dark-rgba;
@@ -18,5 +30,5 @@
 
 .error-svg,
 .valid-svg {
-    @apply hidden absolute text-white md:text-dark;
+    @apply hidden absolute;
 }

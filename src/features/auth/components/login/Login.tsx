@@ -53,13 +53,12 @@ export function Login() {
 
             <Button variant="authentication" disabled={isSubmitting}>
                 {isSubmitting
-                    ? (<Loading />)
-                    : (
-                        <>
-                            <Paw aria-hidden="true" className="paw w-1" />
-                            Sign in
-                        </>
-                    )
+                    ? <Loading />
+                    :
+                    <>
+                        <Paw aria-hidden="true" className="paw w-1" />
+                        Sign in
+                    </>
                 }
             </Button>
         </form>
