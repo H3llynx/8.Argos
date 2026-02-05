@@ -4,7 +4,7 @@ import Paw from "../../../assets/svg/paw.svg?react";
 import "./Input.css";
 
 export type InputProps = {
-    variant?: "default" | "checkbox"
+    variant?: "default" | "checkbox" | "filter"
     label?: string;
     required?: boolean;
 } & React.InputHTMLAttributes<HTMLInputElement>
@@ -14,7 +14,8 @@ const labelVariants = tv({
     variants: {
         variant: {
             default: "flex flex-col",
-            checkbox: "flex flex-row font-bold cursor-pointer"
+            checkbox: "flex flex-row font-bold cursor-pointer",
+            filter: "filter-area"
         }
     },
     defaultVariants: {

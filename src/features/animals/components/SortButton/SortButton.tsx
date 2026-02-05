@@ -1,6 +1,6 @@
 import ArrowDown from "../../../../assets/svg/arrow-down.svg?react"
 import ArrowUp from "../../../../assets/svg/arrow-up.svg?react"
-import Reset from "../../../../assets/svg/filter_alt_off.svg?react"
+import Reset from "../../../../assets/svg/sort_off.svg?react"
 
 type SortButtonType = {
     column?: string,

@@ -32,3 +32,7 @@
 .valid-svg {
     @apply hidden absolute;
 }
+
+.filter-area input {
+    @apply border border-dark-rgba h-2 font-medium bg-white-rgba-2 rounded-lg px-0.5 m-[5px];
+}

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Camera from "../../../../assets/svg/photo.svg?react";
 import { Button } from "../../../../components/atoms/Button/Button";
+import { Input } from "../../../../components/atoms/Input/Input";
 import { Popup } from "../../../../components/molecules/popup/Popup";
 import { tableColumns } from "../../config";
 import { useTable } from "../../hooks/useContexts";
@@ -9,10 +10,10 @@ import type { Animal } from "../../types";
 import { SortButton } from "../SortButton/SortButton";
 import "./AnimalTable.css";
 
-export function AnimalTable({ animals }: { animals: Animal[] }) {
-    const { animalToEdit, sortBy, sortByDate, handleEdit, setReload, isAscending, isSorted, setIsSorted } = useTable();
+export function AnimalTable() {
+    const { animalToEdit, sortBy, sortByDate, handleEdit, setReload, isAscending, isSorted, setIsSorted, filteredAnimals, setFilter } = useTable();
     const [animalToDelete, setAnimalToDelete] = useState<Animal | null>(null);
-    const popupRef = useRef<HTMLDialogElement>(null)
+    const popupRef = useRef<HTMLDialogElement>(null);
 
     useEffect(() => {
         if (animalToDelete) popupRef.current?.showModal();
@@ -35,7 +36,16 @@ export function AnimalTable({ animals }: { animals: Animal[] }) {
 
     return (
         <>
-            <h2 id="animals-table" className="animal-h2">Animal listings</h2>
+            <div className="flex justify-between items-center flex-wrap gap-1">
+                <h2 id="animals-table" className="animal-h2">Animal listings</h2>
+                <Input
+                    variant="filter"
+                    type="text"
+                    aria-label="Filter by name"
+                    placeholder="Filter by name"
+                    onChange={(e) => setFilter(e.target.value)}
+                />
+            </div>
             <div className="shadow-1 table-container">
                 <table aria-labelledby="animals-table">
                     <thead>
@@ -57,6 +67,7 @@ export function AnimalTable({ animals }: { animals: Animal[] }) {
                                 <div className="flex items-center gap-2">
                                     Actions
                                     <SortButton
+                                        aria-label="Remove filters and sorting"
                                         isActive={isSorted !== null}
                                         onClick={() => {
                                             sortByDate();
@@ -68,7 +79,7 @@ export function AnimalTable({ animals }: { animals: Animal[] }) {
                         </tr>
                     </thead>
                     <tbody>
-                        {animals.map(animal => (
+                        {filteredAnimals.map(animal => (
                             <tr key={animal.id}>
                                 <th scope="row">
                                     {animal.photo_url &&

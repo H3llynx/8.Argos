@@ -9,6 +9,8 @@ export function useAnimalDatabase() {
     const [reload, setReload] = useState<boolean>(false);
     const [isAscending, setIsAscending] = useState<boolean>(true);
     const [isSorted, setIsSorted] = useState<string | null>(null);
+    const [filter, setFilter] = useState("");
+    const [filteredAnimals, setFilteredAnimals] = useState<Animal[]>([]);
 
     useEffect(() => {
         const init = async () => {
@@ -25,6 +27,14 @@ export function useAnimalDatabase() {
         }
         init();
     }, [reload]);
+
+    useEffect(() => {
+        if (filter.trim() === "") setFilteredAnimals(animals);
+        else {
+            const filteredAnimals = animals.find(animal => animal.name.toLowerCase().includes(filter.trim().toLowerCase()));
+            setFilteredAnimals(filteredAnimals ? [filteredAnimals] : []);
+        }
+    }, [filter, animals])
 
     const sortBy = (field: keyof Animal) => {
         const newOrder = !isAscending;
@@ -56,6 +66,8 @@ export function useAnimalDatabase() {
         sortByDate,
         isAscending,
         isSorted,
-        setIsSorted
+        setIsSorted,
+        filteredAnimals,
+        setFilter
     };
 }

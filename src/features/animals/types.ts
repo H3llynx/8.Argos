@@ -29,5 +29,7 @@ export type TableContextType = {
     setReload: (value: boolean) => void
     isAscending: boolean;
     isSorted: string | null;
-    setIsSorted: (value: string | null) => void
+    setIsSorted: (value: string | null) => void,
+    filteredAnimals: Animal[];
+    setFilter: (value: string) => void
 }

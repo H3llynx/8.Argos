@@ -21,7 +21,9 @@ export function Animals() {
         sortByDate,
         isAscending,
         isSorted,
-        setIsSorted
+        setIsSorted,
+        filteredAnimals,
+        setFilter
     } = useAnimalDatabase();
     const {
         isEditing,
@@ -64,7 +66,9 @@ export function Animals() {
         setReload,
         isAscending,
         isSorted,
-        setIsSorted
+        setIsSorted,
+        filteredAnimals,
+        setFilter
     }
 
     return (
@@ -75,7 +79,7 @@ export function Animals() {
                 {animals &&
                     <>
                         <TableContext value={TableContextValue}>
-                            <AnimalTable animals={animals} />
+                            <AnimalTable />
                         </TableContext>
 
                     </>
