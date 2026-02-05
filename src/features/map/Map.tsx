@@ -1,9 +1,11 @@
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import { useAnimalDatabase } from '../animals/hooks/useAnimalDatabase';
 
 export function Map() {
+    const { animals } = useAnimalDatabase();
 
     return (
-        <main>
+        <main className="my-auto gap-4">
             <div className="w-full lg:w-1/2 h-[400px] shadow-1 border border-grey-1 rounded-lg overflow-hidden">
                 <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}
                     style={{ height: '100%', width: '100%' }}>
@@ -17,6 +19,16 @@ export function Map() {
                         </Popup>
                     </Marker>
                 </MapContainer>
+            </div>
+            <div className="w-full lg:w-1/2 bg-grey-rgba">
+                {animals.map(animal => {
+                    return (
+                        <>
+                            <h1>{animal.name}</h1>
+                            <p>{animal.location}</p>
+                        </>
+                    )
+                })}
             </div>
         </main>
     )

@@ -1,7 +1,7 @@
 @reference "../../../styles/index.css";
 
 .loading-paws {
-    @apply inline-flex gap-[0.25rem];
+    @apply inline-flex gap-[0.25rem] m-auto;
 }
 
 .loading-paws .paw {
