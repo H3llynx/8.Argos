@@ -105,3 +105,7 @@ export const formFields = {
         date_aria_label: "set adoption date"
     },
 }
+
+export const tableColumns = [
+    "name", "type", "breed", "sex", "age", "size", "location", "status"
+]

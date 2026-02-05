@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AnimalContext } from "../context/AnimalContext";
-import { EditingContext } from "../context/EditingContext";
+import { TableContext } from "../context/TableContext";
 
 export const useAnimal = () => {
     const context = useContext(AnimalContext);
@@ -10,8 +10,8 @@ export const useAnimal = () => {
     return context;
 }
 
-export const useEditing = () => {
-    const context = useContext(EditingContext);
+export const useTable = () => {
+    const context = useContext(TableContext);
     if (!context) {
         throw new Error("Context / provider issue")
     }

@@ -1,12 +1,37 @@
+import { useEffect, useRef, useState } from "react";
 import Camera from "../../../../assets/svg/photo.svg?react";
 import { Button } from "../../../../components/atoms/Button/Button";
-import { useEditing } from "../../hooks/useContexts";
-import type { AnimalTableProps } from "../../types";
+import { Popup } from "../../../../components/molecules/popup/Popup";
+import { tableColumns } from "../../config";
+import { useTable } from "../../hooks/useContexts";
+import { deleteAnimal } from "../../services/animals";
+import type { Animal } from "../../types";
+import { SortButton } from "../SortButton/SortButton";
 import "./AnimalTable.css";
 
+export function AnimalTable({ animals }: { animals: Animal[] }) {
+    const { animalToEdit, sortBy, sortByDate, handleEdit, setReload, isAscending, isSorted, setIsSorted } = useTable();
+    const [animalToDelete, setAnimalToDelete] = useState<Animal | null>(null);
+    const popupRef = useRef<HTMLDialogElement>(null)
 
-export function AnimalTable({ animals, onEditAnimal, onDeleteAnimal }: AnimalTableProps) {
-    const { animalToEdit } = useEditing();
+    useEffect(() => {
+        if (animalToDelete) popupRef.current?.showModal();
+    }, [animalToDelete]);
+
+    const handleDelete = (animal: Animal) => {
+        setAnimalToDelete(animal)
+    };
+
+    const cancelDelete = () => {
+        setAnimalToDelete(null);
+        popupRef.current?.close();
+    }
+
+    const confirmDelete = async (animal: Animal) => {
+        await deleteAnimal(animal.id);
+        setAnimalToDelete(null);
+        setReload(true);
+    }
 
     return (
         <>
@@ -16,21 +41,36 @@ export function AnimalTable({ animals, onEditAnimal, onDeleteAnimal }: AnimalTab
                     <thead>
                         <tr>
                             <th scope="col"><Camera aria-label="Photo" className="w-[16px]" /></th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Type</th>
-                            <th scope="col">Breed</th>
-                            <th scope="col">Sex</th>
-                            <th scope="col">Age</th>
-                            <th scope="col">Size</th>
-                            <th scope="col">Location</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Actions</th>
+                            {tableColumns.map(item => {
+                                return (
+                                    <th scope="col" aria-label={item}>
+                                        <SortButton
+                                            column={item}
+                                            onClick={() => { sortBy(item as keyof Animal) }}
+                                            isAscending={isAscending}
+                                            isActive={isSorted === item}
+                                        />
+                                    </th>
+                                )
+                            })}
+                            <th scope="col" className="min-w-8.5">
+                                <div className="flex items-center gap-2">
+                                    Actions
+                                    <SortButton
+                                        isActive={isSorted !== null}
+                                        onClick={() => {
+                                            sortByDate();
+                                            setIsSorted(null);
+                                        }}
+                                    />
+                                </div>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         {animals.map(animal => (
                             <tr key={animal.id}>
-                                <th scope="row" className="h-3">
+                                <th scope="row">
                                     {animal.photo_url &&
                                         <div className="animal-photo shadow-3">
                                             <img
@@ -47,13 +87,30 @@ export function AnimalTable({ animals, onEditAnimal, onDeleteAnimal }: AnimalTab
                                 <td><span>{animal.size}</span></td>
                                 <td><span>{animal.location}</span></td>
                                 <td>{animal.adopted_at ? "adopted" : "available"}</td>
-                                <td className="min-w-9 flex h-3 gap-[5px] items-center">
-                                    <Button variant="edit" onClick={() => { onEditAnimal(animal) }}>{animalToEdit === animal ? "Cancel" : "Edit"}</Button>
-                                    <Button variant="delete" onClick={() => onDeleteAnimal(animal)}>Delete</Button>
+                                <td className="flex h-3 gap-[5px] items-center">
+                                    <Button variant="edit" onClick={() => handleEdit(animal)}>{animalToEdit === animal ? "Cancel" : "Edit"}</Button>
+                                    <Button variant="delete" onClick={() => handleDelete(animal)}>Delete</Button>
                                 </td>
                             </tr>))}
                     </tbody>
                 </table>
             </div>
+            {animalToDelete &&
+                <Popup
+                    ref={popupRef}
+                    close={cancelDelete}
+                >
+                    <p>Are you sure you want to delete <span className="capitalize font-caveat text-3xl pr-[5px]">{animalToDelete.name}</span>?</p>
+                    {animalToDelete.photo_url &&
+                        <div className="m-auto w-20 h-10 overflow-hidden mt-1 border border-dark-rgba shadow-1 rounded-lg">
+                            <img className="w-full h-full object-cover" src={animalToDelete.photo_url} alt={`photo of ${animalToDelete.name}`} />
+                        </div>
+                    }
+                    <div className="flex gap-[5px] justify-center mt-1.5 mb-0.5">
+                        <Button onClick={() => confirmDelete(animalToDelete)}>Confirm</Button>
+                        <Button className="dialog-btn-secondary" onClick={cancelDelete}>Cancel</Button>
+                    </div>
+                </Popup>
+            }
         </>)
 }

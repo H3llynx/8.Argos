@@ -13,22 +13,21 @@ export type Animal = {
     location: string
 }
 
-export type EditFormProps = {
-    animalToEdit: Animal;
-    editedAnimal: Animal;
-    onNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    onTypeChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-    onBreedChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    onSexChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-    onAgeChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-    onSizeChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-    onLocationChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    onPhotoSelected: (file: File | null) => void;
-    handleUpdate: (e: React.SubmitEvent<HTMLFormElement>) => void;
-}
+export type AnimalContextType = {
+    animalToEdit: Animal | null;
+    editedAnimal: Animal | null;
+    setEditedAnimal: (animal: Animal | null) => void;
+    handleUpdate: (e: React.SubmitEvent) => Promise<void>;
+    setAnimalToEdit: (animal: Animal | null) => void;
+};
 
-export type AnimalTableProps = {
-    animals: Animal[];
-    onEditAnimal: (animal: Animal) => void;
-    onDeleteAnimal: (animal: Animal) => void;
+export type TableContextType = {
+    animalToEdit: Animal | null;
+    handleEdit: (animal: Animal) => void;
+    sortBy: (field: keyof Animal) => void;
+    sortByDate: () => void;
+    setReload: (value: boolean) => void
+    isAscending: boolean;
+    isSorted: string | null;
+    setIsSorted: (value: string | null) => void
 }

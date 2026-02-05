@@ -4,7 +4,7 @@
     @apply flex;
 
     .active {
-        @apply text-grey-3
+        @apply text-grey-2
     }
 
     a:not(.active):hover {
