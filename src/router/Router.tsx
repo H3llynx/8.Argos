@@ -2,6 +2,7 @@ import { createHashRouter } from "react-router";
 import { Layout } from "../components/templates/layout/Layout";
 import { Auth } from "../features/auth/Auth";
 import { Home } from "../features/home/Home";
+import { Map } from "../features/map/Map";
 
 export const Router = createHashRouter([
     {
@@ -15,6 +16,10 @@ export const Router = createHashRouter([
             {
                 path: '/auth',
                 element: <Auth />
+            },
+            {
+                path: '/map',
+                element: <Map />
             },
         ]
     }

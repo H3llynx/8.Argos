@@ -42,7 +42,7 @@ body {
 }
 
 main {
-  @apply text-white xl:text-dark;
+  @apply flex w-full max-w-[1400px] mx-auto mb-auto px-2 py-4 text-white xl:text-dark;
 }
 
 button {

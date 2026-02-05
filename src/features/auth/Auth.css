@@ -1,7 +1,7 @@
 @reference "../../styles/index.css";
 
 .auth-form {
-    @apply flex max-w-xs gap-1 flex-col justify-center m-auto relative z-1 text-white;
+    @apply flex w-xs gap-1 flex-col justify-center m-auto relative z-1 text-white;
 
     input {
         @apply w-full;

@@ -51,9 +51,9 @@ export function AnimalTable() {
                     <thead>
                         <tr>
                             <th scope="col"><Camera aria-label="Photo" className="w-[16px]" /></th>
-                            {tableColumns.map(item => {
+                            {tableColumns.map((item, index) => {
                                 return (
-                                    <th scope="col" aria-label={item}>
+                                    <th scope="col" aria-label={item} key={index}>
                                         <SortButton
                                             column={item}
                                             onClick={() => { sortBy(item as keyof Animal) }}
