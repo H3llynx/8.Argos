@@ -1,8 +1,5 @@
 @reference "../../../styles/index.css";
 
-.dialog {
-    @apply m-auto backdrop:bg-black/50 border border-dark-rgba p-1 rounded-lg bg-white w-sm text-center;
-}
 
 .dialog-btn-secondary {
     @apply bg-grey-2;
