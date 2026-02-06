@@ -71,22 +71,6 @@ export function Map() {
                                 onClick={() => setSelectedAnimal(animal)} />
                         )
                     })}
-                    {animalsWithCoordinates.map(animal => {
-                        return (
-                            <AnimalTile
-                                key={animal.id}
-                                animal={animal}
-                                onClick={() => setSelectedAnimal(animal)} />
-                        )
-                    })}
-                    {animalsWithCoordinates.map(animal => {
-                        return (
-                            <AnimalTile
-                                key={animal.id}
-                                animal={animal}
-                                onClick={() => setSelectedAnimal(animal)} />
-                        )
-                    })}
                 </div>
             </section>
         </main>
