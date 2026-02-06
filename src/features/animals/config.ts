@@ -1,4 +1,25 @@
-export const formFields = {
+export const ageDescription = [
+    {
+        description: "Puppy / Kitten (0-1 yr)",
+        value: "puppy_kitten"
+    },
+    {
+        description: "Young (1-3 yrs)",
+        value: "young"
+    }
+    ,
+    {
+        description: "Adult (3-7 yrs)",
+        value: "adult"
+    }
+    ,
+    {
+        description: "Senior (7+ yrs)",
+        value: "senior"
+    }
+]
+
+export const animalFields = {
     name: {
         field: "name",
         label: "name",
@@ -39,26 +60,7 @@ export const formFields = {
         field: "age",
         id: "age",
         label: "age",
-        options: [
-            {
-                description: "Puppy / Kitten (0-1 yr)",
-                value: "puppy_kitten"
-            },
-            {
-                description: "Young (1-3 yrs)",
-                value: "young"
-            }
-            ,
-            {
-                description: "Adult (3-7 yrs)",
-                value: "adult"
-            }
-            ,
-            {
-                description: "Senior (7+ yrs)",
-                value: "senior"
-            }
-        ]
+        options: ageDescription
     },
     size: {
         field: "size",
@@ -102,10 +104,11 @@ export const formFields = {
         input_type_1: "checkbox",
         input_type_2: "date",
         checkbox_label: "adopted?",
-        date_aria_label: "set adoption date"
+        date_aria_label: "set adoption date",
+        column: "status"
     },
 }
 
 export const tableColumns = [
-    "name", "type", "breed", "sex", "age", "size", "location", "status"
+    animalFields.name.field, animalFields.type.field, animalFields.breed.field, animalFields.sex.field, animalFields.age.field, animalFields.size.field, animalFields.location.field, animalFields.adoption_date.column
 ]

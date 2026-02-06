@@ -4,13 +4,13 @@ import Camera from "../../../../assets/svg/photo.svg?react";
 import { Button } from "../../../../components/atoms/Button/Button";
 import { Input } from "../../../../components/atoms/Input/Input";
 import { Loading } from "../../../../components/atoms/Loading/Loading";
-import { formFields } from "../../config";
+import { animalFields } from "../../config";
 import { addAnimal } from "../../services/animals";
 import { hostImg } from "../../services/picture-hosting";
 import type { Animal } from "../../types";
 
 export function AddAnimal({ onSuccess }: { onSuccess: () => void }) {
-    const { name, type, age, sex, breed, size, location, photo } = formFields;
+    const { name, type, age, sex, breed, size, location, photo } = animalFields;
     const { register, handleSubmit, setValue, watch
         , formState: { isSubmitting } } = useForm<Animal>();
     const fileInputRef = useRef<HTMLInputElement>(null);

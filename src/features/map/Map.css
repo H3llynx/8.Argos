@@ -1,0 +1,13 @@
+@reference "../../styles/index.css";
+
+.main-map {
+    @apply pt-0 px-0 xl:py-4 xl:px-2 xl:my-auto;
+}
+
+.map-div-container {
+    @apply relative xl:fixed xl:top-1/2 xl:-translate-y-1/2 xl:w-2xl xl:rounded-lg w-full h-[40dvh] max-h-[400px] landscape:h-[60dvh] border border-grey-1 overflow-hidden;
+}
+
+.tile-div-container {
+    @apply flex gap-1 w-full xl:w-lg flex-wrap justify-center xl:justify-start;
+}

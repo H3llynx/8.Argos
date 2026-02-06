@@ -24,9 +24,9 @@ export function useAnimalEdit() {
 
     const handleUpdate = async (e: React.SubmitEvent, onSuccess: () => void) => {
         e.preventDefault();
-        if (editedAnimal === animalToEdit) { return }
+        if (editedAnimal === animalToEdit) return;
         else {
-            updateAnimal(editedAnimal!);
+            await updateAnimal(editedAnimal!);
             onSuccess();
             setAnimalToEdit(null);
             setIsEditing(false);

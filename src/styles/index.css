@@ -54,6 +54,10 @@ a {
   transition: 0.4s;
 }
 
+h3 {
+  @apply font-caveat text-2xl capitalize;
+}
+
 @layer base {
   *:focus-visible {
     outline-width: 2px;

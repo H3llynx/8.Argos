@@ -8,9 +8,9 @@ export type Animal = {
     sex: string;
     age: string;
     size: string;
-    photo_url?: string | null;
-    adopted_at?: string | null;
-    location: string
+    photo_url: string | null;
+    adopted_at: string | null;
+    location: string;
 }
 
 export type AnimalContextType = {

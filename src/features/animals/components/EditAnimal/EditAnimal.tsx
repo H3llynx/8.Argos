@@ -2,18 +2,17 @@ import { useRef, useState } from "react";
 import Camera from "../../../../assets/svg/photo.svg?react";
 import { Button } from "../../../../components/atoms/Button/Button";
 import { Input } from "../../../../components/atoms/Input/Input";
-import { formFields } from "../../config";
+import { animalFields } from "../../config";
 import { useAnimal } from "../../hooks/useContexts";
 import { hostImg } from "../../services/picture-hosting";
 import type { Animal } from "../../types";
 
-const { name, type, age, sex, breed, size, location, photo, adoption_date } = formFields;
+const { name, type, age, sex, breed, size, location, photo, adoption_date } = animalFields;
 
 export function EditAnimal() {
     const { animalToEdit, editedAnimal, setEditedAnimal, handleUpdate } = useAnimal();
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [isAdopted, setIsAdopted] = useState(animalToEdit!.adopted_at ? true : false);
-
     if (!animalToEdit || !editedAnimal) return null;
 
     const handleChange = (field: keyof Animal, value: string | null) => {
@@ -155,6 +154,7 @@ export function EditAnimal() {
                             aria-label={adoption_date.date_aria_label}
                             id={adoption_date.id}
                             type={adoption_date.input_type_2}
+                            value={editedAnimal.adopted_at ?? ""}
                             onChange={(e) => handleChange(adoption_date.field as keyof Animal, e.target.value)}
                             required
                         />
@@ -179,7 +179,9 @@ export function EditAnimal() {
                     }
                 </div>
 
-                <Button variant="update" className="w-full md:w-auto m-auto">Update<span className="capitalize">{animalToEdit.name}</span></Button>
+                <Button variant="update" className="w-full md:w-auto m-auto">
+                    Update<span className="capitalize">{animalToEdit.name}</span>
+                </Button>
             </form >
         </div>
     )
