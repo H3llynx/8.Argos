@@ -1,6 +1,7 @@
 import type { LatLngExpression } from 'leaflet';
 import { useEffect, useState } from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
+import { Loading } from '../../components/atoms/Loading/Loading';
 import { useAnimalDatabase } from '../animals/hooks/useAnimalDatabase';
 import { AnimalMarker } from './components/AnimalMarker/AnimalMarker';
 import { AnimalTile } from './components/AnimalTile/AnimalTile';
@@ -13,6 +14,7 @@ export function Map() {
     const [animalsWithCoordinates, setAnimalWithCoordinates] = useState<AnimalWithCoordinates[]>([]);
     const [center, setCenter] = useState<LatLngExpression | null>(null);
     const [selectedAnimal, setSelectedAnimal] = useState<AnimalWithCoordinates | null>(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const loadAnimals = async () => {
@@ -34,12 +36,14 @@ export function Map() {
             longitudes += animal.coordinates.lon;
             divider++;
         }
-        setCenter([(latitudes / divider), longitudes / divider])
+        setCenter([(latitudes / divider), longitudes / divider]);
+        setLoading(false);
     }, [animalsWithCoordinates]);
 
     return (
         <main className="main-map">
             <section className="flex justify-center xl:justify-between w-full flex-wrap gap-2">
+                {loading && <div className="p-5 self-center"><Loading /></div>}
                 <div className="relative z-0 w-full xl:w-2xl">
                     {center &&
                         <div className="map-div-container shadow-1">
