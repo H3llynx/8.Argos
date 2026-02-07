@@ -3,7 +3,7 @@ import Camera from "../../../../assets/svg/photo.svg?react";
 import { Button } from "../../../../components/atoms/Button/Button";
 import { Input } from "../../../../components/atoms/Input/Input";
 import { Popup } from "../../../../components/molecules/popup/Popup";
-import { tableColumns } from "../../config";
+import { tableColumns } from "../../../../config";
 import { useTable } from "../../hooks/useContexts";
 import { deleteAnimal } from "../../services/animals";
 import type { Animal } from "../../types";

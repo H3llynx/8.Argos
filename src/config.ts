@@ -1,20 +1,20 @@
 export const ageDescription = [
     {
-        description: "Puppy / Kitten (0-1 yr)",
+        name: "Puppy / Kitten (0-1 yr)",
         value: "puppy_kitten"
     },
     {
-        description: "Young (1-3 yrs)",
+        name: "Young (1-3 yrs)",
         value: "young"
     }
     ,
     {
-        description: "Adult (3-7 yrs)",
+        name: "Adult (3-7 yrs)",
         value: "adult"
     }
     ,
     {
-        description: "Senior (7+ yrs)",
+        name: "Senior (7+ yrs)",
         value: "senior"
     }
 ]

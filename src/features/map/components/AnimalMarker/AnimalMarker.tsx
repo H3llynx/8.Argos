@@ -9,7 +9,7 @@ import Location from "../../../../assets/svg/marker.svg?react";
 import { Button } from '../../../../components/atoms/Button/Button';
 import { Input } from '../../../../components/atoms/Input/Input';
 import { Loading } from '../../../../components/atoms/Loading/Loading';
-import { ageDescription, animalFields } from '../../../animals/config';
+import { ageDescription, animalFields } from '../../../../config';
 import { updateAnimal } from '../../../animals/services/animals';
 import type { Animal } from '../../../animals/types';
 import type { AnimalWithCoordinates } from '../../types';
@@ -72,7 +72,7 @@ export function AnimalMarker({ animal, isOpen, setReload, animals, loading, setL
 
     const getAgeDetail = (animal: AnimalWithCoordinates) => {
         const age = ageDescription.find(age => age.value === animal.age);
-        return age?.description
+        return age?.name
     }
 
     const customIcon = L.icon({

@@ -3,6 +3,7 @@ import { Layout } from "../components/templates/layout/Layout";
 import { Auth } from "../features/auth/Auth";
 import { Home } from "../features/home/Home";
 import { Map } from "../features/map/Map";
+import { Stats } from "../features/stats/Stats";
 import { ProtectedRoutes } from "./protectedRoutes";
 
 export const Router = createHashRouter([
@@ -26,6 +27,14 @@ export const Router = createHashRouter([
                     </ProtectedRoutes>
                 )
             },
+            {
+                path: '/stats',
+                element: (
+                    <ProtectedRoutes>
+                        <Stats />
+                    </ProtectedRoutes>
+                )
+            }
         ]
     }
 ]);

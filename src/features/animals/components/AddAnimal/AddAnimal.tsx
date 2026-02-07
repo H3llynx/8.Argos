@@ -4,7 +4,7 @@ import Camera from "../../../../assets/svg/photo.svg?react";
 import { Button } from "../../../../components/atoms/Button/Button";
 import { Input } from "../../../../components/atoms/Input/Input";
 import { Loading } from "../../../../components/atoms/Loading/Loading";
-import { animalFields } from "../../config";
+import { animalFields } from "../../../../config";
 import { addAnimal } from "../../services/animals";
 import { hostImg } from "../../services/picture-hosting";
 import type { Animal } from "../../types";
@@ -111,7 +111,7 @@ export function AddAnimal({ onSuccess }: { onSuccess: () => void }) {
                     >
                         {age.options.map(option => {
                             return (
-                                <option key={option.value} value={option.value}>{option.description}</option>
+                                <option key={option.value} value={option.value}>{option.name}</option>
                             )
                         })}
                     </select>
