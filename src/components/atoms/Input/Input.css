@@ -7,16 +7,16 @@
 .input-container {
     @apply flex gap-0.5 items-center relative text-dark font-normal;
 
-    &:has(input:user-valid) .valid-svg {
+    &:has(input:required:user-valid) .valid-svg {
         @apply block -right-1.5 text-turquoise-2;
     }
 
-    &:has(input:user-invalid) .error-svg {
+    &:has(input:required:user-invalid) .error-svg {
         @apply block -right-2 text-orange;
     }
 
     input {
-        @apply bg-white py-0.5 px-1 rounded-full border border-dark-rgba;
+        @apply bg-white py-0.5 px-1 rounded-full border text-dark border-dark-rgba;
 
         &[type="checkbox"] {
             @apply cursor-pointer;

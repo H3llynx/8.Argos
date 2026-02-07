@@ -1,5 +1,6 @@
 import Paw from "../../../../assets/images/paw.png";
 import type { Animal } from "../../../animals/types";
+import "./AnimalTile.css";
 
 type AnimalTile = {
     animal: Animal;
@@ -7,17 +8,17 @@ type AnimalTile = {
 
 export function AnimalTile({ animal, ...props }: AnimalTile) {
     return (
-        <button className="w-10 h-10 bg-grey-1 rounded-lg overflow-hidden shadow-1 relative"
-            tabIndex={0}
+        <button
+            className="tile-btn shadow-1"
             {...props}>
-            <img className="w-full h-full object-cover" src={animal.photo_url ?? Paw} />
-            <div className="absolute bottom-0 left-0 px-1 py-[5px] w-full bg-white-rgba-3 flex items-center justify-between">
+            <img className="tile-img" src={animal.photo_url ?? Paw} />
+            <div className="tile-text">
                 <h3>{animal.name}</h3>
-                <p className="text-xs capitalize">{animal.sex}</p>
+                <p className="text-xs capitalize font-medium">{animal.sex}</p>
             </div>
             {animal.adopted_at &&
                 <p className="absolute top-0 right-0 bg-red text-white text-xs px-1 py-[5px] w-full uppercase">
-                    Adopted</p>
+                    ♥︎ Adopted</p>
             }
         </button>
     )

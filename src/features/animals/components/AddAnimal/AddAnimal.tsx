@@ -126,7 +126,7 @@ export function AddAnimal({ onSuccess }: { onSuccess: () => void }) {
                     required
                 />
 
-                <div className="flex">
+                <div className="flex gap-0.5">
                     <label htmlFor={photo.id} className="flex gap-0.5 flex-wrap items-center cursor-pointer">
                         <Camera className="w-1.5" aria-hidden="true" />
                         <input

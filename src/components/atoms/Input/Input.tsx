@@ -26,7 +26,7 @@ const labelVariants = tv({
 export function Input({ variant = "default", label, id, type, placeholder, ...props }: InputProps) {
     return (
         <label className={labelVariants({ variant })} htmlFor={id}>
-            <span>{label}</span>
+            {label && <span>{label}</span>}
             <div className="input-container">
                 <input
                     className="shadow-1"

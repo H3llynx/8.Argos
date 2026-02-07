@@ -10,7 +10,7 @@ import { getAnimalCoordinates } from './services.ts/location';
 import type { AnimalWithCoordinates } from './types';
 
 export function Map() {
-    const { animals } = useAnimalDatabase();
+    const { animals, reload, setReload } = useAnimalDatabase();
     const [animalsWithCoordinates, setAnimalWithCoordinates] = useState<AnimalWithCoordinates[]>([]);
     const [center, setCenter] = useState<LatLngExpression | null>(null);
     const [selectedAnimal, setSelectedAnimal] = useState<AnimalWithCoordinates | null>(null);
@@ -22,7 +22,7 @@ export function Map() {
             setAnimalWithCoordinates(locatedAnimals);
         }
         loadAnimals();
-    }, [animals])
+    }, [animals, reload])
 
     useEffect(() => {
         if (!animalsWithCoordinates || animalsWithCoordinates.length === 0) {
@@ -40,11 +40,19 @@ export function Map() {
         setLoading(false);
     }, [animalsWithCoordinates]);
 
+    useEffect(() => {
+        if (selectedAnimal) {
+            setTimeout(() => {
+                setSelectedAnimal(null)
+            }, 100)
+        }
+    }, [selectedAnimal])
+
     return (
         <main className="main-map">
             <section className="flex justify-center xl:justify-between w-full flex-wrap gap-2">
-                {loading && <div className="p-5 self-center"><Loading /></div>}
                 <div className="relative z-0 w-full xl:w-2xl">
+                    {loading && <div className="p-5 absolute"><Loading /></div>}
                     {center &&
                         <div className="map-div-container shadow-1">
                             <MapContainer center={center} zoom={3} scrollWheelZoom={false}
@@ -58,7 +66,11 @@ export function Map() {
                                         <AnimalMarker
                                             key={animal.id}
                                             animal={animal}
+                                            animals={animals}
                                             isOpen={selectedAnimal === animal}
+                                            loading={loading}
+                                            setLoading={setLoading}
+                                            setReload={setReload}
                                         />
                                     )
                                 })}

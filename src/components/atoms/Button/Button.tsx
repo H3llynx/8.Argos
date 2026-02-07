@@ -19,7 +19,7 @@ const buttonVariants = tv({
             update: "update-btn",
             add: "action-btn add",
             authentication: "font-caveat text-2xl shadow-1 mt-2",
-            cancelFile: "action-btn cancel-file"
+            cancelFile: "action-btn cancel-file",
         }
     },
     defaultVariants: {

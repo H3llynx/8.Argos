@@ -4,11 +4,15 @@
 
     .leaflet-popup-content-wrapper,
     .leaflet-popup-tip {
-        @apply bg-white w-3xs;
+        @apply bg-white-rgba-3 w-3xs font-open-sans;
     }
 
-    .leaflet-popup-content p {
+    p {
         @apply m-0;
+    }
+
+    button[type="button"]:hover {
+        @apply text-turquoise;
     }
 
     .flex-popup-container {

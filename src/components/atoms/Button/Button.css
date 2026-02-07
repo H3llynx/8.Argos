@@ -21,7 +21,7 @@
 }
 
 .cancel-file {
-    @apply bg-transparent text-inherit border-0 font-bold;
+    @apply bg-transparent text-inherit border-0 font-bold px-0;
 
     &:hover {
         @apply bg-transparent text-turquoise;

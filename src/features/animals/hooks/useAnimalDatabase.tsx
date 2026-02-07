@@ -58,6 +58,7 @@ export function useAnimalDatabase() {
 
     return {
         animals,
+        setAnimals,
         loading,
         error,
         reload,
