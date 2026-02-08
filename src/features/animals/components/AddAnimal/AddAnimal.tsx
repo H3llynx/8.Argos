@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import Camera from "../../../../assets/svg/photo.svg?react";
 import { Button } from "../../../../components/atoms/Button/Button";
@@ -15,6 +15,12 @@ export function AddAnimal({ onSuccess }: { onSuccess: () => void }) {
         , formState: { isSubmitting } } = useForm<Animal>();
     const fileInputRef = useRef<HTMLInputElement>(null);
     const hasPhoto = watch(photo.db_key as keyof Animal);
+    const [animalType, setAnimalType] = useState("dog");
+
+    const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setAnimalType(e.target.value);
+        setValue(type.db_key as keyof Animal, e.target.value)
+    }
 
     const handlePhotoChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0] || null;
@@ -56,6 +62,7 @@ export function AddAnimal({ onSuccess }: { onSuccess: () => void }) {
                         id={type.id}
                         className="bg-blur"
                         {...register(type.db_key as keyof Animal)}
+                        onChange={handleTypeChange}
                     >{type.options.map(option => {
                         return (
                             <option key={option.value} value={option.value}>{option.name}</option>
@@ -94,13 +101,38 @@ export function AddAnimal({ onSuccess }: { onSuccess: () => void }) {
                     </select>
                 </label>
 
-                <Input
-                    label={breed.label}
-                    id={breed.id}
-                    type={breed.input_type}
-                    placeholder="Breed (if any)"
-                    {...register(breed.db_key as keyof Animal)}
-                />
+                {animalType === "dog" &&
+                    <label className="label flex flex-col" htmlFor={breed.id}>
+                        <span>{breed.label}</span>
+                        <select
+                            id={breed.id}
+                            className="bg-blur"
+                            {...register(breed.db_key as keyof Animal)}
+                        >
+                            {breed.dogOptions.map(option => {
+                                return (
+                                    <option key={option.value} value={option.value}>{option.name}</option>
+                                )
+                            })}
+                        </select>
+                    </label>}
+
+                {animalType === "cat" &&
+                    <label className="label flex flex-col" htmlFor={breed.id}>
+                        <span>{breed.label}</span>
+                        <select
+                            id={breed.id}
+                            className="bg-blur"
+                            {...register(breed.db_key as keyof Animal)}
+                        >
+                            {breed.catOptions.map(option => {
+                                return (
+                                    <option key={option.value} value={option.value}>{option.name}</option>
+                                )
+                            })}
+                        </select>
+                    </label>}
+
 
                 <label className="label flex flex-col" htmlFor="age">
                     <span>{age.label}</span>

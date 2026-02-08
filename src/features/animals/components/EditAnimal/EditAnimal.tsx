@@ -13,6 +13,7 @@ export function EditAnimal() {
     const { animalToEdit, editedAnimal, setEditedAnimal, handleUpdate } = useAnimal();
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [isAdopted, setIsAdopted] = useState(animalToEdit!.adopted_at ? true : false);
+    const [animalType, setAnimalType] = useState(animalToEdit?.type);
     if (!animalToEdit || !editedAnimal) return null;
 
     const handleChange = (field: keyof Animal, value: string | null) => {
@@ -60,7 +61,10 @@ export function EditAnimal() {
                         id={type.id}
                         className="bg-blur"
                         defaultValue={animalToEdit.type}
-                        onChange={(e) => handleChange(type.db_key as keyof Animal, e.target.value)}
+                        onChange={(e) => {
+                            setAnimalType(animalToEdit.type);
+                            handleChange(type.db_key as keyof Animal, e.target.value)
+                        }}
                     >{type.options.map(option => {
                         return (
                             <option key={option.value} value={option.value}>{option.name}</option>
@@ -103,14 +107,41 @@ export function EditAnimal() {
                     </select>
                 </label>
 
-                <Input
-                    label={breed.label}
-                    id={breed.id}
-                    type={breed.input_type}
-                    placeholder={`initially: ${animalToEdit.breed}`}
-                    value={editedAnimal.breed || ""}
-                    onChange={(e) => handleChange(breed.db_key as keyof Animal, e.target.value)}
-                />
+                {animalType === "dog" &&
+                    <label className="label flex flex-col" htmlFor={breed.id}>
+                        <span>{breed.label}</span>
+                        <select
+                            key={animalToEdit.id}
+                            id={breed.id}
+                            className="bg-blur"
+                            defaultValue={animalToEdit.breed}
+                            onChange={(e) => handleChange(breed.db_key as keyof Animal, e.target.value)}
+                        >
+                            {breed.dogOptions.map(option => {
+                                return (
+                                    <option key={option.value} value={option.value}>{option.name}</option>
+                                )
+                            })}
+                        </select>
+                    </label>}
+
+                {animalType === "cat" &&
+                    <label className="label flex flex-col" htmlFor={breed.id}>
+                        <span>{breed.label}</span>
+                        <select
+                            key={animalToEdit.id}
+                            id={breed.id}
+                            className="bg-blur"
+                            defaultValue={animalToEdit.breed}
+                            onChange={(e) => handleChange(breed.db_key as keyof Animal, e.target.value)}
+                        >
+                            {breed.catOptions.map(option => {
+                                return (
+                                    <option key={option.value} value={option.value}>{option.name}</option>
+                                )
+                            })}
+                        </select>
+                    </label>}
 
                 <label className="label flex flex-col" htmlFor={age.id}>
                     <span>{age.label}</span>

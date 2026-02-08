@@ -45,3 +45,7 @@ export const setChartColors = <T extends ChartType = ChartType>(
     }
     return chartColors[index] ?? chartColors[0];
 };
+
+export const capitalize = (label: string) => {
+    return (label).charAt(0).toUpperCase() + (label).slice(1);
+};

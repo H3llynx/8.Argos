@@ -1,4 +1,3 @@
-
 export const ageDescription = [
     {
         name: "Puppy / Kitten (0-1 yr)",
@@ -20,12 +19,89 @@ export const ageDescription = [
     }
 ]
 
+export const dogBreeds = [
+    { name: "Mixed Breed", value: "mixed" },
+    { name: "Unknown", value: "unknown" },
+    { name: "Labrador Retriever", value: "labrador retriever" },
+    { name: "German Shepherd", value: "german shepherd" },
+    { name: "Golden Retriever", value: "golden retriever" },
+    { name: "French Bulldog", value: "french bulldog" },
+    { name: "Bulldog", value: "bulldog" },
+    { name: "Poodle", value: "poodle" },
+    { name: "Beagle", value: "beagle" },
+    { name: "Rottweiler", value: "rottweiler" },
+    { name: "German Shorthaired Pointer", value: "german shorthaired" },
+    { name: "Yorkshire Terrier", value: "yorkshire" },
+    { name: "Boxer", value: "boxer" },
+    { name: "Dachshund", value: "dachshund" },
+    { name: "Siberian Husky", value: "husky" },
+    { name: "Cavalier King Charles Spaniel", value: "king charles" },
+    { name: "Doberman Pinscher", value: "doberman" },
+    { name: "Australian Shepherd", value: "australian shepherd" },
+    { name: "Miniature Schnauzer", value: "schnauzer" },
+    { name: "Shih Tzu", value: "shih tzu" },
+    { name: "Boston Terrier", value: "boston terrier" },
+    { name: "Pomeranian", value: "pomeranian" },
+    { name: "Havanese", value: "havanese" },
+    { name: "Shetland Sheepdog", value: "shetland" },
+    { name: "Bernese Mountain Dog", value: "bernese" },
+    { name: "Great Dane", value: "great dane" },
+    { name: "Pembroke Welsh Corgi", value: "corgi" },
+    { name: "Chihuahua", value: "chihuahua" },
+    { name: "Border Collie", value: "border collie" },
+    { name: "Cocker Spaniel", value: "cocker" },
+    { name: "Pug", value: "pug" },
+    { name: "Mastiff", value: "mastiff" },
+    { name: "Canary Mastiff", value: "canary mastiff" },
+    { name: "Maltese", value: "maltese" },
+    { name: "Shiba Inu", value: "shiba inu" },
+    { name: "English Springer Spaniel", value: "english springer" },
+    { name: "English Setter", value: "irish setter" },
+    { name: "Irish Setter", value: "irish setter" },
+    { name: "Brittany", value: "brittany" },
+    { name: "Cane Corso", value: "cane corso" },
+    { name: "Weimaraner", value: "weimaraner" },
+    { name: "Vizsla", value: "vizsla" },
+    { name: "Akita", value: "akita" },
+    { name: "Bichon Frise", value: "bichon" },
+    { name: "Collie", value: "collie" },
+    { name: "Basset Hound", value: "basset" },
+    { name: "Newfoundland", value: "newfoundland" },
+    { name: "Jack Russell Terrier", value: "jack russell" },
+    { name: "Staffordshire Bull Terrier", value: "staffie" },
+    { name: "American Staffordshire Terrier", value: "amstaff" },
+    { name: "Pit Bull Terrier", value: "pitbull" },
+    { name: "Samoyed", value: "samoyed" },
+];
+
+export const catBreeds = [
+    { name: "Mixed Breed", value: "mixed" },
+    { name: "Unknown", value: "unknown" },
+    { name: "Domestic Shorthair", value: "domestic_shorthair" },
+    { name: "Domestic Longhair", value: "domestic_longhair" },
+    { name: "Siamese", value: "siamese" },
+    { name: "Maine Coon", value: "maine_coon" },
+    { name: "Persian", value: "persian" },
+    { name: "Ragdoll", value: "ragdoll" },
+    { name: "British Shorthair", value: "british_shorthair" },
+    { name: "Bengal", value: "bengal" },
+    { name: "Abyssinian", value: "abyssinian" },
+    { name: "Birman", value: "birman" },
+    { name: "Oriental Shorthair", value: "oriental_shorthair" },
+    { name: "Sphynx", value: "sphynx" },
+    { name: "Devon Rex", value: "devon_rex" },
+    { name: "Russian Blue", value: "russian_blue" },
+    { name: "Scottish Fold", value: "scottish_fold" },
+    { name: "Norwegian Forest Cat", value: "norwegian_forest_cat" },
+];
+
 export const animalFields = {
     name: {
         db_key: "name",
         label: "Name",
         id: "name",
         input_type: "text",
+        column: "name"
     },
     type: {
         db_key: "type",
@@ -86,7 +162,8 @@ export const animalFields = {
         db_key: "breed",
         label: "Breed",
         id: "breed",
-        input_type: "text",
+        dogOptions: dogBreeds,
+        catOptions: catBreeds
     },
     location: {
         db_key: "location",
@@ -101,15 +178,22 @@ export const animalFields = {
     },
     adoption_date: {
         db_key: "adopted_at",
+        label: "status",
         id: "adopted_at",
         input_type_1: "checkbox",
         input_type_2: "date",
         checkbox_label: "adopted?",
-        date_aria_label: "set adoption date",
-        column: "status"
+        date_aria_label: "set adoption date"
     },
 }
 
 export const tableColumns = [
-    animalFields.name.label, animalFields.type.label, animalFields.breed.label, animalFields.sex.label, animalFields.age.label, animalFields.size.label, animalFields.location.label, animalFields.adoption_date.column
-]
+    animalFields.name.db_key,
+    animalFields.type.db_key,
+    animalFields.breed.db_key,
+    animalFields.sex.db_key,
+    animalFields.age.db_key,
+    animalFields.size.db_key,
+    animalFields.location.db_key,
+    animalFields.adoption_date.db_key
+];

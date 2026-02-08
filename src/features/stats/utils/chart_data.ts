@@ -1,9 +1,6 @@
 import { animalFields } from "../../../config";
 import type { Animal } from "../../animals/types";
-
-export const capitalize = (label: string) => {
-    return (label).charAt(0).toUpperCase() + (label).slice(1);
-};
+import { capitalize } from "./ui";
 
 export const getLabelsFromOptions = (field: keyof typeof animalFields,) => {
     const labels: string[] = []
@@ -28,20 +25,29 @@ export const getValuesFromOptions = (field: keyof typeof animalFields) => {
     return values;
 };
 
-export const getCount = (AnimalList: Animal[], field: keyof typeof animalFields, option: string) => {
+export const getCount = (animalList: Animal[], field: keyof typeof animalFields, option: string) => {
     let count = 0;
-    AnimalList.forEach(animal => {
+    animalList.forEach(animal => {
         if (animal[field as keyof Animal] === option.toLowerCase())
             count++
     });
     return count;
 };
 
-export const getCountArr = (list: Animal[], field: keyof typeof animalFields, labels: string[]) => {
+export const getCountArr = (animalList: Animal[], field: keyof typeof animalFields, labels: string[]) => {
     const numbers: number[] = [];
     labels.forEach(label => {
-        const n = getCount(list, field, label)
+        const n = getCount(animalList, field, label)
         numbers.push(n);
     })
     return numbers;
+};
+
+export const countPerBreed = (animalList: Animal[], breed: string) => {
+    let count = 0;
+    animalList.forEach(animal => {
+        if (animal.breed === breed)
+            count++
+    });
+    return count;
 };

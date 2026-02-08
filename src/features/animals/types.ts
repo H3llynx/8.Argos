@@ -4,7 +4,7 @@ export type Animal = {
     created_at: string;
     name: string;
     type: string;
-    breed?: string | null;
+    breed: string;
     sex: string;
     age: string;
     size: string;

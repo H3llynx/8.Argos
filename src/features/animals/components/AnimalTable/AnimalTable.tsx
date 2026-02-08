@@ -52,10 +52,13 @@ export function AnimalTable() {
                         <tr>
                             <th scope="col"><Camera aria-label="Photo" className="w-[16px]" /></th>
                             {tableColumns.map((item, index) => {
+                                const header = () => {
+                                    return item === "adopted_at" ? "status" : item;
+                                }
                                 return (
-                                    <th scope="col" aria-label={item} key={index}>
+                                    <th scope="col" aria-label={header()} key={index}>
                                         <SortButton
-                                            column={item}
+                                            column={header()}
                                             onClick={() => { sortBy(item as keyof Animal) }}
                                             isAscending={isAscending}
                                             isActive={isSorted === item}

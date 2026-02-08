@@ -1,19 +1,18 @@
 import type { ChartData, ChartOptions } from "chart.js/auto";
 import { Doughnut } from 'react-chartjs-2';
-import { useAnimalDatabase } from '../../../animals/hooks/useAnimalDatabase';
-import { getCountArr, getLabelsFromOptions, getValuesFromOptions } from "../../utils/chart_data";
-import { colors, setChartColors } from '../../utils/ui';
+import { useAnimalDatabase } from "../../../animals/hooks/useAnimalDatabase";
+import { countPerBreed } from "../../utils/chart_data";
+import { capitalize, colors, setChartColors } from "../../utils/ui";
 
-const labels = getLabelsFromOptions("type");
-const values = getValuesFromOptions("type");
-
-export function TypeChart() {
+export function BreedChart({ type }: { type: string }) {
     const { animals } = useAnimalDatabase();
-    const count = getCountArr(animals, "type", values)
-    const labelsInPlural = labels.map(label => label += "s")
+    const animalsOfType = animals.filter(animal => animal.type === type);
+    const breeds = [...new Set(animalsOfType.map(animal => animal.breed))];
+    const labels = breeds.map(breed => capitalize(breed));
+    const count = breeds.map(breed => countPerBreed(animalsOfType, breed));
 
     const data: ChartData<"doughnut"> = {
-        labels: labelsInPlural,
+        labels: labels,
         datasets: [
             {
                 data: count,
@@ -36,7 +35,7 @@ export function TypeChart() {
             },
             title: {
                 display: true,
-                text: "Animal Type Distribution",
+                text: `${capitalize(type)} Race Distribution`,
                 color: "#333"
             },
         },
