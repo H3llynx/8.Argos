@@ -36,13 +36,13 @@ export function useAnimalDatabase() {
         }
     }, [filter, animals])
 
-    const sortBy = (field: keyof Animal) => {
+    const sortBy = (label: keyof Animal) => {
         const newOrder = !isAscending;
         console.log(newOrder);
-        setIsSorted(field);
+        setIsSorted(label);
         const sortedAnimals = [...animals].sort((a, b) => {
-            const valueA = a[field] ?? "";
-            const valueB = b[field] ?? "";
+            const valueA = a[label] ?? "";
+            const valueB = b[label] ?? "";
             return newOrder ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
         });
         setIsAscending(newOrder);

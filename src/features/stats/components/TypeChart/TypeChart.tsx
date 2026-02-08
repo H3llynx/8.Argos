@@ -1,42 +1,27 @@
-import { ArcElement, Chart as ChartJS, Legend, Title, Tooltip, type ChartOptions, type ScriptableContext } from 'chart.js';
+import type { ChartData, ChartOptions } from "chart.js/auto";
 import { Doughnut } from 'react-chartjs-2';
 import { useAnimalDatabase } from '../../../animals/hooks/useAnimalDatabase';
-import { colors, getLabelsFromOptions, getNumbers } from '../../utils';
+import { getCountArr, getLabelsFromOptions, getValuesFromOptions } from "../../utils/chart";
+import { colors, setChartColors } from '../../utils/colors';
 
-ChartJS.register(ArcElement, Tooltip, Legend, Title);
-
+const labels = getLabelsFromOptions("type");
+const values = getValuesFromOptions("type");
 
 export function TypeChart() {
     const { animals } = useAnimalDatabase();
-    const labels = getLabelsFromOptions("type");
-    const numbers = getNumbers(animals, "type", labels)
+    const count = getCountArr(animals, "type", values)
+    const labelsInPlural = labels.map(label => label += "s")
 
-    const createGradient = (ctx: CanvasRenderingContext2D, color1: string, color2: string) => {
-        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-        gradient.addColorStop(0, color1);
-        gradient.addColorStop(1, color2);
-        return gradient;
-    };
-
-    const data = {
-        labels: labels,
+    const data: ChartData<"doughnut"> = {
+        labels: labelsInPlural,
         datasets: [
             {
-                data: numbers,
-                backgroundColor: (context: ScriptableContext<'doughnut'>) => {
-                    const chart = context.chart;
-                    const { ctx } = chart;
-
-                    if (!ctx) return [colors.turquoise, colors.orange];
-
-                    return context.dataIndex === 0
-                        ? createGradient(ctx, colors.turquoise, colors.turquoiseRgba)
-                        : createGradient(ctx, colors.orangeRgba, colors.orange);
-                },
+                data: count,
+                backgroundColor: setChartColors,
                 borderColor: [
-                    colors.border
+                    colors.whiteRgba
                 ],
-                borderWidth: 2,
+                borderWidth: 1,
             },
         ]
     };
@@ -46,13 +31,13 @@ export function TypeChart() {
             legend: {
                 position: "top",
                 labels: {
-                    color: "white"
+                    color: "#333"
                 }
             },
             title: {
                 display: true,
                 text: "Animal Type Distribution",
-                color: "white"
+                color: "#333"
             },
         },
     };

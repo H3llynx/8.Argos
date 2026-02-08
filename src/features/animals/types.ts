@@ -4,7 +4,7 @@ export type Animal = {
     created_at: string;
     name: string;
     type: string;
-    breed: string | null;
+    breed?: string | null;
     sex: string;
     age: string;
     size: string;
@@ -24,7 +24,7 @@ export type AnimalContextType = {
 export type TableContextType = {
     animalToEdit: Animal | null;
     handleEdit: (animal: Animal) => void;
-    sortBy: (field: keyof Animal) => void;
+    sortBy: (label: keyof Animal) => void;
     sortByDate: () => void;
     setReload: (value: boolean) => void
     isAscending: boolean;

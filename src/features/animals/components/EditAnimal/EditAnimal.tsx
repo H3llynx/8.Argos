@@ -49,7 +49,7 @@ export function EditAnimal() {
                     type={name.input_type}
                     placeholder={animalToEdit.name}
                     value={editedAnimal.name}
-                    onChange={(e) => handleChange(name.field as keyof Animal, e.target.value)}
+                    onChange={(e) => handleChange(name.db_key as keyof Animal, e.target.value)}
                     className="capitalize"
                 />
 
@@ -60,7 +60,7 @@ export function EditAnimal() {
                         id={type.id}
                         className="bg-blur"
                         defaultValue={animalToEdit.type}
-                        onChange={(e) => handleChange(type.field as keyof Animal, e.target.value)}
+                        onChange={(e) => handleChange(type.db_key as keyof Animal, e.target.value)}
                     >{type.options.map(option => {
                         return (
                             <option key={option.value} value={option.value}>{option.name}</option>
@@ -76,7 +76,7 @@ export function EditAnimal() {
                         id={sex.id}
                         className="bg-blur"
                         defaultValue={animalToEdit.sex}
-                        onChange={(e) => handleChange(sex.field as keyof Animal, e.target.value)}
+                        onChange={(e) => handleChange(sex.db_key as keyof Animal, e.target.value)}
                     >
                         {sex.options.map(option => {
                             return (
@@ -93,7 +93,7 @@ export function EditAnimal() {
                         id={size.id}
                         className="bg-blur"
                         defaultValue={animalToEdit.size}
-                        onChange={(e) => handleChange(size.field as keyof Animal, e.target.value)}
+                        onChange={(e) => handleChange(size.db_key as keyof Animal, e.target.value)}
                     >
                         {size.options.map(option => {
                             return (
@@ -109,7 +109,7 @@ export function EditAnimal() {
                     type={breed.input_type}
                     placeholder={`initially: ${animalToEdit.breed}`}
                     value={editedAnimal.breed || ""}
-                    onChange={(e) => handleChange(breed.field as keyof Animal, e.target.value)}
+                    onChange={(e) => handleChange(breed.db_key as keyof Animal, e.target.value)}
                 />
 
                 <label className="label flex flex-col" htmlFor={age.id}>
@@ -119,7 +119,7 @@ export function EditAnimal() {
                         id={age.id}
                         className="bg-blur"
                         defaultValue={animalToEdit.age}
-                        onChange={(e) => handleChange(age.field as keyof Animal, e.target.value)}
+                        onChange={(e) => handleChange(age.db_key as keyof Animal, e.target.value)}
                     >
                         {age.options.map(option => {
                             return (
@@ -135,7 +135,7 @@ export function EditAnimal() {
                     type={location.input_type}
                     placeholder={`initially: ${animalToEdit.location}`}
                     value={editedAnimal.location}
-                    onChange={(e) => handleChange(location.field as keyof Animal, e.target.value)}
+                    onChange={(e) => handleChange(location.db_key as keyof Animal, e.target.value)}
                 />
 
                 <div className="flex gap-2 items-center">
@@ -146,7 +146,7 @@ export function EditAnimal() {
                         checked={isAdopted}
                         onChange={() => {
                             setIsAdopted(!isAdopted);
-                            handleChange(adoption_date.field as keyof Animal, null)
+                            handleChange(adoption_date.db_key as keyof Animal, null)
                         }}
                     />
                     {isAdopted &&
@@ -155,7 +155,7 @@ export function EditAnimal() {
                             id={adoption_date.id}
                             type={adoption_date.input_type_2}
                             value={editedAnimal.adopted_at ?? ""}
-                            onChange={(e) => handleChange(adoption_date.field as keyof Animal, e.target.value)}
+                            onChange={(e) => handleChange(adoption_date.db_key as keyof Animal, e.target.value)}
                             required
                         />
                     }

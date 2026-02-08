@@ -55,7 +55,7 @@ export function Map() {
                     {loading && <div className="p-5 absolute"><Loading /></div>}
                     {center &&
                         <div className="map-div-container shadow-1">
-                            <MapContainer center={center} zoom={3} scrollWheelZoom={false}
+                            <MapContainer center={center} zoom={4} scrollWheelZoom={false}
                                 style={{ height: '100%', width: '100%' }}>
                                 <TileLayer
                                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

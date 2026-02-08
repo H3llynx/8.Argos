@@ -14,14 +14,14 @@ export function AddAnimal({ onSuccess }: { onSuccess: () => void }) {
     const { register, handleSubmit, setValue, watch
         , formState: { isSubmitting } } = useForm<Animal>();
     const fileInputRef = useRef<HTMLInputElement>(null);
-    const hasPhoto = watch(photo.field as keyof Animal);
+    const hasPhoto = watch(photo.db_key as keyof Animal);
 
     const handlePhotoChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0] || null;
         if (file) {
             const url = await hostImg(file);
-            setValue(photo.field as keyof Animal, url)
-        } else setValue(photo.field as keyof Animal, null);
+            setValue(photo.db_key as keyof Animal, url)
+        } else setValue(photo.db_key as keyof Animal, null);
     };
 
     const handlePhotoClear = () => {
@@ -46,7 +46,7 @@ export function AddAnimal({ onSuccess }: { onSuccess: () => void }) {
                     type={name.input_type}
                     placeholder="Animal name"
                     className="capitalize"
-                    {...register(name.field as keyof Animal)}
+                    {...register(name.db_key as keyof Animal)}
                     required
                 />
 
@@ -55,7 +55,7 @@ export function AddAnimal({ onSuccess }: { onSuccess: () => void }) {
                     <select
                         id={type.id}
                         className="bg-blur"
-                        {...register(type.field as keyof Animal)}
+                        {...register(type.db_key as keyof Animal)}
                     >{type.options.map(option => {
                         return (
                             <option key={option.value} value={option.value}>{option.name}</option>
@@ -69,7 +69,7 @@ export function AddAnimal({ onSuccess }: { onSuccess: () => void }) {
                     <select
                         id={sex.id}
                         className="bg-blur"
-                        {...register(sex.field as keyof Animal)}
+                        {...register(sex.db_key as keyof Animal)}
                     >
                         {sex.options.map(option => {
                             return (
@@ -84,7 +84,7 @@ export function AddAnimal({ onSuccess }: { onSuccess: () => void }) {
                     <select
                         id={size.id}
                         className="bg-blur"
-                        {...register(size.field as keyof Animal)}
+                        {...register(size.db_key as keyof Animal)}
                     >
                         {size.options.map(option => {
                             return (
@@ -99,7 +99,7 @@ export function AddAnimal({ onSuccess }: { onSuccess: () => void }) {
                     id={breed.id}
                     type={breed.input_type}
                     placeholder="Breed (if any)"
-                    {...register(breed.field as keyof Animal)}
+                    {...register(breed.db_key as keyof Animal)}
                 />
 
                 <label className="label flex flex-col" htmlFor="age">
@@ -107,7 +107,7 @@ export function AddAnimal({ onSuccess }: { onSuccess: () => void }) {
                     <select
                         id={age.id}
                         className="bg-blur"
-                        {...register(age.field as keyof Animal)}
+                        {...register(age.db_key as keyof Animal)}
                     >
                         {age.options.map(option => {
                             return (
@@ -122,7 +122,7 @@ export function AddAnimal({ onSuccess }: { onSuccess: () => void }) {
                     id={location.id}
                     type={location.input_type}
                     placeholder="Animal current location"
-                    {...register(location.field as keyof Animal)}
+                    {...register(location.db_key as keyof Animal)}
                     required
                 />
 

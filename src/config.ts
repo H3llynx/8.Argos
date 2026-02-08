@@ -1,3 +1,4 @@
+
 export const ageDescription = [
     {
         name: "Puppy / Kitten (0-1 yr)",
@@ -21,15 +22,15 @@ export const ageDescription = [
 
 export const animalFields = {
     name: {
-        field: "name",
-        label: "name",
+        db_key: "name",
+        label: "Name",
         id: "name",
         input_type: "text",
     },
     type: {
-        field: "type",
+        db_key: "type",
         id: "type",
-        label: "type",
+        label: "Type",
         options: [
             {
                 name: "dog",
@@ -42,7 +43,7 @@ export const animalFields = {
         ]
     },
     sex: {
-        field: "sex",
+        db_key: "sex",
         id: "sex",
         label: "sex",
         options: [
@@ -57,15 +58,15 @@ export const animalFields = {
         ]
     },
     age: {
-        field: "age",
+        db_key: "age",
         id: "age",
-        label: "age",
+        label: "Age",
         options: ageDescription
     },
     size: {
-        field: "size",
+        db_key: "size",
         id: "size",
-        label: "size",
+        label: "Size",
         options: [
             {
                 name: "small",
@@ -82,24 +83,24 @@ export const animalFields = {
         ]
     },
     breed: {
-        field: "breed",
-        label: "breed",
+        db_key: "breed",
+        label: "Breed",
         id: "breed",
         input_type: "text",
     },
     location: {
-        field: "location",
-        label: "location",
+        db_key: "location",
+        label: "Location",
         id: "location",
         input_type: "text",
     },
     photo: {
-        field: "photo_url",
+        db_key: "photo_url",
         id: "photo",
         input_type: "file",
     },
     adoption_date: {
-        field: "adopted_at",
+        db_key: "adopted_at",
         id: "adopted_at",
         input_type_1: "checkbox",
         input_type_2: "date",
@@ -110,5 +111,5 @@ export const animalFields = {
 }
 
 export const tableColumns = [
-    animalFields.name.field, animalFields.type.field, animalFields.breed.field, animalFields.sex.field, animalFields.age.field, animalFields.size.field, animalFields.location.field, animalFields.adoption_date.column
+    animalFields.name.label, animalFields.type.label, animalFields.breed.label, animalFields.sex.label, animalFields.age.label, animalFields.size.label, animalFields.location.label, animalFields.adoption_date.column
 ]

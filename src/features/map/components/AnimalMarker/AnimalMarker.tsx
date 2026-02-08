@@ -126,7 +126,7 @@ export function AnimalMarker({ animal, isOpen, setReload, animals, loading, setL
                                 aria-label={adoption_date.date_aria_label}
                                 id={adoption_date.id}
                                 type={adoption_date.input_type_2}
-                                onChange={(e) => handleChange(adoption_date.field as keyof Animal, e.target.value)}
+                                onChange={(e) => handleChange(adoption_date.db_key as keyof Animal, e.target.value)}
                             />
                             <Button variant="edit">Update</Button>
                             <Button
