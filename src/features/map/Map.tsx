@@ -1,8 +1,9 @@
 import type { LatLngExpression } from 'leaflet';
-import { useEffect, useState } from 'react';
-import { MapContainer, TileLayer } from 'react-leaflet';
+import { useEffect, useMemo, useState } from 'react';
+import { LayerGroup, LayersControl, MapContainer, TileLayer } from 'react-leaflet';
 import { Loading } from '../../components/atoms/Loading/Loading';
 import { useAnimalDatabase } from '../animals/hooks/useAnimalDatabase';
+import { capitalize } from '../utils';
 import { AnimalMarker } from './components/AnimalMarker/AnimalMarker';
 import { AnimalTile } from './components/AnimalTile/AnimalTile';
 import "./Map.css";
@@ -46,7 +47,18 @@ export function Map() {
                 setSelectedAnimal(null)
             }, 100)
         }
-    }, [selectedAnimal])
+    }, [selectedAnimal]);
+
+    const animalsByType = useMemo(() => {
+        const animalTypes = [...new Set(animalsWithCoordinates.map(animal => animal.type))];
+        const animalsByType: Record<string, AnimalWithCoordinates[]> = {};
+
+        for (const type of animalTypes) {
+            animalsByType[type] = animalsWithCoordinates.filter(a => a.type === type);
+        }
+
+        return animalsByType;
+    }, [animalsWithCoordinates]);
 
     return (
         <main className="main-map">
@@ -61,19 +73,29 @@ export function Map() {
                                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                 />
-                                {animalsWithCoordinates.map(animal => {
-                                    return (
-                                        <AnimalMarker
-                                            key={animal.id}
-                                            animal={animal}
-                                            animals={animals}
-                                            isOpen={selectedAnimal === animal}
-                                            loading={loading}
-                                            setLoading={setLoading}
-                                            setReload={setReload}
-                                        />
-                                    )
-                                })}
+                                <LayersControl position="topright" collapsed={false}>
+                                    {Object.entries(animalsByType).map(([type, animalsOfType]) => (
+                                        <LayersControl.Overlay
+                                            key={type}
+                                            checked
+                                            name={capitalize(`${type}s`)}
+                                        >
+                                            <LayerGroup>
+                                                {animalsOfType.map((animal) => (
+                                                    <AnimalMarker
+                                                        key={animal.id}
+                                                        animal={animal}
+                                                        animals={animals}
+                                                        isOpen={selectedAnimal === animal}
+                                                        loading={loading}
+                                                        setLoading={setLoading}
+                                                        setReload={setReload}
+                                                    />
+                                                ))}
+                                            </LayerGroup>
+                                        </LayersControl.Overlay>
+                                    ))}
+                                </LayersControl>
                             </MapContainer>
                         </div>
                     }
@@ -89,6 +111,6 @@ export function Map() {
                     })}
                 </div>
             </section>
-        </main>
+        </main >
     )
 }

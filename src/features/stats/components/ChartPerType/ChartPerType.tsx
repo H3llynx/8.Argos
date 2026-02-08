@@ -2,8 +2,9 @@ import type { ChartData, ChartOptions, ScriptableContext } from "chart.js/auto";
 import { Bar } from 'react-chartjs-2';
 import type { animalFields } from "../../../../config";
 import { useAnimalDatabase } from "../../../animals/hooks/useAnimalDatabase";
+import { capitalize } from "../../../utils";
 import { getCountArr, getLabelsFromOptions, getValuesFromOptions } from "../../utils/chart_data";
-import { capitalize, chartColors, chartGradients, colors } from "../../utils/ui";
+import { chartColors, chartGradients, colors } from "../../utils/ui";
 
 export function ChartPerType({ data }: { data: keyof typeof animalFields }) {
     const labels = getLabelsFromOptions(data);

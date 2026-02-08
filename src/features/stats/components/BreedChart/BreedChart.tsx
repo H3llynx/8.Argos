@@ -1,8 +1,9 @@
 import type { ChartData, ChartOptions } from "chart.js/auto";
 import { Doughnut } from 'react-chartjs-2';
 import { useAnimalDatabase } from "../../../animals/hooks/useAnimalDatabase";
+import { capitalize } from "../../../utils";
 import { countPerBreed } from "../../utils/chart_data";
-import { capitalize, colors, setChartColors } from "../../utils/ui";
+import { colors, setChartColors } from "../../utils/ui";
 
 export function BreedChart({ type }: { type: string }) {
     const { animals } = useAnimalDatabase();
@@ -35,7 +36,7 @@ export function BreedChart({ type }: { type: string }) {
             },
             title: {
                 display: true,
-                text: `${capitalize(type)} Race Distribution`,
+                text: `${capitalize(type)} Breed Distribution`,
                 color: "#333"
             },
         },
