@@ -42,7 +42,7 @@ export function AddAnimal({ onSuccess }: { onSuccess: () => void }) {
 
     return (
         <div className="form flex flex-col gap-1">
-            <h2 className="animal-h2">Add a new rescue:</h2>
+            <h2>Add a new rescue:</h2>
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className="flex gap-y-1 gap-x-2 flex-wrap">

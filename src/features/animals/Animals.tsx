@@ -72,8 +72,8 @@ export function Animals() {
     }
 
     return (
-        <section className="flex justify-center xl:justify-between w-full flex-wrap gap-4">
-            <div className="flex flex-col gap-1 pb-2 overflow-hidden xl:w-1/2">
+        <section className="flex justify-center items-center xl:justify-between w-full flex-wrap gap-2 xl:gap-0">
+            <div className="flex flex-col gap-1 pb-2 overflow-hidden xl:w-[680px]">
                 {loading && <Loading />}
                 {error && <p>{error}</p>}
                 {animals &&

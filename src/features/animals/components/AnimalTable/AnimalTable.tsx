@@ -37,7 +37,7 @@ export function AnimalTable() {
     return (
         <>
             <div className="flex justify-between items-center flex-wrap gap-1">
-                <h2 id="animals-table" className="animal-h2">Animal listings</h2>
+                <h1>Animal listings</h1>
                 <Input
                     variant="filter"
                     type="text"

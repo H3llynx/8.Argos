@@ -54,6 +54,14 @@ a {
   transition: 0.4s;
 }
 
+h1 {
+  @apply font-caveat text-4xl text-center
+}
+
+h2 {
+  @apply text-3xl font-caveat;
+}
+
 h3 {
   @apply font-caveat text-2xl capitalize;
 }
@@ -84,10 +92,6 @@ h3 {
   .bg-blur {
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-  }
-
-  .animal-h2 {
-    @apply text-3xl font-caveat;
   }
 
   .paw {

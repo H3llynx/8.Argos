@@ -1,6 +1,7 @@
 import { createHashRouter } from "react-router";
 import { Layout } from "../components/templates/layout/Layout";
 import { Auth } from "../features/auth/Auth";
+import { Calendar } from "../features/calendar/Calentar";
 import { Home } from "../features/home/Home";
 import { Map } from "../features/map/Map";
 import { Stats } from "../features/stats/Stats";
@@ -32,6 +33,14 @@ export const Router = createHashRouter([
                 element: (
                     <ProtectedRoutes>
                         <Stats />
+                    </ProtectedRoutes>
+                )
+            },
+            {
+                path: '/calendar',
+                element: (
+                    <ProtectedRoutes>
+                        <Calendar />
                     </ProtectedRoutes>
                 )
             }
