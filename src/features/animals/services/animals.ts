@@ -1,19 +1,6 @@
 import supabase from "../../../utils/supabase";
 import type { Animal } from "../types";
 
-export const fetchAnimals = async () => {
-    try {
-        const { data, error } = await supabase
-            .from("animals")
-            .select("*");
-        return { data, error };
-    } catch (err: unknown) {
-        const error = err as Error;
-        console.error("Animals fetch error:", error);
-        return { data: null, error };
-    }
-}
-
 export const updateAnimal = async (updatedAnimal: Animal) => {
     try {
         const { data, error } = await supabase
@@ -26,20 +13,6 @@ export const updateAnimal = async (updatedAnimal: Animal) => {
     } catch (err: unknown) {
         const error = err as Error;
         console.error("Animal update error:", error);
-        return { data: null, error };
-    }
-}
-
-export const deleteAnimal = async (id: string) => {
-    try {
-        const { data, error } = await supabase
-            .from("animals")
-            .delete()
-            .eq("id", id)
-        return { data, error };
-    } catch (err: unknown) {
-        const error = err as Error;
-        console.error("Animal delete error:", error);
         return { data: null, error };
     }
 }

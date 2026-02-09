@@ -4,8 +4,8 @@ import { Button } from "../../../../components/atoms/Button/Button";
 import { Input } from "../../../../components/atoms/Input/Input";
 import { Popup } from "../../../../components/molecules/popup/Popup";
 import { tableColumns } from "../../../../config";
+import { deleteData } from "../../../../services/services";
 import { useTable } from "../../hooks/useContexts";
-import { deleteAnimal } from "../../services/animals";
 import type { Animal } from "../../types";
 import { SortButton } from "../SortButton/SortButton";
 import "./AnimalTable.css";
@@ -29,7 +29,7 @@ export function AnimalTable() {
     }
 
     const confirmDelete = async (animal: Animal) => {
-        await deleteAnimal(animal.id);
+        await deleteData(animal.id, "animals");
         setAnimalToDelete(null);
         setReload(true);
     }
@@ -46,7 +46,7 @@ export function AnimalTable() {
                     onChange={(e) => setFilter(e.target.value)}
                 />
             </div>
-            <div className="shadow-1 table-container">
+            <div className="shadow-1 table-container scroll">
                 <table aria-labelledby="animals-table">
                     <thead>
                         <tr>

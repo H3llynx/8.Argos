@@ -19,6 +19,7 @@
     "@supabase/supabase-js": "^2.93.3",
     "@tailwindcss/vite": "^4.1.18",
     "chart.js": "^4.5.1",
+    "date-fns": "^4.1.0",
     "leaflet": "^1.9.4",
     "nominatim-client": "^3.2.1",
     "react": "^19.0.0-rc.1",

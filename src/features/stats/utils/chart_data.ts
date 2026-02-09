@@ -1,6 +1,6 @@
 import { animalFields } from "../../../config";
+import { capitalize } from "../../../utils/ui";
 import type { Animal } from "../../animals/types";
-import { capitalize } from "../../utils";
 
 export const getLabelsFromOptions = (field: keyof typeof animalFields,) => {
     const labels: string[] = []

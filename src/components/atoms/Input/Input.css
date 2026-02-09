@@ -22,7 +22,8 @@
             @apply cursor-pointer;
         }
 
-        &[type="date"] {
+        &[type="date"],
+        &[type="datetime-local"] {
             @apply border border-dark-rgba font-medium bg-white-rgba-2 rounded-lg px-0.5;
         }
     }

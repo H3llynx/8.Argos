@@ -13,6 +13,9 @@
   --color-grey-3: #c1bfbf;
   --color-turquoise: #0097a7;
   --color-turquoise-2: #14B8A6;
+  --color-turquoise-3: #0d8173;
+  --color-turquoise-rgba: rgba(0, 151, 167, 0.2);
+  --color-orange-rgba: rgba(255, 127, 17, 0.4);
   --color-red: #e73737;
   --color-red-2: #e81f1f;
   --color-pink: #ff1048;
@@ -99,11 +102,31 @@ h3 {
   }
 
   select {
-    @apply border border-dark-rgba h-2 font-medium bg-white-rgba rounded-lg px-0.5;
+    @apply border border-dark-rgba h-2 font-medium bg-white-rgba rounded-lg px-0.5 max-w-[200px];
+  }
+
+  textarea {
+    @apply border border-dark-rgba w-3xs font-medium bg-white rounded-lg p-0.5 text-dark;
+  }
+
+  .scroll {
+    overflow: scroll;
+
+    &::-webkit-scrollbar {
+      @apply w-[6px] h-[6px];
+    }
+
+    &::-webkit-scrollbar-track {
+      @apply m-[3px] bg-transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      @apply bg-dark-rgba rounded-full
+    }
   }
 
   @media (min-width: 1280px) {
-    .form {
+    .white-container {
       background: linear-gradient(to right, var(--color-white-rgba-3), transparent);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);

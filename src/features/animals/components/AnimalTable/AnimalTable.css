@@ -2,18 +2,6 @@
 
 .table-container {
     @apply bg-white capitalize border border-grey-1 rounded-lg pt-1 pb-[5px] w-full overflow-scroll xl:max-h-[50dvh];
-
-    &::-webkit-scrollbar {
-        @apply w-[6px] h-[6px];
-    }
-
-    &::-webkit-scrollbar-track {
-        @apply m-[3px] bg-transparent;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        @apply bg-dark-rgba rounded-full
-    }
 }
 
 table {

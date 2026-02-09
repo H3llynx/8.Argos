@@ -41,7 +41,7 @@ export function AddAnimal({ onSuccess }: { onSuccess: () => void }) {
     };
 
     return (
-        <div className="form flex flex-col gap-1">
+        <div className="white-container flex flex-col gap-1">
             <h2>Add a new rescue:</h2>
             <form
                 onSubmit={handleSubmit(onSubmit)}
@@ -56,7 +56,7 @@ export function AddAnimal({ onSuccess }: { onSuccess: () => void }) {
                     required
                 />
 
-                <label className="label flex flex-col" htmlFor="type">
+                <label className="label flex flex-col" htmlFor={type.id}>
                     <span>{type.label}</span>
                     <select
                         id={type.id}
@@ -71,7 +71,7 @@ export function AddAnimal({ onSuccess }: { onSuccess: () => void }) {
                     </select>
                 </label>
 
-                <label className="label flex flex-col" htmlFor="sex">
+                <label className="label flex flex-col" htmlFor={sex.id}>
                     <span>{sex.label}</span>
                     <select
                         id={sex.id}
@@ -86,7 +86,7 @@ export function AddAnimal({ onSuccess }: { onSuccess: () => void }) {
                     </select>
                 </label>
 
-                <label className="label flex flex-col" htmlFor="size">
+                <label className="label flex flex-col" htmlFor={size.id}>
                     <span>{size.label}</span>
                     <select
                         id={size.id}
@@ -134,7 +134,7 @@ export function AddAnimal({ onSuccess }: { onSuccess: () => void }) {
                     </label>}
 
 
-                <label className="label flex flex-col" htmlFor="age">
+                <label className="label flex flex-col" htmlFor={age.id}>
                     <span>{age.label}</span>
                     <select
                         id={age.id}

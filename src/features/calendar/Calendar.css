@@ -1,0 +1,70 @@
+@reference "../../styles/index.css";
+
+.calendar-background {
+    @apply fixed inset-0 w-screen min-h-dvh -z-1;
+    background: url(../../assets/images/bg-cat-calendar.jpg);
+    background-size: cover;
+    background-position: center;
+
+    &::before {
+        content: "";
+        @apply fixed w-screen h-dvh inset-0 bg-dark-rgba-2 -z-1 xl:hidden;
+    }
+}
+
+.calendar-container {
+    @apply bg-white-rgba-2 p-1 text-dark w-[680px];
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 1rem;
+}
+
+.fc {
+    --fc-button-bg-color: var(--color-turquoise-3);
+    @apply text-sm w-auto;
+
+    h2 {
+        @apply px-1;
+    }
+
+    .fc-daygrid-day-frame {
+        @apply text-dark;
+    }
+
+    .fc-button-primary {
+        @apply bg-turquoise-2 border-dark-rgba capitalize;
+
+        &:hover {
+            @apply bg-orange border-dark-rgba;
+        }
+
+        &:not(:disabled).fc-button-active {
+            @apply bg-turquoise-3 border-dark-rgba;
+        }
+
+        &:not(:disabled):active {
+            @apply bg-turquoise-3 border-dark-rgba;
+        }
+
+        &:disabled {
+            @apply cursor-default bg-dark-rgba-2 border-dark-rgba;
+        }
+    }
+
+    .fc-button-group {
+        @apply flex-wrap;
+    }
+
+    .fc-daygrid-day.fc-day-today,
+    .fc-timegrid-col.fc-day-today {
+        @apply bg-orange-rgba;
+    }
+
+    .fc-highlight {
+        @apply bg-turquoise-2;
+    }
+
+    .fc-daygrid-dot-event:hover {
+        @apply bg-turquoise-rgba;
+    }
+}

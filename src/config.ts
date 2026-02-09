@@ -101,7 +101,6 @@ export const animalFields = {
         label: "Name",
         id: "name",
         input_type: "text",
-        column: "name"
     },
     type: {
         db_key: "type",
@@ -197,3 +196,77 @@ export const tableColumns = [
     animalFields.location.db_key,
     animalFields.adoption_date.db_key
 ];
+
+export const eventFields = {
+    title: {
+        db_key: "title",
+        label: "Title",
+        id: "title",
+        input_type: "text",
+    },
+    type: {
+        db_key: "event_type",
+        label: "Type",
+        id: "type",
+        options: [
+            {
+                name: "Vet appointment",
+                value: "vet appointment"
+            },
+            {
+                name: "Adoption visit",
+                value: "adoption visit"
+            },
+            {
+                name: "Food recollection",
+                value: "food recollection"
+            },
+            {
+                name: "Other (specify in description)",
+                value: "other"
+            }
+        ]
+    },
+    start_date: {
+        db_key: "start",
+        label: "Start date and time",
+        id: "start",
+        input_type: "datetime-local",
+    },
+    end_date: {
+        db_key: "end",
+        label: "End date and time",
+        id: "end",
+        input_type: "datetime-local",
+    },
+    organizer: {
+        db_key: "organizer",
+        label: "organizer",
+        id: "organizer",
+        input_type: "text",
+    },
+    location: {
+        db_key: "location",
+        label: "Location",
+        id: "location",
+        input_type: "text",
+    },
+    visitor_name: {
+        db_key: "visitor_name",
+        label: "Visitor name",
+        id: "visitor_name",
+        input_type: "text"
+    },
+    visitor_phone: {
+        db_key: "visitor_phone",
+        label: "Visitor phone",
+        id: "visitor_phone",
+        input_type: "tel"
+    },
+    visitor_email: {
+        db_key: "visitor_email",
+        label: "Visitor email",
+        id: "visitor_email",
+        input_type: "email"
+    }
+}

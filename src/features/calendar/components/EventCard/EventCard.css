@@ -1,0 +1,25 @@
+@reference "../../../../styles/index.css";
+
+.event-card {
+    @apply border border-dark-rgba rounded-lg p-1 bg-white text-dark w-full max-w-md flex flex-col gap-1;
+}
+
+.event-card-top {
+    @apply flex flex-row gap-1.5 justify-between;
+}
+
+.event-card-main {
+    @apply text-sm flex gap-1 justify-between;
+
+    p {
+        @apply flex items-center
+    }
+
+    .event-description {
+        @apply text-grey-2;
+
+        h4 {
+            @apply font-medium;
+        }
+    }
+}

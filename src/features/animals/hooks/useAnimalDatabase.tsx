@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { fetchAnimals } from "../services/animals";
+import { fetchData } from "../../../services/services";
 import type { Animal } from "../types";
 
 export function useAnimalDatabase() {
     const [animals, setAnimals] = useState<Animal[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [reload, setReload] = useState<boolean>(false);
     const [isAscending, setIsAscending] = useState<boolean>(true);
@@ -14,7 +14,7 @@ export function useAnimalDatabase() {
 
     useEffect(() => {
         const init = async () => {
-            const { data, error } = await fetchAnimals();
+            const { data, error } = await fetchData("animals");
             if (error) setError(error.message ? error.message : "Error fetching data");
             else if (data) {
                 const sortedAnimals = [...data].sort((a, b) => {
