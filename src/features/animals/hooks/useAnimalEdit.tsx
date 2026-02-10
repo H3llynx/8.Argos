@@ -3,23 +3,22 @@ import { updateAnimal } from "../services/animals";
 import type { Animal } from "../types";
 
 export function useAnimalEdit() {
-    const [isEditing, setIsEditing] = useState<boolean>(false);
     const [animalToEdit, setAnimalToEdit] = useState<Animal | null>(null)
     const [editedAnimal, setEditedAnimal] = useState<Animal | null>(null);
 
     useEffect(() => {
-        if (!isEditing) {
-            setAnimalToEdit(null);
+        if (!animalToEdit) {
             setEditedAnimal(null);
         }
-    }, [isEditing]);
+    }, [animalToEdit]);
 
     const handleEdit = (animal: Animal) => {
-        if (!animalToEdit || animalToEdit === animal) {
-            setIsEditing(!animalToEdit);
+        if (animalToEdit && animalToEdit === animal) {
+            setAnimalToEdit(null);
+        } else {
+            setAnimalToEdit(animal);
+            setEditedAnimal(animal);
         }
-        setAnimalToEdit(animal);
-        setEditedAnimal(animal);
     };
 
     const handleUpdate = async (e: React.SubmitEvent, onSuccess: () => void) => {
@@ -29,13 +28,10 @@ export function useAnimalEdit() {
             await updateAnimal(editedAnimal!);
             onSuccess();
             setAnimalToEdit(null);
-            setIsEditing(false);
         }
     };
 
     return {
-        isEditing,
-        setIsEditing,
         animalToEdit,
         editedAnimal,
         setEditedAnimal,

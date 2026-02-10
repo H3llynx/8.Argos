@@ -1,7 +1,9 @@
 import { tv } from 'tailwind-variants';
+import type { Event } from '../../types';
+
 
 type Tag = {
-    status: "scheduled" | "completed" | "cancelled"
+    status: Event["status"]
 }
 
 const tagVariants = tv({
@@ -9,8 +11,8 @@ const tagVariants = tv({
     variants: {
         status: {
             scheduled: "bg-[#84db84]",
-            completed: "bg-grey-2",
-            cancelled: "bg-red",
+            updated: "bg-grey-2",
+            postponed: "bg-red",
         }
     }
 });

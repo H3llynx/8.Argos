@@ -4,7 +4,7 @@ export type Event = {
     title: string;
     start: string;
     end: string;
-    status: "scheduled" | "completed" | "cancelled"
+    status: "scheduled" | "updated" | "postponed"
     animal_id: string | null;
     visitor_name: string | null;
     visitor_email: string | null;

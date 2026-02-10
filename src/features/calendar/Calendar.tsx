@@ -18,8 +18,7 @@ export function Calendar() {
     const [error, setError] = useState<string | null>(null);
     const [reload, setReload] = useState<boolean>(false);
     const [selectedEvent, setSelectedEvent] = useState<Event | null>(null)
-    const [isAdding, setIsAdding] = useState<boolean>(false);
-    const [selectedDate, setSelectedDate] = useState<string[]>([]);
+    const [newEventDate, setNewEventDate] = useState<string[]>([]);
 
     useEffect(() => {
         const init = async () => {
@@ -30,30 +29,25 @@ export function Calendar() {
             }
             setLoading(false);
             setReload(false);
-            setSelectedDate([]);
+            setNewEventDate([]);
         }
         init();
     }, [reload]);
 
-    useEffect(() => {
-        if (isAdding) setSelectedEvent(null);
-    }, [isAdding]);
-
-    useEffect(() => {
-        if (!isAdding) { setSelectedDate([]) }
-    }, [isAdding])
-
     const handleViewEvent = (info: EventClickArg) => {
-        if (selectedEvent && selectedEvent.id === info.event.id) setSelectedEvent(null);
-        else {
-            if (isAdding) setIsAdding(false);
+        if (selectedEvent && selectedEvent.id === info.event.id) {
+            setSelectedEvent(null);
+        } else {
+            if (newEventDate) setNewEventDate([]);
             setSelectedEvent(convertEvent(info.event));
         }
     }
 
     const handleAddEvent = (info: DateClickArg) => {
-        setIsAdding(true);
-        setSelectedDate([`${info.dateStr}T00:00`, `${info.dateStr}T01:00`]);
+        if (selectedEvent) setSelectedEvent(null);
+        const dateInfo = [`${info.dateStr}T00:00`, `${info.dateStr}T01:00`];
+        if (newEventDate.length > 0 && newEventDate[0] === dateInfo[0]) setNewEventDate([]);
+        else setNewEventDate(dateInfo);
     }
 
     return (
@@ -74,7 +68,12 @@ export function Calendar() {
                 </section>
                 <section className="flex flex-col gap-1 w-full max-w-xl items-center">
                     {selectedEvent && <EventCard event={selectedEvent} />}
-                    {isAdding && <AddEvent date={selectedDate!} onSuccess={() => { setReload(true) }} />}
+                    {newEventDate.length > 0 &&
+                        <AddEvent
+                            key={newEventDate[0]}
+                            date={newEventDate!}
+                            onSuccess={() => { setReload(true) }} />
+                    }
                 </section>
             </main>
         </>

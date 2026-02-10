@@ -26,8 +26,6 @@ export function Animals() {
         setFilter
     } = useAnimalDatabase();
     const {
-        isEditing,
-        setIsEditing,
         animalToEdit,
         setAnimalToEdit,
         editedAnimal,
@@ -39,11 +37,11 @@ export function Animals() {
     const [isAdding, setIsAdding] = useState<boolean>(false);
 
     useEffect(() => {
-        if (isEditing) setIsAdding(false);
-    }, [isEditing]);
+        if (animalToEdit) setIsAdding(false);
+    }, [animalToEdit]);
 
     useEffect(() => {
-        if (isAdding) setIsEditing(false);
+        if (isAdding) setAnimalToEdit(null);
     }, [isAdding]);
 
     const handleAdd = () => {
@@ -51,6 +49,7 @@ export function Animals() {
     }
 
     const AnimalContextValue: AnimalContextType = {
+        loading,
         animalToEdit,
         setAnimalToEdit,
         editedAnimal,
@@ -98,13 +97,13 @@ export function Animals() {
                 </Button>
             </div>
             <div className="flex flex-col gap-1 w-full max-w-xl">
-                {isEditing && animalToEdit &&
+                {animalToEdit &&
                     <AnimalContext value={AnimalContextValue}>
                         <EditAnimal />
                     </AnimalContext>
                 }
                 {isAdding &&
-                    <AddAnimal onSuccess={() => setReload(true)} />
+                    <AddAnimal onSuccess={() => { setReload(true); setIsAdding(false) }} />
                 }
             </div>
         </section>

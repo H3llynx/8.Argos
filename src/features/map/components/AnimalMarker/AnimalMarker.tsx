@@ -28,7 +28,6 @@ export function AnimalMarker({ animal, isOpen, setReload, animals, loading, setL
     const animalIcon = animal.photo_url ? animal.photo_url : animal.type === "dog" ? Dog : Cat;
     const imageClassName = animal.photo_url ? "object-cover rounded-full border border-dark-rgba shadow-3" : "object-contain";
     const markerRef = useRef<L.Marker>(null);
-    const [isEditing, setIsEditing] = useState<boolean>(false);
     const [animalToEdit, setAnimalToEdit] = useState<Animal | null>(null);
     const [editedAnimal, setEditedAnimal] = useState<Animal | null>(null);
     const { adoption_date } = animalFields;
@@ -40,14 +39,12 @@ export function AnimalMarker({ animal, isOpen, setReload, animals, loading, setL
     }, [isOpen]);
 
     useEffect(() => {
-        if (!isEditing) {
-            setAnimalToEdit(null);
+        if (!animalToEdit) {
             setEditedAnimal(null);
         }
-    }, [isEditing]);
+    }, [animalToEdit]);
 
     const handleEdit = (animal: Animal) => {
-        setIsEditing(true);
         const originalAnimal = animals.find(a => a.id === animal.id);
         if (originalAnimal) {
             setAnimalToEdit(originalAnimal);
@@ -61,13 +58,14 @@ export function AnimalMarker({ animal, isOpen, setReload, animals, loading, setL
         }
     };
 
-    const handleUpdate = async () => {
+    const handleUpdate = async (e: React.SubmitEvent) => {
+        e.preventDefault();
         if (editedAnimal !== animalToEdit) {
             await updateAnimal(editedAnimal!);
             setReload(true);
             setLoading(true);
+            setAnimalToEdit(null);
         }
-        setIsEditing(false);
     }
 
     const getAgeDetail = (animal: AnimalWithCoordinates) => {
@@ -103,7 +101,7 @@ export function AnimalMarker({ animal, isOpen, setReload, animals, loading, setL
                     {animal.adopted_at && <span className="font-caveat text-xl text-red">Adopted ♥︎</span>}
                     {!animal.adopted_at && !loading &&
                         <>
-                            {!isEditing &&
+                            {!animalToEdit &&
                                 <span className="font-caveat text-xl flex gap-[5px] items-center">
                                     Available for adoption
                                     <button
@@ -119,7 +117,7 @@ export function AnimalMarker({ animal, isOpen, setReload, animals, loading, setL
                         </>
                     }
                     {
-                        isEditing &&
+                        animalToEdit &&
                         <form onSubmit={handleUpdate}
                             className="flex gap-0.5 items-center">
                             <Input
@@ -131,7 +129,7 @@ export function AnimalMarker({ animal, isOpen, setReload, animals, loading, setL
                             <Button variant="edit">Update</Button>
                             <Button
                                 variant="cancelFile"
-                                onClick={(e) => { e.stopPropagation(); setIsEditing(false) }}
+                                onClick={(e) => { e.stopPropagation(); setAnimalToEdit(null) }}
                             ><Close className="w-1.5" /></Button>
                         </form>
                     }

@@ -18,7 +18,7 @@ export function useAnimalDatabase() {
             if (error) setError(error.message ? error.message : "Error fetching data");
             else if (data) {
                 const sortedAnimals = [...data].sort((a, b) => {
-                    return new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+                    return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
                 });
                 setAnimals(sortedAnimals)
             }

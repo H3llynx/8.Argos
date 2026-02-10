@@ -14,6 +14,7 @@ export type Animal = {
 }
 
 export type AnimalContextType = {
+    loading: boolean;
     animalToEdit: Animal | null;
     editedAnimal: Animal | null;
     setEditedAnimal: (animal: Animal | null) => void;

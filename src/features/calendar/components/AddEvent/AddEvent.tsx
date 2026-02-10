@@ -155,7 +155,10 @@ export function AddEvent({ onSuccess, date }: AddEventProps) {
                     {...register(organizer.db_key as keyof Event)}
                 />
 
-                <Button variant="update" className="w-full md:w-auto m-auto">{isSubmitting ? <Loading /> : "Add event"}</Button>
+                <Button variant="update" className="w-full md:w-auto m-auto">
+                    {isSubmitting && <Loading />}
+                    {!isSubmitting && <span>Add event</span>}
+                </Button>
             </form>
         </div>
     )

@@ -174,7 +174,10 @@ export function AddAnimal({ onSuccess }: { onSuccess: () => void }) {
                     }
                 </div>
 
-                <Button variant="update" className="m-auto">{isSubmitting ? <Loading /> : "Add animal"}</Button>
+                <Button variant="update" className="m-auto">
+                    {isSubmitting && <Loading />}
+                    {!isSubmitting && <span>Add animal</span>}
+                </Button>
             </form>
         </div>
     )
