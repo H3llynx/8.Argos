@@ -125,6 +125,10 @@ h3 {
     }
   }
 
+  .text-error {
+    @apply text-red text-xs font-medium;
+  }
+
   @media (min-width: 1280px) {
     .white-container {
       background: linear-gradient(to right, var(--color-white-rgba-3), transparent);

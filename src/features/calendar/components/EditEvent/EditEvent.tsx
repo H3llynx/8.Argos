@@ -6,22 +6,20 @@ import { Input } from "../../../../components/atoms/Input/Input";
 import { Loading } from "../../../../components/atoms/Loading/Loading";
 import { eventFields } from "../../../../config";
 import { useAnimalDatabase } from "../../../animals/hooks/useAnimalDatabase";
-import type { Animal } from "../../../animals/types";
-import { addEvent } from "../../services/events";
+import { updateEvent } from "../../services/events";
 import type { Event } from "../../types";
-import { dateTimeLocalToDb } from "../../utils";
+import { dateTimeLocalToDb, dbDateToDateTimeLocal } from "../../utils";
 
-type AddEventProps = {
+type EditEventProps = {
     onSuccess: () => void;
-    date: string[];
+    event: Event;
 }
 
-export function AddEvent({ onSuccess, date }: AddEventProps) {
-    const { register, handleSubmit, setValue, watch, formState: { isSubmitting, errors } } = useForm<Event>();
-    const [adoptionRelated, setAdoptionRelated] = useState<boolean>(false);
-    const [animal, setAnimal] = useState<Animal | null>(null)
+export function EditEvent({ onSuccess, event }: EditEventProps) {
+    const { register, handleSubmit, watch, setValue, formState: { isSubmitting, errors } } = useForm<Event>();
+    const [adoptionRelated, setAdoptionRelated] = useState<boolean>(event.event_type.includes("adoption") ?? false);
     const { title, type, start_date, end_date, organizer, location, visitor_name, visitor_phone, visitor_email } = eventFields;
-    const { animals } = useAnimalDatabase();
+    const { animals, loading } = useAnimalDatabase();
 
     const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         if (e.target.value.includes("adoption")) setAdoptionRelated(true);
@@ -30,25 +28,26 @@ export function AddEvent({ onSuccess, date }: AddEventProps) {
     }
 
     const handleAnimalChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const selectedAnimal = animals.find(animal => animal.id === e.target.value);
-        if (selectedAnimal) setAnimal(selectedAnimal); else setAnimal(null);
-        if (e.target.value.length > 0) { setValue("animal_id" as keyof Event, e.target.value) }
-        else { setValue("animal_id" as keyof Event, null) }
+        if (e.target.value.length > 0) setValue("animal_id" as keyof Event, e.target.value)
+        else setValue("animal_id" as keyof Event, null);
     }
 
-    const onSubmit = async (event: Event) => {
-        const formattedEvent = {
-            ...event,
-            start: dateTimeLocalToDb(event.start),
-            end: dateTimeLocalToDb(event.end)
+    const onSubmit = async (updatedEvent: Event) => {
+        const edittedEvent = {
+            ...updatedEvent,
+            id: event.id,
+            start: dateTimeLocalToDb(updatedEvent.start),
+            end: dateTimeLocalToDb(updatedEvent.end),
+            status: "updated" as const
         };
-        await addEvent(formattedEvent);
+        await updateEvent(edittedEvent);
         onSuccess();
     };
 
-    return (
-        <div className="white-container flex flex-col gap-1">
-            <h2>Add a new event:</h2>
+    return (<>
+        {loading && <Loading />}
+        {!loading && <div className="white-container w-full max-w-md flex flex-col gap-1">
+            <h2>Edit event</h2>
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className="flex gap-y-1 gap-x-2 flex-wrap">
@@ -57,6 +56,7 @@ export function AddEvent({ onSuccess, date }: AddEventProps) {
                     label={title.label}
                     id={title.id}
                     type={title.input_type}
+                    defaultValue={event.title}
                     {...register(title.db_key as keyof Event)}
                     required
                 />
@@ -65,7 +65,7 @@ export function AddEvent({ onSuccess, date }: AddEventProps) {
                     label={start_date.label}
                     id={start_date.id}
                     type={start_date.input_type}
-                    defaultValue={date[0]}
+                    defaultValue={dbDateToDateTimeLocal(event.start)}
                     {...register(start_date.db_key as keyof Event)}
                     required
                 />
@@ -75,7 +75,7 @@ export function AddEvent({ onSuccess, date }: AddEventProps) {
                         label={end_date.label}
                         id={end_date.id}
                         type={end_date.input_type}
-                        defaultValue={date[1]}
+                        defaultValue={dbDateToDateTimeLocal(event.end)}
                         {...register(end_date.db_key as keyof Event, {
                             validate: (value) => {
                                 const start = watch("start");
@@ -92,15 +92,15 @@ export function AddEvent({ onSuccess, date }: AddEventProps) {
                     )}
                 </div>
 
+
                 <label className="label flex flex-col" htmlFor={type.id}>
                     <span>{type.label}</span>
                     <select
                         id={type.id}
                         className="bg-blur"
+                        defaultValue={event.event_type}
                         {...register(type.db_key as keyof Event, { required: true })}
-                        onChange={(e) => {
-                            handleTypeChange(e);
-                        }}
+                        onChange={(e) => { handleTypeChange(e) }}
                     >
                         {type.options.map(option => {
                             return (
@@ -110,11 +110,13 @@ export function AddEvent({ onSuccess, date }: AddEventProps) {
                     </select>
                 </label>
 
-                <label className="label flex flex-col" htmlFor="animal-add">
+
+                <label className="label flex flex-col" htmlFor="animal-edit">
                     <p>Select an animal {!adoptionRelated && <span>(if applicable)</span>}</p>
                     <select
-                        id="animal-add"
+                        id="animal-edit"
                         className="bg-blur capitalize"
+                        {...(event.animal_id && { defaultValue: event.animal_id })}
                         onChange={handleAnimalChange}
                     >
                         <option value="">None</option>
@@ -132,6 +134,7 @@ export function AddEvent({ onSuccess, date }: AddEventProps) {
                             label={visitor_name.label}
                             id={visitor_name.id}
                             type={visitor_name.input_type}
+                            {...(event.visitor_name && { defaultValue: event.visitor_name })}
                             {...register(visitor_name.db_key as keyof Event)}
                         />
 
@@ -139,6 +142,7 @@ export function AddEvent({ onSuccess, date }: AddEventProps) {
                             label={visitor_phone.label}
                             id={visitor_phone.id}
                             type={visitor_phone.input_type}
+                            {...(event.visitor_phone && { defaultValue: event.visitor_phone })}
                             {...register(visitor_phone.db_key as keyof Event)}
                         />
 
@@ -146,15 +150,16 @@ export function AddEvent({ onSuccess, date }: AddEventProps) {
                             label={visitor_email.label}
                             id={visitor_email.id}
                             type={visitor_email.input_type}
+                            {...(event.visitor_email && { defaultValue: event.visitor_email })}
                             {...register(visitor_email.db_key as keyof Event)}
                         />
                     </>
                 }
 
-                <label className="label flex flex-col" htmlFor="description-add">
+                <label className="label flex flex-col" htmlFor="description-edit">
                     <span>Description:</span>
-                    <textarea
-                        id="description-add"
+                    <textarea id="description-edit"
+                        {...(event.description && { defaultValue: event.description })}
                         {...register("description" as keyof Event)}
                     />
                 </label>
@@ -163,7 +168,7 @@ export function AddEvent({ onSuccess, date }: AddEventProps) {
                     label={location.label}
                     id={location.id}
                     type={location.input_type}
-                    defaultValue={animal ? animal.location : ""}
+                    {...(event.location && { defaultValue: event.location })}
                     {...register(location.db_key as keyof Event)}
                 />
 
@@ -171,14 +176,16 @@ export function AddEvent({ onSuccess, date }: AddEventProps) {
                     label={organizer.label}
                     id={organizer.id}
                     type={organizer.input_type}
+                    {...(event.organizer && { defaultValue: event.organizer })}
                     {...register(organizer.db_key as keyof Event)}
                 />
 
                 <Button variant="update" className="w-full md:w-auto m-auto">
                     {isSubmitting && <Loading />}
-                    {!isSubmitting && <span>Add event</span>}
+                    {!isSubmitting && <span>Update event</span>}
                 </Button>
             </form>
         </div>
+        }</>
     )
 }

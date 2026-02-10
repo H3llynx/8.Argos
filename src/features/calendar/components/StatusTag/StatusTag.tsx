@@ -11,7 +11,7 @@ const tagVariants = tv({
     variants: {
         status: {
             scheduled: "bg-[#84db84]",
-            updated: "bg-grey-2",
+            updated: "bg-[#ffbf00]",
             postponed: "bg-red",
         }
     }
