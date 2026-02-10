@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { updateAnimal } from "../services/animals";
+import { updateData } from "../../../services/services";
 import type { Animal } from "../types";
 
 export function useAnimalEdit() {
@@ -23,9 +23,9 @@ export function useAnimalEdit() {
 
     const handleUpdate = async (e: React.SubmitEvent, onSuccess: () => void) => {
         e.preventDefault();
-        if (editedAnimal === animalToEdit) return;
+        if (editedAnimal === animalToEdit || !editedAnimal) return;
         else {
-            await updateAnimal(editedAnimal!);
+            await updateData(editedAnimal, "animals");
             onSuccess();
             setAnimalToEdit(null);
         }

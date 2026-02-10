@@ -1,5 +1,9 @@
 @reference "../../styles/index.css";
 
+.main-calendar {
+    @apply pt-0 px-0 flex-col-reverse flex-wrap items-center md:p-2 md:gap-1 xl:justify-between xl:items-start xl:gap-1 xl:flex-row;
+}
+
 .calendar-background {
     @apply fixed inset-0 w-screen min-h-dvh -z-1;
     background: url(../../assets/images/bg-cat-calendar.jpg);
@@ -8,15 +12,14 @@
 
     &::before {
         content: "";
-        @apply fixed w-screen h-dvh inset-0 bg-dark-rgba-2 -z-1 xl:hidden;
+        @apply fixed w-screen h-dvh inset-0 bg-grey md:bg-dark-rgba-2 -z-1 xl:hidden;
     }
 }
 
 .calendar-container {
-    @apply bg-white-rgba-2 p-1 text-dark w-[680px];
+    @apply bg-white-rgba-2 md:bg-white-rgba-2 md:rounded-lg py-3 px-0.5 md:py-1 text-dark w-full md:max-w-[680px];
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border-radius: 1rem;
 }
 
 .fc {

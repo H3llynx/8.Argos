@@ -5,17 +5,17 @@ import interactionPlugin from '@fullcalendar/interaction';
 import FullCalendar from '@fullcalendar/react';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { useEffect, useState } from 'react';
+import ErrorPitbull from "../../assets/images/error.png";
 import { deleteData, fetchData } from '../../services/services';
 import "./Calendar.css";
 import { AddEvent } from './components/AddEvent/AddEvent';
 import { EditEvent } from './components/EditEvent/EditEvent';
 import { EventCard } from './components/EventCard/EventCard';
-import { convertEvent } from './services/events';
 import type { Event } from './types';
+import { convertEvent } from './utils';
 
 export function Calendar() {
     const [events, setEvents] = useState<Event[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [reload, setReload] = useState<boolean>(false);
     const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
@@ -29,7 +29,6 @@ export function Calendar() {
             else if (data) {
                 setEvents(data);
             }
-            setLoading(false);
             setReload(false);
             setNewEventDate([]);
             setEventToEdit(null);
@@ -69,26 +68,30 @@ export function Calendar() {
     return (
         <>
             <div className="calendar-background" />
-            <main className="justify-center xl:justify-between w-full flex-wrap gap-2">
+            <main className="main-calendar">
                 <section className="calendar-container">
-                    <FullCalendar
-                        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-                        initialView="dayGridMonth"
-                        events={events}
-                        eventClick={handleViewEvent}
-                        dateClick={handleAddEvent}
-                        editable={true}
-                        selectable={true}
-                        height="auto"
-                    />
+                    {error && <img src={ErrorPitbull} alt="Oops, something went wrong..." />}
+                    {!error &&
+                        <FullCalendar
+                            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+                            initialView="dayGridMonth"
+                            events={events}
+                            eventClick={handleViewEvent}
+                            dateClick={handleAddEvent}
+                            editable={true}
+                            selectable={true}
+                            height="auto"
+                        />
+                    }
                 </section>
-                <section className="flex flex-col gap-1 w-full max-w-xl items-center">
+                <section className="flex flex-col bg-dark md:bg-transparent gap-1 w-screen md:max-w-lg items-center relative">
                     {selectedEvent &&
                         <EventCard
                             event={selectedEvent}
                             onEdit={handleEditEvent}
                             onDelete={handleDeleteEvent}
-                        />}
+                        />
+                    }
                     {newEventDate.length > 0 &&
                         <AddEvent
                             key={newEventDate[0]}

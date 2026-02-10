@@ -1,14 +1,18 @@
 @reference "../../../../styles/index.css";
 
 .event-card {
-    @apply border border-dark-rgba rounded-lg p-1 bg-white text-dark w-full max-w-md flex flex-col gap-1;
+    @apply py-2 px-1 md:border border-dark-rgba md:rounded-lg md:p-1 bg-white text-dark w-screen md:max-w-md flex flex-col gap-1;
 }
 
 .event-card-top {
     @apply flex flex-row gap-1.5 justify-between;
 }
 
-.event-card-main {
+.event-card-type-cta {
+    @apply flex flex-col sm:flex-row gap-0.5 items-start flex-wrap;
+}
+
+.event-card-additional-info {
     @apply text-sm flex gap-1 justify-between;
 
     p {

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import ErrorPitbull from "../../assets/images/error.png";
 import { default as Add, default as Close } from "../../assets/svg/add.svg?react";
 import { Button } from '../../components/atoms/Button/Button';
 import { Loading } from '../../components/atoms/Loading/Loading';
@@ -72,31 +73,30 @@ export function Animals() {
 
     return (
         <section className="flex justify-center items-center xl:justify-between w-full flex-wrap gap-2 xl:gap-0">
-            <div className="flex flex-col gap-1 pb-2 overflow-hidden xl:w-[680px]">
+            <div className="flex flex-col gap-1 pb-2 overflow-hidden w-full max-w-[680px]">
                 {loading && <Loading />}
-                {error && <p>{error}</p>}
-                {animals &&
+                {error && <img className="bg-white-rgba-2 p-1 rounded-lg" src={ErrorPitbull} alt="Oops, something went wrong..." />}
+                {!error && animals &&
                     <>
                         <TableContext value={TableContextValue}>
                             <AnimalTable />
                         </TableContext>
-
+                        <Button variant="add" className="w-min" onClick={handleAdd}>
+                            {isAdding ?
+                                <>
+                                    <Close aria-hidden="true" className="w-1" />
+                                    Cancel
+                                </> :
+                                <>
+                                    <Add aria-hidden="true" className="w-1" />
+                                    Add
+                                </>
+                            }
+                        </Button>
                     </>
                 }
-                <Button variant="add" className="w-min" onClick={handleAdd}>
-                    {isAdding ?
-                        <>
-                            <Close aria-hidden="true" className="w-1" />
-                            Cancel
-                        </> :
-                        <>
-                            <Add aria-hidden="true" className="w-1" />
-                            Add
-                        </>
-                    }
-                </Button>
             </div>
-            <div className="flex flex-col gap-1 w-full max-w-xl">
+            <div className="flex flex-col gap-1 w-full max-w-xl" id="animal-forms">
                 {animalToEdit &&
                     <AnimalContext value={AnimalContextValue}>
                         <EditAnimal />

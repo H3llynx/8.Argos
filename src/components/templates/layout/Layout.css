@@ -1,10 +1,18 @@
 @reference "../../../styles/index.css";
 
 .layout {
-    @apply w-screen min-h-dvh flex flex-col justify-between relative z-1;
+    @apply w-screen h-dvh flex flex-col justify-between relative z-1 overflow-scroll;
 
     &::before {
         content: "";
-        @apply fixed w-screen h-dvh inset-0 bg-dark-rgba-2 xl:hidden -z-1;
+        @apply fixed w-screen h-dvh inset-0 -z-2;
+        background-size: cover;
+        background-position: center;
+        background-image: url(../../../assets/images/bg-dog-2.jpg);
+    }
+
+    &::after {
+        content: "";
+        @apply fixed w-screen h-dvh inset-0 bg-dark-rgba-2 xl:hidden -z-2;
     }
 }

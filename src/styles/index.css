@@ -35,12 +35,9 @@ html {
 }
 
 body {
-  background-size: cover;
-  background-position: center;
-  background-image: url(../assets/images/bg-dog-2.jpg);
-  background-attachment: fixed;
   display: flex;
   min-height: 100dvh;
+  overflow: hidden;
   font-family: var(--font-open-sans);
 }
 
@@ -130,7 +127,7 @@ h3 {
   }
 
   @media (min-width: 1280px) {
-    .white-container {
+    .form-container {
       background: linear-gradient(to right, var(--color-white-rgba-3), transparent);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);

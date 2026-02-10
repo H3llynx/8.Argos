@@ -33,30 +33,32 @@ export function EventCard({ event, onEdit, onDelete }: EventCardProps) {
 
     useEffect(() => {
         if (event.animal_id) {
-            const eventAnimal = animals.find(a => a.id === event.animal_id);
+            const eventAnimal = animals.find(animal => animal.id === event.animal_id);
             if (eventAnimal) {
                 setAnimal(eventAnimal)
             }
         } else setAnimal(null)
-    }, [event]);
+    }, [event, animal, animals]);
 
     return (
         <div className="event-card">
             <div className="event-card-top">
                 <h2>{capitalize(event.title)}</h2>
-                <div className="text-sm font-medium text-right min-w-max">
+                <div className="text-sm font-medium text-right w-max">
                     <p className="text-turquoise">{formatDate(event.start)}</p>
                     <p className="text-grey-2">{formatTime(event.start)} - {formatTime(event.end)}</p>
                 </div>
             </div >
-            <div className="event-card-main">
+            <div className="event-card-type-cta">
+                <p className="capitalize text-sm">{event.event_type}</p>
+                <div className="flex gap-[5px]">
+                    <StatusTag status={event.status} />
+                    <Button variant="edit" onClick={() => onEdit(event)}>Edit</Button>
+                    <Button variant="delete" onClick={() => onDelete(event)}>Delete</Button>
+                </div>
+            </div>
+            <div className="event-card-additional-info">
                 <div className="flex flex-col justify-between gap-0.5">
-                    <div className="flex gap-0.5">
-                        <p className="capitalize">{event.event_type}</p>
-                        <StatusTag status={event.status} />
-                        <Button variant="edit" onClick={() => onEdit(event)}>Edit</Button>
-                        <Button variant="delete" onClick={() => onDelete(event)}>Delete</Button>
-                    </div>
                     {event.description &&
                         <div className="event-description">
                             <h4>Description:</h4>
@@ -72,7 +74,7 @@ export function EventCard({ event, onEdit, onDelete }: EventCardProps) {
                     </div>
                 </div>
                 {loading && <Loading />}
-                {animal && !loading &&
+                {animal &&
                     <div className="text-center text-grey-1 self-end">
                         <img src={animalIcon} alt="" className={imageClassName} />
                         <p>Rescue: <span className="font-caveat text-2xl capitalize">{animal.name}</span></p>

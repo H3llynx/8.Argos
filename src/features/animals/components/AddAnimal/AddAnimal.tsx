@@ -5,7 +5,7 @@ import { Button } from "../../../../components/atoms/Button/Button";
 import { Input } from "../../../../components/atoms/Input/Input";
 import { Loading } from "../../../../components/atoms/Loading/Loading";
 import { animalFields } from "../../../../config";
-import { addAnimal } from "../../services/animals";
+import { addData } from "../../../../services/services";
 import { hostImg } from "../../services/picture-hosting";
 import type { Animal } from "../../types";
 
@@ -36,12 +36,12 @@ export function AddAnimal({ onSuccess }: { onSuccess: () => void }) {
     };
 
     const onSubmit = async (animal: Animal) => {
-        await addAnimal(animal);
+        await addData(animal, "animals");
         onSuccess();
     };
 
     return (
-        <div className="white-container flex flex-col gap-1">
+        <div className="form-container flex flex-col gap-1">
             <h2>Add a new rescue:</h2>
             <form
                 onSubmit={handleSubmit(onSubmit)}

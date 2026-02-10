@@ -10,7 +10,7 @@ import { Button } from '../../../../components/atoms/Button/Button';
 import { Input } from '../../../../components/atoms/Input/Input';
 import { Loading } from '../../../../components/atoms/Loading/Loading';
 import { ageDescription, animalFields } from '../../../../config';
-import { updateAnimal } from '../../../animals/services/animals';
+import { updateData } from '../../../../services/services';
 import type { Animal } from '../../../animals/types';
 import type { AnimalWithCoordinates } from '../../types';
 import "./AnimalMarker.css";
@@ -60,8 +60,8 @@ export function AnimalMarker({ animal, isOpen, setReload, animals, loading, setL
 
     const handleUpdate = async (e: React.SubmitEvent) => {
         e.preventDefault();
-        if (editedAnimal !== animalToEdit) {
-            await updateAnimal(editedAnimal!);
+        if (editedAnimal && editedAnimal !== animalToEdit) {
+            await updateData(editedAnimal, "animals");
             setReload(true);
             setLoading(true);
             setAnimalToEdit(null);

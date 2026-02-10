@@ -5,8 +5,8 @@ import { Button } from "../../../../components/atoms/Button/Button";
 import { Input } from "../../../../components/atoms/Input/Input";
 import { Loading } from "../../../../components/atoms/Loading/Loading";
 import { eventFields } from "../../../../config";
+import { updateData } from "../../../../services/services";
 import { useAnimalDatabase } from "../../../animals/hooks/useAnimalDatabase";
-import { updateEvent } from "../../services/events";
 import type { Event } from "../../types";
 import { dateTimeLocalToDb, dbDateToDateTimeLocal } from "../../utils";
 
@@ -40,13 +40,13 @@ export function EditEvent({ onSuccess, event }: EditEventProps) {
             end: dateTimeLocalToDb(updatedEvent.end),
             status: "updated" as const
         };
-        await updateEvent(edittedEvent);
+        await updateData(edittedEvent, "events");
         onSuccess();
     };
 
     return (<>
         {loading && <Loading />}
-        {!loading && <div className="white-container w-full max-w-md flex flex-col gap-1">
+        {!loading && <div className="form-container w-full max-w-md flex flex-col gap-1 pt-2 px-1 pb-4 md:py-1">
             <h2>Edit event</h2>
             <form
                 onSubmit={handleSubmit(onSubmit)}

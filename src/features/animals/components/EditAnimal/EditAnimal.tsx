@@ -42,7 +42,7 @@ export function EditAnimal() {
     };
 
     return (
-        <div className="white-container flex flex-col gap-1">
+        <div className="form-container flex flex-col gap-1">
             <h2>Edit <span className="capitalize">{animalToEdit.name}</span>:</h2>
             <form className="flex gap-y-1 gap-x-2 flex-wrap" onSubmit={handleUpdate}>
                 <Input

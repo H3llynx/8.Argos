@@ -5,9 +5,9 @@ import { Button } from "../../../../components/atoms/Button/Button";
 import { Input } from "../../../../components/atoms/Input/Input";
 import { Loading } from "../../../../components/atoms/Loading/Loading";
 import { eventFields } from "../../../../config";
+import { addData } from "../../../../services/services";
 import { useAnimalDatabase } from "../../../animals/hooks/useAnimalDatabase";
 import type { Animal } from "../../../animals/types";
-import { addEvent } from "../../services/events";
 import type { Event } from "../../types";
 import { dateTimeLocalToDb } from "../../utils";
 
@@ -31,7 +31,9 @@ export function AddEvent({ onSuccess, date }: AddEventProps) {
 
     const handleAnimalChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedAnimal = animals.find(animal => animal.id === e.target.value);
-        if (selectedAnimal) setAnimal(selectedAnimal); else setAnimal(null);
+        if (selectedAnimal) {
+            setAnimal(selectedAnimal); setValue(location.db_key as keyof Event, selectedAnimal.location);
+        } else setAnimal(null);
         if (e.target.value.length > 0) { setValue("animal_id" as keyof Event, e.target.value) }
         else { setValue("animal_id" as keyof Event, null) }
     }
@@ -42,12 +44,12 @@ export function AddEvent({ onSuccess, date }: AddEventProps) {
             start: dateTimeLocalToDb(event.start),
             end: dateTimeLocalToDb(event.end)
         };
-        await addEvent(formattedEvent);
+        await addData(formattedEvent, "events");
         onSuccess();
     };
 
     return (
-        <div className="white-container flex flex-col gap-1">
+        <div className="form-container  w-full max-w-md flex flex-col gap-1 p-t-2 px-1 pb-4 md:py-1">
             <h2>Add a new event:</h2>
             <form
                 onSubmit={handleSubmit(onSubmit)}
@@ -163,7 +165,7 @@ export function AddEvent({ onSuccess, date }: AddEventProps) {
                     label={location.label}
                     id={location.id}
                     type={location.input_type}
-                    defaultValue={animal ? animal.location : ""}
+                    {...(animal && { defaultValue: animal.location })}
                     {...register(location.db_key as keyof Event)}
                 />
 

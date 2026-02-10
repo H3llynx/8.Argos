@@ -1,7 +1,7 @@
 @reference "../../styles/index.css";
 
 .stats-background {
-    @apply fixed inset-0 w-screen min-h-dvh -z-1;
+    @apply fixed inset-0 w-screen h-lvh -z-1;
     background: url(../../assets/images/bg-dog-stats.jpg);
     background-size: cover;
     background-position: center;

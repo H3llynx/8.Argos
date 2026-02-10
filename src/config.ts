@@ -56,7 +56,7 @@ export const dogBreeds = [
     { name: "Maltese", value: "maltese" },
     { name: "Shiba Inu", value: "shiba inu" },
     { name: "English Springer Spaniel", value: "english springer" },
-    { name: "English Setter", value: "irish setter" },
+    { name: "English Setter", value: "english setter" },
     { name: "Irish Setter", value: "irish setter" },
     { name: "Brittany", value: "brittany" },
     { name: "Cane Corso", value: "cane corso" },
