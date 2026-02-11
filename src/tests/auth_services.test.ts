@@ -7,7 +7,6 @@ export const setupAuthenticatedTest = async () => {
         email: 'test@example.com',
         password: 'Test123!'
     };
-    const { data: signUpData } = await supabase.auth.signUp(testUser);
     const { data: session } = await supabase.auth.signInWithPassword(testUser);
     return {
         user: session.user,
@@ -22,7 +21,6 @@ export const setupAdminTest = async () => {
         email: 'admin-test@example.com',
         password: 'Admin123!'
     };
-    const { data: signUpData } = await supabase.auth.signUp(adminUser);
     const { data: session } = await supabase.auth.signInWithPassword(adminUser);
 
     return {

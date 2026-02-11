@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { Button } from "../../components/atoms/Button/Button";
-import { Login } from "./components/Login/Login";
+import { Login } from "./components/login/Login";
 import { Register } from "./components/Register/Register";
 import { useAuth } from "./hooks/useAuth";
 
