@@ -38,6 +38,8 @@ This project helped me learn || improve my knowledge on:
 
 ## Preview
 
+**Live demo** : https://h3llynx.github.io/8.Argos/
+
 <img src="./public/screens/desktop.png" height="300px">
 <img src="./public/screens/mobile.png" height="300px">
 
