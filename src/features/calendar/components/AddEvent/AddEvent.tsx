@@ -6,7 +6,7 @@ import { Input } from "../../../../components/atoms/Input/Input";
 import { Loading } from "../../../../components/atoms/Loading/Loading";
 import { eventFields } from "../../../../config";
 import { addData } from "../../../../services/services";
-import { useAnimalDatabase } from "../../../animals/hooks/useAnimalDatabase";
+import { useAnimal } from "../../../animals/hooks/useContexts";
 import type { Animal } from "../../../animals/types";
 import type { Event } from "../../types";
 import { dateTimeLocalToDb } from "../../utils";
@@ -21,7 +21,7 @@ export function AddEvent({ onSuccess, date }: AddEventProps) {
     const [adoptionRelated, setAdoptionRelated] = useState<boolean>(false);
     const [animal, setAnimal] = useState<Animal | null>(null)
     const { title, type, start_date, end_date, organizer, location, visitor_name, visitor_phone, visitor_email } = eventFields;
-    const { animals } = useAnimalDatabase();
+    const { animals } = useAnimal();
 
     const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         if (e.target.value.includes("adoption")) setAdoptionRelated(true);

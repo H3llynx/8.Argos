@@ -1,4 +1,4 @@
 import { createContext } from "react";
-import type { TableContextType } from "../types";
+import type { AnimalTableType } from "../types";
 
-export const TableContext = createContext<TableContextType | null>(null);
+export const AnimalTableContext = createContext<AnimalTableType | null>(null);

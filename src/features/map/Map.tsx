@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { LayerGroup, LayersControl, MapContainer, TileLayer } from 'react-leaflet';
 import { Loading } from '../../components/atoms/Loading/Loading';
 import { capitalize } from '../../utils/ui';
-import { useAnimalDatabase } from '../animals/hooks/useAnimalDatabase';
+import { useAnimal } from '../animals/hooks/useContexts';
 import { AnimalMarker } from './components/AnimalMarker/AnimalMarker';
 import { AnimalTile } from './components/AnimalTile/AnimalTile';
 import "./Map.css";
@@ -11,7 +11,7 @@ import { getAnimalCoordinates } from './services.ts/location';
 import type { AnimalWithCoordinates } from './types';
 
 export function Map() {
-    const { animals, reload, setReload } = useAnimalDatabase();
+    const { animals, reload, setReload } = useAnimal();
     const [animalsWithCoordinates, setAnimalWithCoordinates] = useState<AnimalWithCoordinates[]>([]);
     const [center, setCenter] = useState<LatLngExpression | null>(null);
     const [selectedAnimal, setSelectedAnimal] = useState<AnimalWithCoordinates | null>(null);

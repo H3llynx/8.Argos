@@ -4,6 +4,7 @@ import { createContext } from 'react';
 export type AuthContextType = {
     user: User | null;
     loading: boolean;
+    isAdmin: boolean;
 };
 
 export const AuthContext = createContext<AuthContextType | null>(null);

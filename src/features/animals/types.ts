@@ -13,7 +13,7 @@ export type Animal = {
     location: string;
 }
 
-export type AnimalContextType = {
+export type AnimalUpdateType = {
     loading: boolean;
     animalToEdit: Animal | null;
     editedAnimal: Animal | null;
@@ -22,7 +22,7 @@ export type AnimalContextType = {
     setAnimalToEdit: (animal: Animal | null) => void;
 };
 
-export type TableContextType = {
+export type AnimalTableType = {
     animalToEdit: Animal | null;
     handleEdit: (animal: Animal) => void;
     sortBy: (label: keyof Animal) => void;
@@ -33,4 +33,13 @@ export type TableContextType = {
     setIsSorted: (value: string | null) => void,
     filteredAnimals: Animal[];
     setFilter: (value: string) => void
-}
+};
+
+export type AnimalContextType = {
+    animals: Animal[];
+    reload: boolean;
+    loading: boolean;
+    error: string | null;
+    setReload: (value: boolean) => void
+    setAnimals: (value: Animal[]) => void
+};

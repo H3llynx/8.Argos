@@ -1,6 +1,6 @@
 import type { ChartData, ChartOptions } from "chart.js/auto";
 import { Doughnut } from 'react-chartjs-2';
-import { useAnimalDatabase } from '../../../animals/hooks/useAnimalDatabase';
+import { useAnimal } from "../../../animals/hooks/useContexts";
 import { getCountArr, getLabelsFromOptions, getValuesFromOptions } from "../../utils/chart_data";
 import { colors, setChartColors } from '../../utils/ui';
 
@@ -8,7 +8,7 @@ const labels = getLabelsFromOptions("type");
 const values = getValuesFromOptions("type");
 
 export function TypeChart() {
-    const { animals } = useAnimalDatabase();
+    const { animals } = useAnimal();
     const count = getCountArr(animals, "type", values)
     const labelsInPlural = labels.map(label => label += "s")
 

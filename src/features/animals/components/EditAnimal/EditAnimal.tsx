@@ -4,14 +4,14 @@ import { Button } from "../../../../components/atoms/Button/Button";
 import { Input } from "../../../../components/atoms/Input/Input";
 import { Loading } from "../../../../components/atoms/Loading/Loading";
 import { animalFields } from "../../../../config";
-import { useAnimal } from "../../hooks/useContexts";
+import { useEdit } from "../../hooks/useContexts";
 import { hostImg } from "../../services/picture-hosting";
 import type { Animal } from "../../types";
 
 const { name, type, age, sex, breed, size, location, photo, adoption_date } = animalFields;
 
 export function EditAnimal() {
-    const { animalToEdit, editedAnimal, setEditedAnimal, handleUpdate, loading } = useAnimal();
+    const { animalToEdit, editedAnimal, setEditedAnimal, handleUpdate, loading } = useEdit();
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [isAdopted, setIsAdopted] = useState(animalToEdit!.adopted_at ? true : false);
     const [animalType, setAnimalType] = useState(animalToEdit?.type);

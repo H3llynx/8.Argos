@@ -12,7 +12,7 @@ import { Loading } from '../../../../components/atoms/Loading/Loading';
 import { ageDescription, animalFields } from '../../../../config';
 import { updateData } from '../../../../services/services';
 import type { Animal } from '../../../animals/types';
-import { useAdmin } from '../../../auth/hooks/useAdmin';
+import { useAuth } from '../../../auth/hooks/useAuth';
 import type { AnimalWithCoordinates } from '../../types';
 import "./AnimalMarker.css";
 
@@ -32,7 +32,7 @@ export function AnimalMarker({ animal, isOpen, setReload, animals, loading, setL
     const [animalToEdit, setAnimalToEdit] = useState<Animal | null>(null);
     const [editedAnimal, setEditedAnimal] = useState<Animal | null>(null);
     const { adoption_date } = animalFields;
-    const isAdmin = useAdmin();
+    const { isAdmin } = useAuth();
 
     useEffect(() => {
         if (isOpen && markerRef.current) {

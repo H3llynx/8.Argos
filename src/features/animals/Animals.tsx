@@ -3,22 +3,20 @@ import ErrorPitbull from "../../assets/images/error.png";
 import { default as Add, default as Close } from "../../assets/svg/add.svg?react";
 import { Button } from '../../components/atoms/Button/Button';
 import { Loading } from '../../components/atoms/Loading/Loading';
-import { useAdmin } from '../auth/hooks/useAdmin';
+import { useAuth } from '../auth/hooks/useAuth';
 import { AddAnimal } from './components/AddAnimal/AddAnimal';
 import { AnimalTable } from './components/AnimalTable/AnimalTable';
 import { EditAnimal } from './components/EditAnimal/EditAnimal';
-import { AnimalContext } from './context/AnimalContext';
-import { TableContext } from './context/TableContext';
+import { AnimalUpdateContext } from './context/AnimalUpdateContext';
+import { AnimalTableContext } from './context/TableContext';
 import { useAnimalDatabase } from './hooks/useAnimalDatabase';
 import { useAnimalEdit } from './hooks/useAnimalEdit';
-import type { AnimalContextType, TableContextType } from './types';
+import { useAnimal } from './hooks/useContexts';
+import type { AnimalTableType, AnimalUpdateType } from './types';
 
 export function Animals() {
+    const { animals, loading, error, setReload } = useAnimal();
     const {
-        animals,
-        loading,
-        error,
-        setReload,
         sortBy,
         sortByDate,
         isAscending,
@@ -35,7 +33,7 @@ export function Animals() {
         handleEdit,
         handleUpdate
     } = useAnimalEdit();
-    const isAdmin = useAdmin();
+    const { isAdmin } = useAuth();
     const [isAdding, setIsAdding] = useState<boolean>(false);
 
     useEffect(() => {
@@ -50,7 +48,7 @@ export function Animals() {
         setIsAdding(!isAdding);
     }
 
-    const AnimalContextValue: AnimalContextType = {
+    const AnimalUpdateValue: AnimalUpdateType = {
         loading,
         animalToEdit,
         setAnimalToEdit,
@@ -59,7 +57,7 @@ export function Animals() {
         handleUpdate: (e: React.SubmitEvent) => handleUpdate(e, () => setReload(true))
     };
 
-    const TableContextValue: TableContextType = {
+    const TableContextValue: AnimalTableType = {
         animalToEdit,
         handleEdit,
         sortBy,
@@ -79,9 +77,9 @@ export function Animals() {
                 {error && <img className="bg-white-rgba-2 p-1 rounded-lg" src={ErrorPitbull} alt="Oops, something went wrong..." />}
                 {!error && animals &&
                     <>
-                        <TableContext value={TableContextValue}>
+                        <AnimalTableContext value={TableContextValue}>
                             <AnimalTable />
-                        </TableContext>
+                        </AnimalTableContext>
                         {isAdmin &&
                             <Button variant="add" className="w-min" onClick={handleAdd}>
                                 {isAdding ?
@@ -100,9 +98,9 @@ export function Animals() {
             </div>
             <div className="flex flex-col gap-1 w-full max-w-xl" id="animal-forms">
                 {animalToEdit &&
-                    <AnimalContext value={AnimalContextValue}>
+                    <AnimalUpdateContext value={AnimalUpdateValue}>
                         <EditAnimal />
-                    </AnimalContext>
+                    </AnimalUpdateContext>
                 }
                 {isAdding &&
                     <AddAnimal onSuccess={() => { setReload(true); setIsAdding(false) }} />

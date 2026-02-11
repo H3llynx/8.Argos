@@ -6,7 +6,7 @@ import { Input } from "../../../../components/atoms/Input/Input";
 import { Loading } from "../../../../components/atoms/Loading/Loading";
 import { eventFields } from "../../../../config";
 import { updateData } from "../../../../services/services";
-import { useAnimalDatabase } from "../../../animals/hooks/useAnimalDatabase";
+import { useAnimal } from "../../../animals/hooks/useContexts";
 import type { Event } from "../../types";
 import { dateTimeLocalToDb, dbDateToDateTimeLocal } from "../../utils";
 
@@ -19,7 +19,7 @@ export function EditEvent({ onSuccess, event }: EditEventProps) {
     const { register, handleSubmit, watch, setValue, formState: { isSubmitting, errors } } = useForm<Event>();
     const [adoptionRelated, setAdoptionRelated] = useState<boolean>(event.event_type.includes("adoption") ?? false);
     const { title, type, start_date, end_date, organizer, location, visitor_name, visitor_phone, visitor_email } = eventFields;
-    const { animals, loading } = useAnimalDatabase();
+    const { animals, loading } = useAnimal();
 
     const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         if (e.target.value.includes("adoption")) setAdoptionRelated(true);

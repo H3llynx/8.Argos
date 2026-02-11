@@ -6,9 +6,9 @@ import Location from "../../../../assets/svg/marker.svg?react";
 import { Button } from '../../../../components/atoms/Button/Button';
 import { Loading } from '../../../../components/atoms/Loading/Loading';
 import { capitalize } from '../../../../utils/ui';
-import { useAnimalDatabase } from '../../../animals/hooks/useAnimalDatabase';
+import { useAnimal } from '../../../animals/hooks/useContexts';
 import type { Animal } from '../../../animals/types';
-import { useAdmin } from '../../../auth/hooks/useAdmin';
+import { useAuth } from '../../../auth/hooks/useAuth';
 import type { Event } from "../../types";
 import { StatusTag } from '../StatusTag/StatusTag';
 import "./EventCard.css";
@@ -27,11 +27,11 @@ type EventCardProps = {
 }
 
 export function EventCard({ event, onEdit, onDelete }: EventCardProps) {
-    const { animals, loading } = useAnimalDatabase();
+    const { animals, loading } = useAnimal();
     const [animal, setAnimal] = useState<Animal | null>(null);
     const animalIcon = animal?.photo_url ? animal.photo_url : animal?.type === "dog" ? Dog : Cat;
     const imageClassName = animal?.photo_url ? "w-5 h-5 object-cover rounded-full border border-dark-rgba shadow-3" : "object-contain";
-    const isAdmin = useAdmin();
+    const { isAdmin } = useAuth();
 
     useEffect(() => {
         if (event.animal_id) {
