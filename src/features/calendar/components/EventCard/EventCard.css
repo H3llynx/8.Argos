@@ -9,7 +9,7 @@
 }
 
 .event-card-type-cta {
-    @apply flex flex-col sm:flex-row gap-0.5 items-center flex-wrap;
+    @apply flex flex-col sm:flex-row gap-0.5 sm:items-center flex-wrap;
 }
 
 .event-card-additional-info {
