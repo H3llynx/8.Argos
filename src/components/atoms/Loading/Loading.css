@@ -1,7 +1,7 @@
 @reference "../../../styles/index.css";
 
 .loading-paws {
-    @apply inline-flex gap-[0.25rem] m-auto py-0.5 px-1 bg-white-rgba-3 text-dark rounded-lg;
+    @apply inline-flex gap-[0.25rem] m-auto py-0.5 px-1 rounded-lg;
 }
 
 .loading-paws .paw {

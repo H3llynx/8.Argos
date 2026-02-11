@@ -5,6 +5,7 @@ import { Input } from "../../../../components/atoms/Input/Input";
 import { Popup } from "../../../../components/molecules/popup/Popup";
 import { tableColumns } from "../../../../config";
 import { deleteData } from "../../../../services/services";
+import { useAdmin } from "../../../auth/hooks/useAdmin";
 import { useTable } from "../../hooks/useContexts";
 import type { Animal } from "../../types";
 import { SortButton } from "../SortButton/SortButton";
@@ -14,6 +15,7 @@ export function AnimalTable() {
     const { animalToEdit, sortBy, sortByDate, handleEdit, setReload, isAscending, isSorted, setIsSorted, filteredAnimals, setFilter } = useTable();
     const [animalToDelete, setAnimalToDelete] = useState<Animal | null>(null);
     const popupRef = useRef<HTMLDialogElement>(null);
+    const isAdmin = useAdmin();
 
     useEffect(() => {
         if (animalToDelete) popupRef.current?.showModal();
@@ -101,10 +103,11 @@ export function AnimalTable() {
                                 <td><span>{animal.size}</span></td>
                                 <td><span>{animal.location}</span></td>
                                 <td>{animal.adopted_at ? "adopted" : "available"}</td>
-                                <td className="flex h-3 gap-[5px] items-center">
-                                    <Button variant="edit" onClick={() => handleEdit(animal)}>{animalToEdit === animal ? "Cancel" : "Edit"}</Button>
-                                    <Button variant="delete" onClick={() => handleDelete(animal)}>Delete</Button>
-                                </td>
+                                {isAdmin &&
+                                    <td className="flex h-3 gap-[5px] items-center">
+                                        <Button variant="edit" onClick={() => handleEdit(animal)}>{animalToEdit === animal ? "Cancel" : "Edit"}</Button>
+                                        <Button variant="delete" onClick={() => handleDelete(animal)}>Delete</Button>
+                                    </td>}
                             </tr>))}
                     </tbody>
                 </table>

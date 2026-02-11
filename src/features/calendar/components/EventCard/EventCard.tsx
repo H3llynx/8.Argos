@@ -8,6 +8,7 @@ import { Loading } from '../../../../components/atoms/Loading/Loading';
 import { capitalize } from '../../../../utils/ui';
 import { useAnimalDatabase } from '../../../animals/hooks/useAnimalDatabase';
 import type { Animal } from '../../../animals/types';
+import { useAdmin } from '../../../auth/hooks/useAdmin';
 import type { Event } from "../../types";
 import { StatusTag } from '../StatusTag/StatusTag';
 import "./EventCard.css";
@@ -30,6 +31,7 @@ export function EventCard({ event, onEdit, onDelete }: EventCardProps) {
     const [animal, setAnimal] = useState<Animal | null>(null);
     const animalIcon = animal?.photo_url ? animal.photo_url : animal?.type === "dog" ? Dog : Cat;
     const imageClassName = animal?.photo_url ? "w-5 h-5 object-cover rounded-full border border-dark-rgba shadow-3" : "object-contain";
+    const isAdmin = useAdmin();
 
     useEffect(() => {
         if (event.animal_id) {
@@ -53,8 +55,12 @@ export function EventCard({ event, onEdit, onDelete }: EventCardProps) {
                 <p className="capitalize text-sm">{event.event_type}</p>
                 <div className="flex gap-[5px]">
                     <StatusTag status={event.status} />
-                    <Button variant="edit" onClick={() => onEdit(event)}>Edit</Button>
-                    <Button variant="delete" onClick={() => onDelete(event)}>Delete</Button>
+                    {isAdmin &&
+                        <>
+                            <Button variant="edit" onClick={() => onEdit(event)}>Edit</Button>
+                            <Button variant="delete" onClick={() => onDelete(event)}>Delete</Button>
+                        </>
+                    }
                 </div>
             </div>
             <div className="event-card-additional-info">

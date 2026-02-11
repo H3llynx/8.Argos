@@ -3,6 +3,7 @@ import ErrorPitbull from "../../assets/images/error.png";
 import { default as Add, default as Close } from "../../assets/svg/add.svg?react";
 import { Button } from '../../components/atoms/Button/Button';
 import { Loading } from '../../components/atoms/Loading/Loading';
+import { useAdmin } from '../auth/hooks/useAdmin';
 import { AddAnimal } from './components/AddAnimal/AddAnimal';
 import { AnimalTable } from './components/AnimalTable/AnimalTable';
 import { EditAnimal } from './components/EditAnimal/EditAnimal';
@@ -34,7 +35,7 @@ export function Animals() {
         handleEdit,
         handleUpdate
     } = useAnimalEdit();
-
+    const isAdmin = useAdmin();
     const [isAdding, setIsAdding] = useState<boolean>(false);
 
     useEffect(() => {
@@ -81,18 +82,19 @@ export function Animals() {
                         <TableContext value={TableContextValue}>
                             <AnimalTable />
                         </TableContext>
-                        <Button variant="add" className="w-min" onClick={handleAdd}>
-                            {isAdding ?
-                                <>
-                                    <Close aria-hidden="true" className="w-1" />
-                                    Cancel
-                                </> :
-                                <>
-                                    <Add aria-hidden="true" className="w-1" />
-                                    Add
-                                </>
-                            }
-                        </Button>
+                        {isAdmin &&
+                            <Button variant="add" className="w-min" onClick={handleAdd}>
+                                {isAdding ?
+                                    <>
+                                        <Close aria-hidden="true" className="w-1" />
+                                        Cancel
+                                    </> :
+                                    <>
+                                        <Add aria-hidden="true" className="w-1" />
+                                        Add
+                                    </>
+                                }
+                            </Button>}
                     </>
                 }
             </div>

@@ -55,3 +55,11 @@
         @apply bg-turquoise;
     }
 }
+
+.auth-secondary-btn {
+    @apply bg-transparent border-0 font-bold text-sm w-full text-turquoise-2 py-0.5;
+
+    &:hover {
+        @apply bg-transparent border border-turquoise-2;
+    }
+}

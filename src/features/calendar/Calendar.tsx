@@ -7,6 +7,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import { useEffect, useState } from 'react';
 import ErrorPitbull from "../../assets/images/error.png";
 import { deleteData, fetchData } from '../../services/services';
+import { useAdmin } from '../auth/hooks/useAdmin';
 import "./Calendar.css";
 import { AddEvent } from './components/AddEvent/AddEvent';
 import { EditEvent } from './components/EditEvent/EditEvent';
@@ -21,6 +22,7 @@ export function Calendar() {
     const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
     const [newEventDate, setNewEventDate] = useState<string[]>([]);
     const [eventToEdit, setEventToEdit] = useState<Event | null>(null);
+    const isAdmin = useAdmin();
 
     useEffect(() => {
         const init = async () => {
@@ -48,6 +50,7 @@ export function Calendar() {
     }
 
     const handleAddEvent = (info: DateClickArg) => {
+        if (!isAdmin) return;
         if (selectedEvent) setSelectedEvent(null);
         if (eventToEdit) setEventToEdit(null);
         const dateInfo = [`${info.dateStr}T00:00`, `${info.dateStr}T01:00`];

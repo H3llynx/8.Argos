@@ -9,10 +9,10 @@ import { Loading } from '../../../../components/atoms/Loading/Loading.tsx';
 import { Popup } from '../../../../components/molecules/popup/Popup.tsx';
 import "../../Auth.css";
 import { customAuthErrors } from '../../config.ts';
-import { signIn } from '../../services/auth.ts';
+import { signUp } from '../../services/auth.ts';
 import type { Credentials } from "../../types.ts";
 
-export function Login() {
+export function Register() {
     const { register, handleSubmit, formState: { isSubmitting } } = useForm<Credentials>();
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -25,7 +25,7 @@ export function Login() {
     }, [errorMessage])
 
     async function onSubmit(formData: Credentials) {
-        const { error } = await signIn(formData);
+        const { error } = await signUp(formData);
         if (error) {
             if (error.code && typeof error.code === "string") {
                 setErrorMessage(customAuthErrors[error.code as keyof typeof customAuthErrors] ||
@@ -66,7 +66,7 @@ export function Login() {
                         :
                         <>
                             <Paw aria-hidden="true" className="paw w-1" />
-                            Sign in
+                            Register
                         </>
                     }
                 </Button>

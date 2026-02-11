@@ -31,3 +31,30 @@ export const signIn = async ({ email, password }: Credentials) => {
 export const signOut = async () => {
     await supabase.auth.signOut();
 };
+
+export const signUp = async ({ email, password }: Credentials) => {
+    try {
+        const result = await supabase.auth.signUp({
+            email,
+            password
+        });
+        if (result.error)
+            throw result.error;
+        return result;
+    } catch (error) {
+        console.error("Sign up error:", error);
+        return {
+            data: { user: null, session: null },
+            error: error as AuthError | PostgrestError | null
+        };
+    }
+};
+
+export const getUserRole = async (userId: string) => {
+    const { data } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", userId)
+        .single();
+    return data?.role || "user";
+};

@@ -12,6 +12,7 @@ import { Loading } from '../../../../components/atoms/Loading/Loading';
 import { ageDescription, animalFields } from '../../../../config';
 import { updateData } from '../../../../services/services';
 import type { Animal } from '../../../animals/types';
+import { useAdmin } from '../../../auth/hooks/useAdmin';
 import type { AnimalWithCoordinates } from '../../types';
 import "./AnimalMarker.css";
 
@@ -31,6 +32,7 @@ export function AnimalMarker({ animal, isOpen, setReload, animals, loading, setL
     const [animalToEdit, setAnimalToEdit] = useState<Animal | null>(null);
     const [editedAnimal, setEditedAnimal] = useState<Animal | null>(null);
     const { adoption_date } = animalFields;
+    const isAdmin = useAdmin();
 
     useEffect(() => {
         if (isOpen && markerRef.current) {
@@ -104,14 +106,16 @@ export function AnimalMarker({ animal, isOpen, setReload, animals, loading, setL
                             {!animalToEdit &&
                                 <span className="font-caveat text-xl flex gap-[5px] items-center">
                                     Available for adoption
-                                    <button
-                                        type="button"
-                                        aria-label="edit"
-                                        tabIndex={0}
-                                        onClick={(e) => { e.stopPropagation(); handleEdit(animal) }}
-                                    >
-                                        <Edit />
-                                    </button>
+                                    {isAdmin &&
+                                        <button
+                                            type="button"
+                                            aria-label="edit"
+                                            tabIndex={0}
+                                            onClick={(e) => { e.stopPropagation(); handleEdit(animal) }}
+                                        >
+                                            <Edit />
+                                        </button>
+                                    }
                                 </span>
                             }
                         </>

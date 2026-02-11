@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Animal } from '../features/animals/types';
+import type { Profile } from '../features/auth/types';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY;
@@ -16,6 +17,9 @@ export type Database = {
             }
             events: {
                 Row: Event
+            }
+            profiles: {
+                Row: Profile
             }
         }
     }
