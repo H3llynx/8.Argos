@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { databases } from "../../../config";
 import { updateData } from "../../../services/services";
 import type { Animal } from "../types";
 
@@ -25,7 +26,7 @@ export function useAnimalEdit() {
         e.preventDefault();
         if (editedAnimal === animalToEdit || !editedAnimal) return;
         else {
-            await updateData(editedAnimal, "animals");
+            await updateData(editedAnimal, databases.animal);
             onSuccess();
             setAnimalToEdit(null);
         }

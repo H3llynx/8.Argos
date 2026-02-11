@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { Button } from "../../../../components/atoms/Button/Button";
 import { Input } from "../../../../components/atoms/Input/Input";
 import { Loading } from "../../../../components/atoms/Loading/Loading";
-import { eventFields } from "../../../../config";
+import { databases, eventFields } from "../../../../config";
 import { updateData } from "../../../../services/services";
 import { useAnimal } from "../../../animals/hooks/useContexts";
 import type { Event } from "../../types";
@@ -40,7 +40,7 @@ export function EditEvent({ onSuccess, event }: EditEventProps) {
             end: dateTimeLocalToDb(updatedEvent.end),
             status: "updated" as const
         };
-        await updateData(edittedEvent, "events");
+        await updateData(edittedEvent, databases.events);
         onSuccess();
     };
 

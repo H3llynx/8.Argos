@@ -9,7 +9,7 @@ import Location from "../../../../assets/svg/marker.svg?react";
 import { Button } from '../../../../components/atoms/Button/Button';
 import { Input } from '../../../../components/atoms/Input/Input';
 import { Loading } from '../../../../components/atoms/Loading/Loading';
-import { ageDescription, animalFields } from '../../../../config';
+import { ageDescription, animalFields, databases } from '../../../../config';
 import { updateData } from '../../../../services/services';
 import type { Animal } from '../../../animals/types';
 import { useAuth } from '../../../auth/hooks/useAuth';
@@ -63,7 +63,7 @@ export function AnimalMarker({ animal, isOpen, setReload, animals, loading, setL
     const handleUpdate = async (e: React.SubmitEvent) => {
         e.preventDefault();
         if (editedAnimal && editedAnimal !== animalToEdit) {
-            await updateData(editedAnimal, "animals");
+            await updateData(editedAnimal, databases.animal);
             setReload(true);
             setLoading(true);
             setAnimalToEdit(null);

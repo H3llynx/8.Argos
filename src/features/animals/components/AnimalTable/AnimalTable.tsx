@@ -3,7 +3,7 @@ import Camera from "../../../../assets/svg/photo.svg?react";
 import { Button } from "../../../../components/atoms/Button/Button";
 import { Input } from "../../../../components/atoms/Input/Input";
 import { Popup } from "../../../../components/molecules/popup/Popup";
-import { tableColumns } from "../../../../config";
+import { databases, tableColumns } from "../../../../config";
 import { deleteData } from "../../../../services/services";
 import { useAuth } from "../../../auth/hooks/useAuth";
 import { useTable } from "../../hooks/useContexts";
@@ -31,7 +31,7 @@ export function AnimalTable() {
     }
 
     const confirmDelete = async (animal: Animal) => {
-        await deleteData(animal.id, "animals");
+        await deleteData(animal.id, databases.animal);
         setAnimalToDelete(null);
         setReload(true);
     }

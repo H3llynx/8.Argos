@@ -6,6 +6,7 @@ import FullCalendar from '@fullcalendar/react';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { useEffect, useState } from 'react';
 import ErrorPitbull from "../../assets/images/error.png";
+import { databases } from '../../config';
 import { deleteData, fetchData } from '../../services/services';
 import { useAuth } from '../auth/hooks/useAuth';
 import "./Calendar.css";
@@ -26,7 +27,7 @@ export function Calendar() {
 
     useEffect(() => {
         const init = async () => {
-            const { data, error } = await fetchData("events");
+            const { data, error } = await fetchData(databases.events);
             if (error) setError(error.message ? error.message : "Error fetching data");
             else if (data) {
                 setEvents(data);
@@ -64,7 +65,7 @@ export function Calendar() {
     }
 
     const handleDeleteEvent = async (event: Event) => {
-        await deleteData(event.id, "events");
+        await deleteData(event.id, databases.events);
         setReload(true);
     }
 

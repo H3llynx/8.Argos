@@ -1,5 +1,6 @@
 import type { User } from "@supabase/supabase-js";
 import { AuthError, PostgrestError } from '@supabase/supabase-js';
+import { databases } from "../../../config";
 import supabase from "../../../utils/supabase";
 import type { Credentials } from "../types";
 
@@ -52,9 +53,9 @@ export const signUp = async ({ email, password }: Credentials) => {
 
 export const getUserRole = async (userId: string) => {
     const { data } = await supabase
-        .from("profiles")
+        .from(databases.users)
         .select("role")
         .eq("id", userId)
         .single();
-    return data?.role || "user";
+    return data?.role;
 };

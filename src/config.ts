@@ -1,3 +1,11 @@
+import type { Tables } from "./services/services";
+
+export const databases = {
+    animal: "animals" as keyof Tables,
+    users: "profiles" as keyof Tables,
+    events: "events" as keyof Tables
+}
+
 export const ageDescription = [
     {
         name: "Puppy / Kitten (0-1 yr)",

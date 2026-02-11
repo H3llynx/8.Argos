@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
+import { databases } from "../../../config";
 import { fetchData } from "../../../services/services";
 import type { Animal } from "../types";
 import { AnimalContext } from "./AnimalContext";
@@ -12,7 +13,7 @@ export function AnimalProvider({ children }: { children: ReactNode }) {
 
     useEffect(() => {
         const init = async () => {
-            const { data, error } = await fetchData("animals");
+            const { data, error } = await fetchData(databases.animal);
             if (error) setError(error.message ? error.message : "Error fetching data");
             else if (data) {
                 const sortedAnimals = [...data].sort((a, b) => {

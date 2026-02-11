@@ -3,7 +3,7 @@ import type { Event } from "../features/calendar/types";
 import type { Database } from "../utils/supabase";
 import supabase from "../utils/supabase";
 
-type Tables = Database["public"]["Tables"]
+export type Tables = Database["public"]["Tables"]
 
 export const fetchData = async <T extends keyof Tables>
     (table: T) => {

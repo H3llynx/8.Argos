@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { Button } from "../../../../components/atoms/Button/Button";
 import { Input } from "../../../../components/atoms/Input/Input";
 import { Loading } from "../../../../components/atoms/Loading/Loading";
-import { eventFields } from "../../../../config";
+import { databases, eventFields } from "../../../../config";
 import { addData } from "../../../../services/services";
 import { useAnimal } from "../../../animals/hooks/useContexts";
 import type { Animal } from "../../../animals/types";
@@ -44,7 +44,7 @@ export function AddEvent({ onSuccess, date }: AddEventProps) {
             start: dateTimeLocalToDb(event.start),
             end: dateTimeLocalToDb(event.end)
         };
-        await addData(formattedEvent, "events");
+        await addData(formattedEvent, databases.events);
         onSuccess();
     };
 

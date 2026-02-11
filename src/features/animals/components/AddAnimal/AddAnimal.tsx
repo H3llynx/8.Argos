@@ -4,7 +4,7 @@ import Camera from "../../../../assets/svg/photo.svg?react";
 import { Button } from "../../../../components/atoms/Button/Button";
 import { Input } from "../../../../components/atoms/Input/Input";
 import { Loading } from "../../../../components/atoms/Loading/Loading";
-import { animalFields } from "../../../../config";
+import { animalFields, databases } from "../../../../config";
 import { addData } from "../../../../services/services";
 import { hostImg } from "../../services/picture-hosting";
 import type { Animal } from "../../types";
@@ -36,7 +36,7 @@ export function AddAnimal({ onSuccess }: { onSuccess: () => void }) {
     };
 
     const onSubmit = async (animal: Animal) => {
-        await addData(animal, "animals");
+        await addData(animal, databases.animal);
         onSuccess();
     };
 
