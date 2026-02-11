@@ -103,11 +103,16 @@ export function AnimalTable() {
                                 <td><span>{animal.size}</span></td>
                                 <td><span>{animal.location}</span></td>
                                 <td>{animal.adopted_at ? "adopted" : "available"}</td>
-                                {isAdmin &&
-                                    <td className="flex h-3 gap-[5px] items-center">
-                                        <Button variant="edit" onClick={() => handleEdit(animal)}>{animalToEdit === animal ? "Cancel" : "Edit"}</Button>
-                                        <Button variant="delete" onClick={() => handleDelete(animal)}>Delete</Button>
-                                    </td>}
+
+                                <td className="flex h-3 gap-[5px] items-center">
+                                    {isAdmin &&
+                                        <>
+                                            <Button variant="edit" onClick={() => handleEdit(animal)}>{animalToEdit === animal ? "Cancel" : "Edit"}</Button>
+                                            <Button variant="delete" onClick={() => handleDelete(animal)}>Delete</Button>
+                                        </>
+                                    }
+                                    {!isAdmin && <p className="text-grey-3 text-[0.6rem] normal-case">No action is allowed for non admin users</p>}
+                                </td>
                             </tr>))}
                     </tbody>
                 </table>

@@ -40,6 +40,7 @@ export function Register() {
 
     return (
         <>
+            <h1 className="text-white py-2">Create an account</h1>
             <form onSubmit={handleSubmit(onSubmit)}
                 className="auth-form"
             >

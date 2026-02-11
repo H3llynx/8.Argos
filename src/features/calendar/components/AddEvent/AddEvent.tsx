@@ -49,7 +49,7 @@ export function AddEvent({ onSuccess, date }: AddEventProps) {
     };
 
     return (
-        <div className="form-container  w-full max-w-md flex flex-col gap-1 p-t-2 px-1 pb-4 md:py-1">
+        <div className="form-container  w-full max-w-md flex flex-col gap-1 pt-2 px-1 pb-4 md:py-1">
             <h2>Add a new event:</h2>
             <form
                 onSubmit={handleSubmit(onSubmit)}

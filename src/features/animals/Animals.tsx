@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ErrorPitbull from "../../assets/images/error.png";
 import { default as Add, default as Close } from "../../assets/svg/add.svg?react";
 import { Button } from '../../components/atoms/Button/Button';
@@ -35,14 +35,23 @@ export function Animals() {
     } = useAnimalEdit();
     const { isAdmin } = useAuth();
     const [isAdding, setIsAdding] = useState<boolean>(false);
+    const formRef = useRef<HTMLDivElement>(null);
 
+    useEffect(() => {
+        if (animalToEdit || isAdding) {
+            formRef.current?.scrollIntoView({
+                behavior: "smooth",
+                block: "nearest"
+            });
+        }
+    })
     useEffect(() => {
         if (animalToEdit) setIsAdding(false);
     }, [animalToEdit]);
 
     useEffect(() => {
         if (isAdding) setAnimalToEdit(null);
-    }, [isAdding]);
+    }, [isAdding, setAnimalToEdit]);
 
     const handleAdd = () => {
         setIsAdding(!isAdding);
@@ -96,7 +105,7 @@ export function Animals() {
                     </>
                 }
             </div>
-            <div className="flex flex-col gap-1 w-full max-w-xl" id="animal-forms">
+            <div className="flex flex-col gap-1 w-full max-w-xl" ref={formRef}>
                 {animalToEdit &&
                     <AnimalUpdateContext value={AnimalUpdateValue}>
                         <EditAnimal />

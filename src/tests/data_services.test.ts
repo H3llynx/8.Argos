@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { databases } from "../config";
+import type { Animal } from "../features/animals/types";
 import { addData, deleteData, fetchData, updateData, type Tables } from "../services/services";
 import supabase from "../utils/supabase";
 
@@ -52,7 +53,7 @@ describe("fetchData", () => {
 })
 
 describe("addData", () => {
-    const newAnimal = {
+    const newAnimal: Omit<Animal, "id" | "created_at"> = {
         name: "test",
         type: "cat",
         breed: "egyptian mau",
@@ -68,12 +69,12 @@ describe("addData", () => {
         expect(typeof addData).toBe("function");
     });
     it("should return an object", async () => {
-        expect(typeof await addData(newAnimal, animalTable)).toBe("object");
+        expect(typeof await addData(newAnimal as Animal, animalTable)).toBe("object");
     });
     it("should return an error if the user adding the data is not admin", async () => {
-        const { data, error } = await addData(newAnimal, animalTable);
+        const { data, error } = await addData(newAnimal as Animal, animalTable);
         expect(data).toBe(null);
-        expect(error?.code.length).toBeGreaterThan(0);
+        expect(error?.message.length).toBeGreaterThan(0);
     });
 })
 
@@ -88,7 +89,7 @@ describe("deleteData", () => {
 })
 
 describe("updateData", () => {
-    const animalToUpdate = {
+    const animalToUpdate: Omit<Animal, "id" | "created_at"> = {
         name: "test",
         type: "cat",
         breed: "egyptian mau",
@@ -103,6 +104,6 @@ describe("updateData", () => {
         expect(typeof updateData).toBe("function");
     });
     it("should return an object", async () => {
-        expect(typeof await updateData(animalToUpdate, animalTable)).toBe("object");
+        expect(typeof await updateData(animalToUpdate as Animal, animalTable)).toBe("object");
     });
 })
