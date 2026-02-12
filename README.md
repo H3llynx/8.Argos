@@ -7,7 +7,7 @@
 [![Live Demo](https://img.shields.io/badge/demo-live-00ffff?style=for-the-badge)](https://h3llynx.github.io/7.Star-Wars/)
 [![React](https://img.shields.io/badge/React-19.1.1-61DAFB?style=for-the-badge&logo=react)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8.3-3178C6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
-[![Firebase](https://img.shields.io/badge/Supabase-242424?style=for-the-badge&logo=supabase)](https://firebase.google.com/)
+[![Supabase](https://img.shields.io/badge/Supabase-242424?style=for-the-badge&logo=supabase)](https://supabase.com/)
 
 </div>
 
