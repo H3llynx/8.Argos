@@ -71,7 +71,7 @@ This project helped me learn || improve my knowledge on:
    # (See /database/schema.sql for the complete schema)
 ```
 
-4. Run the development server
+5. Run the development server
 ```bash
    npm run dev
 ```
