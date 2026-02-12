@@ -114,7 +114,7 @@ This project helped me learn || improve my knowledge on:
 | **Frontend** | React 18, TypeScript, Tailwind |
 | **Backend** | Supabase (PostgreSQL database, authentication) |
 | **Routing** | React Router |
-| **Authentication** | Firebase Auth (Email/Password + Google OAuth) |
+| **Authentication** | Supabase Auth |
 | **Build Tool** | Vite |
 | **Testing** | Vitest |
 | **Key Libraries** | FullCalendar (event scheduling), Leaflet (interactive maps), Chart.js (data visualization) |
