@@ -4,21 +4,11 @@ import type { AnimalWithCoordinates } from "../types";
 export const getCoordinates = async (location: string) => {
     try {
         const response = await fetch(
-            `https://nominatim.openstreetmap.org/search?` +
-            `q=${encodeURIComponent(location)}` +
-            `&format=json&limit=1`,
-            {
-                headers: {
-                    useragent: "Argos"
-                }
-            })
+            `https://photon.komoot.io/api/?q=${encodeURIComponent(location)}&limit=1`)
         const results = await response.json();
-
-        if (results.length > 0) {
-            return {
-                lat: Number(results[0].lat),
-                lon: Number(results[0].lon)
-            };
+        if (results.features && results.features.length > 0) {
+            const [lon, lat] = results.features[0].geometry.coordinates;
+            return { lat, lon };
         }
 
     } catch (error) {
